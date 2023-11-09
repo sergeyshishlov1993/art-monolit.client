@@ -9,6 +9,7 @@
     <div class="wrapper__icon_white">
       <icon-phone />
       <icon-logo />
+      <icon-shevron class="test" />
     </div>
   </div>
 </template>
@@ -20,6 +21,7 @@ import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import IconLogo from "~/assets/icon/IconLogo";
 import IconPhone from "~/assets/icon/IconPhone.vue";
+import IconShevron from "~/assets/icon/IconShevron.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -28,5 +30,8 @@ import IconPhone from "~/assets/icon/IconPhone.vue";
   &__icon_white {
     background: #000;
   }
+}
+.test {
+  fill: rgba(130, 100, 45, 1);
 }
 </style>

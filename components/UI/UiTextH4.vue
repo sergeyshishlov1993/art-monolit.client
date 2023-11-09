@@ -8,8 +8,14 @@
 
 <style lang="scss" scoped>
 h2 {
-  font-size: 15px;
+  margin: 0;
+  font-size: 16px;
   font-weight: 400;
-  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  h2 {
+    font-size: 13px;
+  }
 }
 </style>
