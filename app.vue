@@ -34,7 +34,7 @@ const { showScrollToTop, scrollToTop } = useScrollToTop();
   top: 600px;
   right: 25px;
   fill: rgba(130, 100, 45, 1);
-  z-index: 999999;
+  z-index: 15;
 }
 @media screen and (min-width: 1440px) {
   .container {

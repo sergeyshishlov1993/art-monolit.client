@@ -51,6 +51,7 @@ function linkToSection(section) {
   flex-direction: column;
   align-items: center;
   border-top: solid 1px #82642d;
+  z-index: 20;
 }
 
 a {

@@ -9,6 +9,7 @@
         :src="prod.src"
         :alt="prod.alt"
         :title="prod.title"
+        @click="changTab(prod.name)"
       />
     </div>
 
@@ -19,42 +20,56 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import UiTextH1 from "~/components/UI/UiTextH1";
 import UiTextH3 from "~/components/UI/UiTextH3";
 import CardProduct from "../components/CardProduct.vue";
 import UiBtn from "~/components/Ui/UiBtn";
+
+const route = useRoute();
+const router = useRouter();
+
+function changTab(id) {
+  router.push(`/catalogPage${id}`);
+}
 
 const card = reactive({
   single: {
     src: "1.png",
     alt: "Одиночні",
     title: "Одиночні",
+    name: "single",
   },
   double: {
     src: "2.png",
     alt: "Двійні",
     title: "Двійні",
+    name: "double",
   },
   marble: {
     src: "mram.png",
-    alt: "Мраморні",
-    title: "Мармурові Комплекси",
+    alt: "Меморіальні Комплекси",
+    title: "Меморіальні Комплекси",
+    name: "marble",
   },
   concrete: {
     src: "bet.png",
     alt: "Бетоні",
     title: "Бетоні",
+    name: "concrete",
   },
   kids: {
     src: "bet.png",
     alt: "Дитячі",
     title: "Дитячі",
+    name: "kids",
   },
   accessories: {
     src: "acs.png",
     alt: "Аксесуари",
     title: "Аксесуари",
+    name: "accessories",
   },
 });
 </script>
