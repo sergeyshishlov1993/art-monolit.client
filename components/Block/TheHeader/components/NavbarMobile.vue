@@ -18,11 +18,11 @@
     >
 
     <div class="mt-25">
-      <a href="+380508520594">
+      <a href="tel:380508520594">
         <ui-text-h3 class="white">+380-50-852-05-94</ui-text-h3>
       </a>
 
-      <a href="+380508520590">
+      <a href="tel:380508520590">
         <ui-text-h3 class="white">+380-50-852-05-90</ui-text-h3>
       </a>
     </div>

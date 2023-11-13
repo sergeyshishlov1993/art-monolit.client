@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { reactive, computed } from "vue";
 
 export const useCatalogData = defineStore("catalogData", () => {
-  const catalogData = {
+  const catalogData = reactive({
     single: [
       {
         src: "1.png",
@@ -375,7 +375,7 @@ export const useCatalogData = defineStore("catalogData", () => {
         description: "some text",
       },
     ],
-  };
+  });
 
   const activeTab = reactive(["single"]);
 
