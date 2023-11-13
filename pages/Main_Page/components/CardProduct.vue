@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import UiTextH2 from "~/components/Ui/UiTextH2";
+import UiTextH2 from "~/components/UI/UiTextH2.vue";
 
 const props = defineProps({
   src: {
