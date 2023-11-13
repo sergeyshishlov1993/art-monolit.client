@@ -32,7 +32,7 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { useCatalogData } from "~/stores/catalogData";
-import UiTextH3 from "~/components/UI/UiTextH3";
+import UiTextH3 from "~/components/UI/UiTextH3.vue";
 
 const route = useRoute();
 const router = useRouter();

@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import UiTextH1 from "~/components/UI/UiTextH1";
+import UiTextH1 from "~/components/UI/UiTextH1.vue";
 
 const props = defineProps({
   number: {

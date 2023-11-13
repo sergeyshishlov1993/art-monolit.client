@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import UiBtn from "~/components/UI/UiBtn";
+import UiBtn from "~/components/UI/UiBtn.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 const emit = defineEmits(["selecTab"]);
 const props = defineProps({

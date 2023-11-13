@@ -13,10 +13,10 @@
 </template>
 
 <script setup>
-import UiTextH1 from "~/components/UI/UiTextH1";
-import UiTextH3 from "~/components/UI/UiTextH3";
-import UiInput from "~/components/UI/UiInput";
-import UiBtn from "~/components/UI/UiBtn";
+import UiTextH1 from "~/components/UI/UiTextH1.vue";
+import UiTextH3 from "~/components/UI/UiTextH3.vue";
+import UiInput from "~/components/UI/UiInput.vue";
+import UiBtn from "~/components/UI/UiBtn.vue";
 </script>
 
 <style lang="scss" scoped>

@@ -36,7 +36,7 @@
 import { useRoute, useRouter } from "vue-router";
 import { useCatalogData } from "~/stores/catalogData";
 
-import UiTextH3 from "~/components/ui/UiTextH3";
+import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import IconPhone from "~/assets/icon/IconPhone.vue";
 
 const route = useRoute();

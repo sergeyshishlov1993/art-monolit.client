@@ -23,8 +23,8 @@
 import { reactive, ref } from "vue";
 import { useCatalogData } from "~/stores/catalogData";
 import { useRouter } from "vue-router";
-import UiTextH1 from "~/components/UI/UiTextH1";
-import UiTextH3 from "~/components/UI/UiTextH3";
+import UiTextH1 from "~/components/UI/UiTextH1.vue";
+import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import CardProduct from "../components/CardProduct.vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
 

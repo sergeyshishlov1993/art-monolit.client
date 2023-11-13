@@ -35,7 +35,7 @@ import { computed, onMounted } from "vue";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import TabsPage from "../Catalog/components/TabsPage.vue";
-import WorkCard from "./components/WorkCard";
+import WorkCard from "./components/WorkCard.vue";
 import { useOurWorkData } from "~/stores/ourWorkData";
 
 const { activeTab, changeTab, ourWorkData } = useOurWorkData();

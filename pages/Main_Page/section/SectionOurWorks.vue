@@ -19,9 +19,9 @@
 </template>
 
 <script setup>
-import UiTextH1 from "~/components/UI/UiTextH1";
-import UiTextH3 from "~/components/UI/UiTextH3";
-import CardOurWork from "../components/CardOurWork";
+import UiTextH1 from "~/components/UI/UiTextH1.vue";
+import UiTextH3 from "~/components/UI/UiTextH3.vue";
+import CardOurWork from "../components/CardOurWork.vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
 </script>
 

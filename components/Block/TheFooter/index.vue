@@ -3,10 +3,6 @@
     <footer>
       <div class="wrapper__logo">
         <icon-logo class="logo" />
-
-        <!-- <ui-text-h4 class="white mt-7">з пн по сб</ui-text-h4>
-        <ui-text-h4 class="white mt-7">вс вихідний</ui-text-h4>
-        <ui-text-h4 class="white mt-7">09:00 до 16:00</ui-text-h4> -->
       </div>
 
       <div class="wrapper__address">
@@ -37,11 +33,9 @@
 </template>
 
 <script setup>
-import UiTextH2 from "~/components/UI/UiTextH2";
-import UiTextH3 from "~/components/UI/UiTextH3";
 import UiTextH4 from "~/components/UI/UiTextH4";
-import IconLogo from "~/assets/icon/IconLogo";
-import IconPhone from "~/assets/icon/IconPhone";
+import IconLogo from "~/assets/icon/IconLogo.vue";
+import IconPhone from "~/assets/icon/IconPhone.vue";
 </script>
 
 <style lang="scss" scoped>
