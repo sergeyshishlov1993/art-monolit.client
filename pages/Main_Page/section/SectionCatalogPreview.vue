@@ -26,7 +26,7 @@ import { useRouter } from "vue-router";
 import UiTextH1 from "~/components/UI/UiTextH1";
 import UiTextH3 from "~/components/UI/UiTextH3";
 import CardProduct from "../components/CardProduct.vue";
-import UiBtn from "~/components/Ui/UiBtn";
+import UiBtn from "~/components/UI/UiBtn.vue";
 
 const router = useRouter();
 const { changeTab } = useCatalogData();
