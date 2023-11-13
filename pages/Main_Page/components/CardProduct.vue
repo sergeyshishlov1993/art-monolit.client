@@ -1,6 +1,7 @@
 <template>
   <div class="card__product">
-    <img :src="path" :alt="props.alt" />
+    <!-- <img :src="path" :alt="props.alt" /> -->
+    <img :src="imageUrl" :alt="props.alt" />
     <ui-text-h2 class="fw-500">{{ props.title }}</ui-text-h2>
   </div>
 </template>
@@ -24,8 +25,9 @@ const props = defineProps({
 });
 
 // const path = `/_nuxt/assets/img/catalog/${props.src}`;
-// const path = `/_nuxt/assets/img/catalog/${props.src}`;
-const path = require(`~/assets/img/catalog${props.src}`);
+const path = `@/assets/img/catalog/${props.src}`;
+const imageUrl = new URL(`/assets/img/catalog/${props.src}`, import.meta.url)
+  .href;
 </script>
 
 <style lang="scss" scoped>
