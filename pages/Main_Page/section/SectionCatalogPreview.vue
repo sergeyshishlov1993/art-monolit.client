@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 import { useCatalogData } from "~/stores/catalogData";
 import { useRouter } from "vue-router";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";

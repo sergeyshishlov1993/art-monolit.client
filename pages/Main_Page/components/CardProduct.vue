@@ -23,7 +23,8 @@ const props = defineProps({
   },
 });
 
-const path = `/_nuxt/assets/img/catalog/${props.src}`;
+// const path = `/_nuxt/assets/img/catalog/${props.src}`;
+const path = `~/assets/img/catalog/${props.src}`;
 </script>
 
 <style lang="scss" scoped>
