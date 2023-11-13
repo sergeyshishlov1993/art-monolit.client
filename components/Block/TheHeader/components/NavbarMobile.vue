@@ -1,13 +1,15 @@
 <template>
   <div class="wrapper">
     <ui-text-h3 class="white mt-15"
-      ><nuxt-link to="#">каталог</nuxt-link></ui-text-h3
-    >
+      ><nuxt-link @click="goToCatalog" style="cursor: pointer"
+        >каталог</nuxt-link
+      >
+    </ui-text-h3>
     <ui-text-h3 class="white mt-15"
       ><nuxt-link :to="linkToSection('about')">про нас</nuxt-link></ui-text-h3
     >
     <ui-text-h3 class="white mt-15"
-      ><nuxt-link to="#">наші работи</nuxt-link></ui-text-h3
+      ><nuxt-link to="/our_works">наші работи</nuxt-link></ui-text-h3
     >
     <ui-text-h3 class="white mt-15"
       ><nuxt-link :to="linkToSection('map')"
@@ -28,10 +30,13 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { useCatalogData } from "~/stores/catalogData";
 import UiTextH3 from "~/components/UI/UiTextH3";
 
 const route = useRoute();
+const router = useRouter();
+const { changeTab } = useCatalogData();
 const emit = defineEmits(["closeMenu"]);
 
 function linkToSection(section) {
@@ -40,6 +45,11 @@ function linkToSection(section) {
   return currentPath == "/"
     ? { path: "/", hash: `#${section}` }
     : "/" && { path: "/", hash: `#${section}` };
+}
+
+function goToCatalog() {
+  changeTab("single");
+  return router.push("/catalog");
 }
 </script>
 

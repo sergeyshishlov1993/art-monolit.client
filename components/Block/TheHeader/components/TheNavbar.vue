@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <nuxt-link to="catalogPage">
+    <nuxt-link @click="goToCatalog" style="cursor: pointer">
       <ui-text-h3 class="white mr-50">каталог</ui-text-h3>
     </nuxt-link>
 
@@ -8,7 +8,7 @@
       <ui-text-h3 class="white mr-50">про нас</ui-text-h3>
     </nuxt-link>
 
-    <nuxt-link to="#">
+    <nuxt-link to="/our_works">
       <ui-text-h3 class="white mr-50">наші работи</ui-text-h3>
     </nuxt-link>
 
@@ -33,18 +33,26 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { useCatalogData } from "~/stores/catalogData";
 
 import UiTextH3 from "~/components/ui/UiTextH3";
 import IconPhone from "~/assets/icon/IconPhone.vue";
 
 const route = useRoute();
+const router = useRouter();
+const { changeTab } = useCatalogData();
 
 function linkToSection(section) {
   const currentPath = route.path;
   return currentPath == "/"
     ? { path: "/", hash: `#${section}` }
     : "/" && { path: "/", hash: `#${section}` };
+}
+
+function goToCatalog() {
+  changeTab("single");
+  return router.push("/catalog");
 }
 </script>
 

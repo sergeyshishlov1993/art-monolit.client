@@ -1,16 +1,22 @@
 <template>
-  <div class="wrapper">
-    <ui-text-h1>TEST</ui-text-h1>
-    <ui-text-h2>TEST</ui-text-h2>
-    <ui-text-h3>TEST</ui-text-h3>
-    <ui-text-h4>TEST</ui-text-h4>
+  <div class="">
+    <div class="wrapper substrate">
+      <ui-text-h1>TEST</ui-text-h1>
+      <ui-text-h2>TEST</ui-text-h2>
+      <ui-text-h3>TEST</ui-text-h3>
+      <ui-text-h4>TEST</ui-text-h4>
 
-    <ui-text-h2>icon</ui-text-h2>
-    <div class="wrapper__icon_white">
-      <icon-phone />
-      <icon-logo />
-      <icon-shevron class="test" />
+      <ui-text-h2>icon</ui-text-h2>
+      <div class="wrapper__icon_white">
+        <icon-phone />
+        <icon-logo />
+        <icon-shevron class="test" />
+      </div>
     </div>
+  </div>
+
+  <div>
+    <modal-call-back />
   </div>
 </template>
 
@@ -22,6 +28,7 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import IconLogo from "~/assets/icon/IconLogo";
 import IconPhone from "~/assets/icon/IconPhone.vue";
 import IconShevron from "~/assets/icon/IconShevron.vue";
+import ModalCallBack from "~/components/Block/Modal/ModalCallBack.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -33,5 +40,9 @@ import IconShevron from "~/assets/icon/IconShevron.vue";
 }
 .test {
   fill: rgba(130, 100, 45, 1);
+}
+
+.substrate {
+  background: rgba(0, 0, 0, 0.25);
 }
 </style>

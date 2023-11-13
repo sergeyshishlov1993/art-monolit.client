@@ -1,14 +1,16 @@
 <template>
   <div class="catalog__card">
     <img :src="path" :alt="props.alt" />
-    <ui-text-h2 class="mt-25">{{ props.title }}</ui-text-h2>
-    <ui-text-h3 class="mt-25">{{ props.description }}</ui-text-h3>
+    <div>
+      <ui-text-h4 class="mt-25">{{ props.title }}</ui-text-h4>
+      <ui-text-h3 class="mt-25">{{ props.description }}</ui-text-h3>
+    </div>
   </div>
 </template>
 
 <script setup>
-import UiTextH2 from "~/components/UI/UiTextH2.vue";
 import UiTextH3 from "~/components/UI/UiTextH3.vue";
+import UiTextH4 from "~/components/UI/UiTextH4.vue";
 const props = defineProps({
   src: {
     type: String,
@@ -45,5 +47,19 @@ const path = `/_nuxt/assets/img/catalog/${props.src}`;
 
 .mt-25 {
   margin-top: 25px;
+}
+
+@media screen and (max-width: 1199px) {
+  .catalog__card {
+    width: 200px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .catalog__card {
+    width: 150px;
+  }
+  .mt-25 {
+    margin-top: 15px;
+  }
 }
 </style>

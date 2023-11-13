@@ -20,7 +20,7 @@ h2 {
 }
 @media screen and (max-width: 1023px) {
   h2 {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 </style>

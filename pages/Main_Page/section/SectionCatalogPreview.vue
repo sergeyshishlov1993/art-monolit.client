@@ -9,11 +9,11 @@
         :src="prod.src"
         :alt="prod.alt"
         :title="prod.title"
-        @click="changTab(prod.name)"
+        @click="goToCatalog(prod.name)"
       />
     </div>
 
-    <ui-btn class="button">
+    <ui-btn class="button" @click="goToCatalog('single')">
       <ui-text-h3 class="fw-500">ПЕРЕЙТИ В КАТАЛОГ</ui-text-h3>
     </ui-btn>
   </div>
@@ -21,17 +21,19 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useCatalogData } from "~/stores/catalogData";
+import { useRouter } from "vue-router";
 import UiTextH1 from "~/components/UI/UiTextH1";
 import UiTextH3 from "~/components/UI/UiTextH3";
 import CardProduct from "../components/CardProduct.vue";
 import UiBtn from "~/components/Ui/UiBtn";
 
-const route = useRoute();
 const router = useRouter();
+const { changeTab } = useCatalogData();
 
-function changTab(id) {
-  router.push(`/catalogPage${id}`);
+function goToCatalog(id) {
+  changeTab(id);
+  router.push(`/catalog`);
 }
 
 const card = reactive({

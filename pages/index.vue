@@ -10,12 +10,12 @@
 </template>
 
 <script setup>
-import SectionMainScrin from "./mainPage/section/SectionMainScrin";
-import SectionCatalogPreview from "./mainPage/section/SectionCatalogPreview";
-import SectionOurWorks from "./mainPage/section/SectionOurWorks";
-import SectionAbout from "./mainPage/section/SectionAbout";
-import SectionContact from "./mainPage/section/SectionContact.vue";
-import SectionMap from "./mainPage/section/SectionMap.vue";
+import SectionMainScrin from "./Main_Page/section/SectionMainScrin";
+import SectionCatalogPreview from "./Main_Page/section/SectionCatalogPreview";
+import SectionOurWorks from "./Main_Page/section/SectionOurWorks";
+import SectionAbout from "./Main_Page/section/SectionAbout";
+import SectionContact from "./Main_Page/section/SectionContact.vue";
+import SectionMap from "./Main_Page/section/SectionMap.vue";
 </script>
 
 <style lang="scss" scoped></style>

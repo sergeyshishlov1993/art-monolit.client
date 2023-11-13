@@ -11,7 +11,9 @@
     </div>
 
     <ui-btn class="button">
-      <ui-text-h3 class="white">ПЕРЕГЛЯНУТИ ГАЛЕРЕЮ</ui-text-h3>
+      <ui-text-h3 class="white" @click="$router.push('/our_works')"
+        >ПЕРЕГЛЯНУТИ ГАЛЕРЕЮ</ui-text-h3
+      >
     </ui-btn>
   </div>
 </template>
