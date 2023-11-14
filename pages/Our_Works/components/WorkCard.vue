@@ -1,6 +1,6 @@
 <template>
   <div class="card__wrapper">
-    <img :src="path" :alt="props.alt" />
+    <img :src="imageUrl" :alt="props.alt" />
 
     <div class="number">
       <ui-text-h1 class="white">{{ props.number }}</ui-text-h1>
@@ -28,7 +28,7 @@ const props = defineProps({
   },
 });
 
-const path = `/_nuxt/assets/img/ourWork/${props.src}`;
+const imageUrl = new URL(`/assets/img/ourWork/${props.src}`, import.meta.url);
 </script>
 
 <style lang="scss" scoped>

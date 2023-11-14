@@ -30,6 +30,7 @@ h1 {
     padding: 204px 0 200px 25px;
   }
 }
+
 @media screen and (max-width: 767px) {
   .wrapper {
     padding: 140px 0 150px 25px;

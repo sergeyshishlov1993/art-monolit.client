@@ -24,7 +24,7 @@
           <ui-text-h3 class="white">+380-50-852-05-94</ui-text-h3>
         </a>
 
-        <a href="tel:380508520590">
+        <a href="tel:380508520590" class="mt-10">
           <ui-text-h3 class="white">+380-50-852-05-90</ui-text-h3>
         </a>
       </div>
@@ -69,6 +69,7 @@ function goToCatalog() {
 
 a {
   color: inherit;
+  display: block;
 }
 .white {
   color: #ffffff;
@@ -77,6 +78,9 @@ a {
   }
 }
 
+.mt-10 {
+  margin-top: 10px;
+}
 .mr-10 {
   margin-right: 10px;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="catalog__card">
-    <img :src="path" :alt="props.alt" />
+    <img :src="imageUrl" :alt="props.alt" />
     <div>
       <ui-text-h4 class="mt-25">{{ props.title }}</ui-text-h4>
       <ui-text-h3 class="mt-25">{{ props.description }}</ui-text-h3>
@@ -30,7 +30,7 @@ const props = defineProps({
   },
 });
 
-const path = `/_nuxt/assets/img/catalog/${props.src}`;
+const imageUrl = new URL(`/assets/img/catalog/${props.src}`, import.meta.url);
 </script>
 
 <style lang="scss" scoped>

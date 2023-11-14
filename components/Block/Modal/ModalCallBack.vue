@@ -172,10 +172,18 @@ form {
 @media screen and (max-width: 767px) {
   .modal {
     width: 320px;
+    height: 450px;
   }
 
+  form {
+    margin-top: 30px;
+  }
+  .close {
+    width: 20px;
+  }
   .input {
     width: 300px;
+    margin-bottom: 30px;
   }
 
   .button {

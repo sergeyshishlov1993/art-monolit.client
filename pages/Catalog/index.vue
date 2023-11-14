@@ -34,19 +34,13 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
 import { useCatalogData } from "~/stores/catalogData";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import CatalogCard from "./components/CatalogCard";
 import TabsPage from "./components/TabsPage.vue";
 
-const { catalogData, activeTab, changeTab, filterCatalogData } =
-  useCatalogData();
-
-// const filterCatalogData = computed(() => {
-//   return catalogData[activeTab[0]];
-// });
+const { activeTab, changeTab, filterCatalogData } = useCatalogData();
 
 function changeSelectTab(tab) {
   changeTab(tab);

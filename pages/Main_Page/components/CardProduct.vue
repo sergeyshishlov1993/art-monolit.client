@@ -24,8 +24,6 @@ const props = defineProps({
   },
 });
 
-// const path = `/_nuxt/assets/img/catalog/${props.src}`;
-const path = `@/assets/img/catalog/${props.src}`;
 const imageUrl = new URL(`/assets/img/catalog/${props.src}`, import.meta.url)
   .href;
 </script>

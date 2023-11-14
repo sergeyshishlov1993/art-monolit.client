@@ -14,7 +14,7 @@
       </div>
 
       <div class="product">
-        <img :src="path" alt="catalog__item" class="mr-40" />
+        <img :src="imageUrl" alt="catalog__item" class="mr-40" />
 
         <div class="description">
           <ui-text-h1>НАЗВА</ui-text-h1>
@@ -53,9 +53,10 @@ import ModalCallBack from "~/components/Block/Modal/ModalCallBack.vue";
 const { filterCatalogData } = useCatalogData();
 const route = useRoute();
 
-const path = `/_nuxt/assets/img/catalog/${
-  filterCatalogData()[route.params.id].src
-}`;
+const imageUrl = new URL(
+  `/assets/img/catalog/${filterCatalogData()[route.params.id].src}`,
+  import.meta.url
+);
 
 const showModal = ref(false);
 </script>
