@@ -19,7 +19,7 @@ h1 {
   font-family: Roboto;
   font-size: 33px;
   font-weight: 700;
-  color: #82642d;
+  color: rgba(161, 138, 104, 1);
 }
 .white {
   color: white;

@@ -118,7 +118,6 @@ form {
   margin-bottom: 42px;
   width: 500px;
   height: 69px;
-  border: 1px solid black;
 }
 .button {
   width: 500px;

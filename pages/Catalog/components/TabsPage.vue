@@ -22,15 +22,8 @@
     </ui-btn>
 
     <ui-btn
-      :class="{ active: props.selectedTab == 'concrete' }"
-      @click="selecTab('concrete')"
-    >
-      <ui-text-h4>бетоні</ui-text-h4>
-    </ui-btn>
-
-    <ui-btn
-      :class="{ active: props.selectedTab == 'marble' }"
-      @click="selecTab('marble')"
+      :class="{ active: props.selectedTab == 'memorial' }"
+      @click="selecTab('memorial')"
     >
       <ui-text-h4>меморіальні комплекси</ui-text-h4>
     </ui-btn>

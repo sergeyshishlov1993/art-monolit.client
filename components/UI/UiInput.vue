@@ -14,11 +14,11 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    required: true,
+    required: false,
   },
   value: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 </script>
@@ -28,5 +28,6 @@ input {
   padding: 12px 0 12px 24px;
   background: white;
   border-radius: 20px;
+  border: 1px solid black;
 }
 </style>
