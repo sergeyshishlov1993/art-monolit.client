@@ -10,21 +10,32 @@
           <ui-text-h4 class="fw-500">/каталог</ui-text-h4>
         </nuxt-link>
 
-        <ui-text-h4 class="fw-500">/каталог</ui-text-h4>
+        <ui-text-h4 class="fw-500"
+          >/{{ product[route.params.id].title }}</ui-text-h4
+        >
       </div>
 
       <div class="product">
         <img :src="imageUrl" alt="catalog__item" class="mr-40" />
 
         <div class="description">
-          <ui-text-h1>НАЗВА</ui-text-h1>
-          <ui-text-h3 class="fw-500 mt-40">РОЗМІР : 150 X 20 X 45</ui-text-h3>
-          <ui-text-h3 class="fw-500 mt-20">МАТЕРИАЛ : ГРАНИТ</ui-text-h3>
-          <ui-text-h3 class="fw-500 mt-20"
-            >ТЕРМІН ВИГОТОВЛЕННЯ : 30 ДНІВ</ui-text-h3
+          <ui-text-h1>{{ product[route.params.id].title }}</ui-text-h1>
+          <ui-text-h3 class="fw-500 mt-40"
+            >РОЗМІР : {{ product[route.params.id].size }}</ui-text-h3
           >
-          <ui-text-h3 class="fw-500 mt-20">ДОСТАВКА : БЕЗКОШТОВНА</ui-text-h3>
-          <ui-text-h3 class="fw-500 mt-20">КОМПЛЕКТАЦІЯ : ТУМБА</ui-text-h3>
+          <ui-text-h3 class="fw-500 mt-20"
+            >МАТЕРИАЛ : {{ product[route.params.id].material }}</ui-text-h3
+          >
+          <ui-text-h3 class="fw-500 mt-20"
+            >ТЕРМІН ВИГОТОВЛЕННЯ :
+            {{ product[route.params.id].term }} ДНІВ</ui-text-h3
+          >
+          <ui-text-h3 class="fw-500 mt-20"
+            >ДОСТАВКА : {{ product[route.params.id].delivery }}</ui-text-h3
+          >
+          <ui-text-h3 class="fw-500 mt-20"
+            >КОМПЛЕКТАЦІЯ : {{ product[route.params.id].equipment }}</ui-text-h3
+          >
 
           <ui-btn
             class="button"
@@ -50,13 +61,18 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import UiBtn from "~/components/UI/UiBtn";
 import ModalCallBack from "~/components/Block/Modal/ModalCallBack.vue";
 
-const { filterCatalogData } = useCatalogData();
+const { product } = useCatalogData();
+
+const props = defineProps({
+  src: {
+    type: String,
+    required: true,
+  },
+});
+
 const route = useRoute();
 
-const imageUrl = new URL(
-  `/assets/img/catalog/${filterCatalogData()[route.params.id].src}`,
-  import.meta.url
-);
+const imageUrl = product[route.params.id].src;
 
 const showModal = ref(false);
 </script>

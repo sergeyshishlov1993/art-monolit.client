@@ -1,9 +1,11 @@
 <template>
   <div class="catalog__card">
-    <img :src="imageUrl" :alt="props.alt" />
+    <img :src="props.src" :alt="props.title" />
     <div>
       <ui-text-h4 class="mt-25">{{ props.title }}</ui-text-h4>
-      <ui-text-h3 class="mt-25">{{ props.description }}</ui-text-h3>
+      <ui-text-h4 class="mt-25">
+        від <span>{{ props.price }} </span> гривень</ui-text-h4
+      >
     </div>
   </div>
 </template>
@@ -24,13 +26,11 @@ const props = defineProps({
     type: String,
     requred: true,
   },
-  description: {
+  price: {
     type: String,
     requred: true,
   },
 });
-
-const imageUrl = new URL(`/assets/img/catalog/${props.src}`, import.meta.url);
 </script>
 
 <style lang="scss" scoped>
@@ -47,6 +47,10 @@ const imageUrl = new URL(`/assets/img/catalog/${props.src}`, import.meta.url);
 
 .mt-25 {
   margin-top: 25px;
+  span {
+    color: darkred;
+    font-weight: 700;
+  }
 }
 
 @media screen and (max-width: 1199px) {

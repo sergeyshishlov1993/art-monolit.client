@@ -14,7 +14,7 @@
         @focus="(event) => handleFocus(event, 'persone')"
         @input="(event) => getInputVal(event, 'persone')"
         @blur="(event) => handleBlur(event, 'persone')"
-        :value="name"
+        :value="namePersone"
         :class="{
           invalid: errorsFormData?.persone?.errors.length != 0,
         }"

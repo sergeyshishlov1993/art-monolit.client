@@ -1,381 +1,37 @@
 import { defineStore } from "pinia";
 import { reactive, computed } from "vue";
 
+import { app } from "../firebaseConfig";
+import {
+  getFirestore,
+  getDoc,
+  getDocs,
+  collection,
+  doc,
+  deleteDoc,
+  setDoc,
+  query,
+  startAfter,
+  limit,
+  orderBy,
+  startAt,
+  Timestamp,
+} from "firebase/firestore";
+import {
+  getStorage,
+  ref as storageRef,
+  deleteObject,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
+
+const db = getFirestore(app);
+const storage = getStorage(app);
+const now = Timestamp.now();
+const lastDoc = ref(null);
+
 export const useCatalogData = defineStore("catalogData", () => {
-  const catalogData = reactive({
-    single: [
-      {
-        src: "1.png",
-        alt: "Одиночні",
-        title: "Одиночні",
-        description: "some text",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-        title: "Одиночні",
-        description: "some text",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-        title: "Одиночні",
-        description: "some text",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-        title: "Одиночні",
-        description: "some text",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-        title: "Одиночні",
-        description: "some text",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-        title: "Одиночні",
-        description: "some text",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-        title: "Одиночні",
-        description: "some text",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-        title: "Одиночні",
-        description: "some text",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-        title: "Одиночні",
-        description: "some text",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-        title: "Одиночні",
-        description: "some text",
-      },
-    ],
-    double: [
-      {
-        src: "2.png",
-        alt: "Двійні",
-        title: "Двійні",
-        description: "some text",
-      },
-      {
-        src: "2.png",
-        alt: "Двійні",
-        title: "Двійні",
-        description: "some text",
-      },
-      {
-        src: "2.png",
-        alt: "Двійні",
-        title: "Двійні",
-        description: "some text",
-      },
-      {
-        src: "2.png",
-        alt: "Двійні",
-        title: "Двійні",
-        description: "some text",
-      },
-      {
-        src: "2.png",
-        alt: "Двійні",
-        title: "Двійні",
-        description: "some text",
-      },
-      {
-        src: "2.png",
-        alt: "Двійні",
-        title: "Двійні",
-        description: "some text",
-      },
-      {
-        src: "2.png",
-        alt: "Двійні",
-        title: "Двійні",
-        description: "some text",
-      },
-      {
-        src: "2.png",
-        alt: "Двійні",
-        title: "Двійні",
-        description: "some text",
-      },
-      {
-        src: "2.png",
-        alt: "Двійні",
-        title: "Двійні",
-        description: "some text",
-      },
-      {
-        src: "2.png",
-        alt: "Двійні",
-        title: "Двійні",
-        description: "some text",
-      },
-    ],
-    marble: [
-      {
-        src: "mram.png",
-        alt: "Меморіальні Комплекси",
-        title: "Меморіальні Комплекси",
-        description: "some text",
-      },
-      {
-        src: "mram.png",
-        alt: "Меморіальні Комплекси",
-        title: "Меморіальні Комплекси",
-        description: "some text",
-      },
-      {
-        src: "mram.png",
-        alt: "Меморіальні Комплекси",
-        title: "Меморіальні Комплекси",
-        description: "some text",
-      },
-      {
-        src: "mram.png",
-        alt: "Меморіальні Комплекси",
-        title: "Меморіальні Комплекси",
-        description: "some text",
-      },
-      {
-        src: "mram.png",
-        alt: "Меморіальні Комплекси",
-        title: "Меморіальні Комплекси",
-        description: "some text",
-      },
-      {
-        src: "mram.png",
-        alt: "Меморіальні Комплекси",
-        title: "Меморіальні Комплекси",
-        description: "some text",
-      },
-      {
-        src: "mram.png",
-        alt: "Меморіальні Комплекси",
-        title: "Меморіальні Комплекси",
-        description: "some text",
-      },
-      {
-        src: "mram.png",
-        alt: "Меморіальні Комплекси",
-        title: "Меморіальні Комплекси",
-        description: "some text",
-      },
-      {
-        src: "mram.png",
-        alt: "Меморіальні Комплекси",
-        title: "Меморіальні Комплекси",
-        description: "some text",
-      },
-      {
-        src: "mram.png",
-        alt: "Меморіальні Комплекси",
-        title: "Меморіальні Комплекси",
-        description: "some text",
-      },
-    ],
-    concrete: [
-      {
-        src: "bet.png",
-        alt: "Бетоні",
-        title: "Бетоні",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Бетоні",
-        title: "Бетоні",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Бетоні",
-        title: "Бетоні",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Бетоні",
-        title: "Бетоні",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Бетоні",
-        title: "Бетоні",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Бетоні",
-        title: "Бетоні",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Бетоні",
-        title: "Бетоні",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Бетоні",
-        title: "Бетоні",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Бетоні",
-        title: "Бетоні",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Бетоні",
-        title: "Бетоні",
-        description: "some text",
-      },
-    ],
-    kids: [
-      {
-        src: "bet.png",
-        alt: "Дитячі",
-        title: "Дитячі",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Дитячі",
-        title: "Дитячі",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Дитячі",
-        title: "Дитячі",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Дитячі",
-        title: "Дитячі",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Дитячі",
-        title: "Дитячі",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Дитячі",
-        title: "Дитячі",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Дитячі",
-        title: "Дитячі",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Дитячі",
-        title: "Дитячі",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Дитячі",
-        title: "Дитячі",
-        description: "some text",
-      },
-      {
-        src: "bet.png",
-        alt: "Дитячі",
-        title: "Дитячі",
-        description: "some text",
-      },
-    ],
-    accessories: [
-      {
-        src: "acs.png",
-        alt: "Аксесуари",
-        title: "Аксесуари",
-        description: "some text",
-      },
-      {
-        src: "acs.png",
-        alt: "Аксесуари",
-        title: "Аксесуари",
-        description: "some text",
-      },
-      {
-        src: "acs.png",
-        alt: "Аксесуари",
-        title: "Аксесуари",
-        description: "some text",
-      },
-      {
-        src: "acs.png",
-        alt: "Аксесуари",
-        title: "Аксесуари",
-        description: "some text",
-      },
-      {
-        src: "acs.png",
-        alt: "Аксесуари",
-        title: "Аксесуари",
-        description: "some text",
-      },
-      {
-        src: "acs.png",
-        alt: "Аксесуари",
-        title: "Аксесуари",
-        description: "some text",
-      },
-      {
-        src: "acs.png",
-        alt: "Аксесуари",
-        title: "Аксесуари",
-        description: "some text",
-      },
-      {
-        src: "acs.png",
-        alt: "Аксесуари",
-        title: "Аксесуари",
-        description: "some text",
-      },
-      {
-        src: "acs.png",
-        alt: "Аксесуари",
-        title: "Аксесуари",
-        description: "some text",
-      },
-      {
-        src: "acs.png",
-        alt: "Аксесуари",
-        title: "Аксесуари",
-        description: "some text",
-      },
-    ],
-  });
+  const product = reactive([]);
 
   const activeTab = reactive(["single"]);
 
@@ -383,14 +39,60 @@ export const useCatalogData = defineStore("catalogData", () => {
     return (activeTab[0] = tab);
   };
 
-  const filterCatalogData = () => {
-    return catalogData[activeTab[0]];
-  };
+  async function getData() {
+    const firestoreQuery = query(
+      collection(db, `product/catalog/${activeTab[0]}`),
+      orderBy("timestamp"),
+      limit(8)
+    );
+
+    const documentSnapshots = await getDocs(firestoreQuery);
+
+    lastDoc.value = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+
+    product.length = 0;
+    const snapshot = await getDocs(firestoreQuery);
+    snapshot.docs.map((doc) => product.push({ ...doc.data(), id: doc.id }));
+
+    return product;
+  }
+
+  async function getNextData() {
+    const next = query(
+      collection(db, `product/catalog/${activeTab[0]}`),
+      orderBy("timestamp"),
+      startAfter(lastDoc.value),
+      limit(8)
+    );
+
+    product.length = 0;
+    const nextSnapshot = await getDocs(next);
+    nextSnapshot.docs.map((doc) => product.push({ ...doc.data(), id: doc.id }));
+
+    return product;
+  }
+
+  async function getPrevData() {
+    const prevQuery = query(
+      collection(db, `product/catalog/${activeTab[0]}`),
+      orderBy("timestamp", "desc"),
+      startAt(lastDoc.value),
+      limit(8)
+    );
+
+    product.length = 0;
+    const nextSnapshot = await getDocs(prevQuery);
+    nextSnapshot.docs.map((doc) => product.push({ ...doc.data(), id: doc.id }));
+
+    return product;
+  }
 
   return {
     activeTab,
     changeTab,
-    catalogData,
-    filterCatalogData,
+    product,
+    getData,
+    getNextData,
+    getPrevData,
   };
 });
