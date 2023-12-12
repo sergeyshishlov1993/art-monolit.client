@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div class="about__product" :class="{ substrate: showModal }">
+    <div class="spinner-border" role="status" v-if="isLoading"></div>
+
+    <div class="about__product" :class="{ substrate: showModal }" v-else>
       <div class="navigation">
         <nuxt-link to="/">
           <ui-text-h4 class="fw-500">головна</ui-text-h4>
@@ -16,7 +18,11 @@
       </div>
 
       <div class="product">
-        <img :src="imageUrl" alt="catalog__item" class="mr-40" />
+        <img
+          :src="product[route.params.id].src"
+          alt="catalog__item"
+          class="mr-40"
+        />
 
         <div class="description">
           <ui-text-h1>{{ product[route.params.id].title }}</ui-text-h1>
@@ -52,7 +58,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onBeforeMount } from "vue";
 import { useCatalogData } from "~/stores/catalogData";
 import { useRoute } from "vue-router";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
@@ -61,18 +67,22 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import UiBtn from "~/components/UI/UiBtn";
 import ModalCallBack from "~/components/Block/Modal/ModalCallBack.vue";
 
-const { product } = useCatalogData();
+const { getData } = useCatalogData();
+let product = ref([]);
+let isLoading = ref(true);
 
-const props = defineProps({
-  src: {
-    type: String,
-    required: true,
-  },
+onMounted(async () => {
+  try {
+    const res = await getData();
+    product.value = [...res];
+    console.log(product.value);
+    isLoading.value = false;
+  } catch (error) {
+    console.error("Ошибка при получении данных:", error);
+  }
 });
 
 const route = useRoute();
-
-const imageUrl = product[route.params.id].src;
 
 const showModal = ref(false);
 </script>
@@ -124,6 +134,11 @@ const showModal = ref(false);
 }
 .mt-40 {
   margin-top: 40px;
+}
+
+.spinner-border {
+  display: block;
+  margin: 0 auto;
 }
 
 @media screen and (min-width: 1440px) {

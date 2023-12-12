@@ -1,6 +1,6 @@
 <template>
   <div class="card__wrapper">
-    <img :src="imageUrl" :alt="props.alt" />
+    <img :src="props.src" :alt="props.number" />
 
     <div class="number">
       <ui-text-h1 class="white">{{ props.number }}</ui-text-h1>
@@ -17,18 +17,11 @@ const props = defineProps({
     requred: true,
   },
 
-  alt: {
-    type: String,
-    requred: true,
-  },
-
   number: {
     type: Number,
     requred: true,
   },
 });
-
-const imageUrl = new URL(`/assets/img/ourWork/${props.src}`, import.meta.url);
 </script>
 
 <style lang="scss" scoped>

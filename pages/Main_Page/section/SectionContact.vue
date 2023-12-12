@@ -57,7 +57,12 @@
 <script setup>
 import { v4 as uuidv4 } from "uuid";
 import { app } from "../firebaseConfig";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  Timestamp,
+} from "firebase/firestore";
 import { ref, computed } from "vue";
 import {
   errorsFormData,
@@ -79,6 +84,7 @@ const phone = ref("+380");
 const date = new Date();
 const dateFeedback = ref();
 const showModal = ref("empty");
+const now = Timestamp.now();
 
 const phoneMask = computed(() => {
   const regex = /(\d?)(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/g;
@@ -153,6 +159,7 @@ async function sendFeedback(event) {
           phone: phone.value,
           date: getDateFeedback().format(date),
           status: "в обробці",
+          timestamp: now,
         },
         documentId // id обьекта
       );

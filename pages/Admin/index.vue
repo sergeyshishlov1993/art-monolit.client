@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="admin">
+    <div class="admin" v-if="isAuth[0] && error[0] == ''">
       <div class="admin__wrapper">
         <div class="admin-wrapper__navbar">
           <ui-text-h3
@@ -25,21 +25,43 @@
           >
         </div>
         <!-- ------------------- -->
+
         <component :is="tabContent"></component>
       </div>
     </div>
+
+    <modal-sing-in v-else />
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
+import { useAuthStore } from "~/stores/auth";
 import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import CallBackTable from "./sections/CallBackTable.vue";
 import AddProduct from "./sections/AddProduct.vue";
 import AdminCategory from "./sections/AdminCategory.vue";
 import AdminOurWork from "./sections/AdminOurWork.vue";
+import ModalSingIn from "./components/ModalSingIn.vue";
+
+const checkAuthOnLoad = () => {
+  const storedToken = localStorage.getItem("userToken");
+
+  if (storedToken) {
+    const storedUserToken = JSON.parse(storedToken);
+    isAuth[0] = true;
+
+    userInfo.value = {
+      token: storedUserToken.token,
+      refreshToken: storedUserToken.refreshToken,
+    };
+  }
+};
+
+onMounted(checkAuthOnLoad);
 
 const activeTab = ref("call");
+const { error, isAuth, userInfo } = useAuthStore();
 
 function changeTab(name) {
   return (activeTab.value = name);

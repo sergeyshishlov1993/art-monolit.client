@@ -1,266 +1,22 @@
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
+import { app } from "../firebaseConfig";
+import {
+  getFirestore,
+  getDocs,
+  collection,
+  query,
+  startAfter,
+  limit,
+  orderBy,
+  startAt,
+} from "firebase/firestore";
+
+const db = getFirestore(app);
+const lastDoc = ref(null);
 
 export const useOurWorkData = defineStore("ourWorkData", () => {
-  const ourWorkData = {
-    single: [
-      {
-        src: "1.png",
-        alt: "Одиночні",
-      },
-      {
-        src: "4.png",
-        alt: "Одиночні",
-      },
-      {
-        src: "6.png",
-        alt: "Одиночні",
-      },
-      {
-        src: "4.png",
-        alt: "Одиночні",
-      },
-      {
-        src: "5.png",
-        alt: "Одиночні",
-      },
-      {
-        src: "6.png",
-        alt: "Одиночні",
-      },
-      {
-        src: "7.png",
-        alt: "Одиночні",
-      },
-      {
-        src: "8.png",
-        alt: "Одиночні",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-      },
-      {
-        src: "1.png",
-        alt: "Одиночні",
-      },
-    ],
-
-    double: [
-      {
-        src: "2.png",
-        alt: "Двійні",
-      },
-      {
-        src: "1.png",
-        alt: "Двійні",
-      },
-      {
-        src: "2.png",
-        alt: "Двійні",
-      },
-      {
-        src: "3.png",
-        alt: "Двійні",
-      },
-      {
-        src: "4.png",
-        alt: "Двійні",
-      },
-      {
-        src: "5.png",
-        alt: "Двійні",
-      },
-      {
-        src: "6.png",
-        alt: "Двійні",
-      },
-      {
-        src: "7.png",
-        alt: "Двійні",
-      },
-      {
-        src: "8.png",
-        alt: "Двійні",
-      },
-      {
-        src: "9.png",
-        alt: "Двійні",
-      },
-    ],
-
-    marble: [
-      {
-        src: "3.png",
-        alt: "Меморіальні Комплекси",
-      },
-      {
-        src: "4.png",
-        alt: "Меморіальні Комплекси",
-      },
-      {
-        src: "3.png",
-        alt: "Меморіальні Комплекси",
-      },
-      {
-        src: "4.png",
-        alt: "Меморіальні Комплекси",
-      },
-      {
-        src: "5.png",
-        alt: "Меморіальні Комплекси",
-      },
-      {
-        src: "6.png",
-        alt: "Меморіальні Комплекси",
-      },
-      {
-        src: "7.png",
-        alt: "Меморіальні Комплекси",
-      },
-      {
-        src: "8.png",
-        alt: "Меморіальні Комплекси",
-      },
-      {
-        src: "9.png",
-        alt: "Меморіальні Комплекси",
-      },
-      {
-        src: "1.png",
-        alt: "Меморіальні Комплекси",
-      },
-    ],
-
-    concrete: [
-      {
-        src: "4.png",
-        alt: "Бетоні",
-      },
-      {
-        src: "8.png",
-        alt: "Бетоні",
-      },
-      {
-        src: "3.png",
-        alt: "Бетоні",
-      },
-      {
-        src: "4.png",
-        alt: "Бетоні",
-      },
-      {
-        src: "5.png",
-        alt: "Бетоні",
-      },
-      {
-        src: "6.png",
-        alt: "Бетоні",
-      },
-      {
-        src: "7.png",
-        alt: "Бетоні",
-      },
-      {
-        src: "8.png",
-        alt: "Бетоні",
-      },
-      {
-        src: "9.png",
-        alt: "Бетоні",
-      },
-      {
-        src: "1.png",
-        alt: "Бетоні",
-      },
-    ],
-
-    kids: [
-      {
-        src: "5.png",
-        alt: "Дитячі",
-      },
-      {
-        src: "9.png",
-        alt: "Дитячі",
-      },
-      {
-        src: "3.png",
-        alt: "Дитячі",
-      },
-      {
-        src: "4.png",
-        alt: "Дитячі",
-      },
-      {
-        src: "5.png",
-        alt: "Дитячі",
-      },
-      {
-        src: "6.png",
-        alt: "Дитячі",
-      },
-      {
-        src: "7.png",
-        alt: "Дитячі",
-      },
-      {
-        src: "8.png",
-        alt: "Дитячі",
-      },
-      {
-        src: "9.png",
-        alt: "Дитячі",
-      },
-      {
-        src: "1.png",
-        alt: "Дитячі",
-      },
-    ],
-
-    accessories: [
-      {
-        src: "6.png",
-        alt: "Аксесуари",
-      },
-      {
-        src: "8.png",
-        alt: "Аксесуари",
-      },
-      {
-        src: "3.png",
-        alt: "Аксесуари",
-      },
-      {
-        src: "4.png",
-        alt: "Аксесуари",
-      },
-      {
-        src: "5.png",
-        alt: "Аксесуари",
-      },
-      {
-        src: "6.png",
-        alt: "Аксесуари",
-      },
-      {
-        src: "7.png",
-        alt: "Аксесуари",
-      },
-      {
-        src: "8.png",
-        alt: "Аксесуари",
-      },
-      {
-        src: "9.png",
-        alt: "Аксесуари",
-      },
-      {
-        src: "1.png",
-        alt: "Аксесуари",
-      },
-    ],
-  };
+  const product = reactive([]);
 
   const activeTab = reactive(["single"]);
 
@@ -268,9 +24,59 @@ export const useOurWorkData = defineStore("ourWorkData", () => {
     return (activeTab[0] = tab);
   };
 
+  async function getData() {
+    const firestoreQuery = query(
+      collection(db, `product/ourWork/${activeTab[0]}`),
+      orderBy("timestamp"),
+      limit(8)
+    );
+
+    const documentSnapshots = await getDocs(firestoreQuery);
+
+    lastDoc.value = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+
+    product.length = 0;
+    const snapshot = await getDocs(firestoreQuery);
+    snapshot.docs.map((doc) => product.push({ ...doc.data(), id: doc.id }));
+
+    return product;
+  }
+  async function getNextData() {
+    const next = query(
+      collection(db, `product/ourWork/${activeTab[0]}`),
+      orderBy("timestamp"),
+      startAfter(lastDoc.value),
+      limit(8)
+    );
+
+    product.length = 0;
+    const nextSnapshot = await getDocs(next);
+    nextSnapshot.docs.map((doc) => product.push({ ...doc.data(), id: doc.id }));
+
+    return product;
+  }
+
+  async function getPrevData() {
+    const prevQuery = query(
+      collection(db, `product/ourWork/${activeTab[0]}`),
+      orderBy("timestamp", "desc"),
+      startAt(lastDoc.value),
+      limit(8)
+    );
+
+    product.length = 0;
+    const nextSnapshot = await getDocs(prevQuery);
+    nextSnapshot.docs.map((doc) => product.push({ ...doc.data(), id: doc.id }));
+
+    return product;
+  }
+
   return {
     activeTab,
     changeTab,
-    ourWorkData,
+    product,
+    getData,
+    getNextData,
+    getPrevData,
   };
 });

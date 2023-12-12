@@ -1,6 +1,6 @@
 <template>
   <div class="work-item">
-    <img src="~assets/img/OurWork.png" alt="" />
+    <img :src="props.src" :alt="props.number" />
 
     <div class="number">
       <ui-text-h1 class="white">{{ props.number }}</ui-text-h1>
@@ -12,6 +12,10 @@
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 
 const props = defineProps({
+  src: {
+    type: String,
+    required: true,
+  },
   number: {
     type: Number,
     required: true,

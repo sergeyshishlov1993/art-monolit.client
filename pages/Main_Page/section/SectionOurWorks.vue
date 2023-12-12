@@ -4,8 +4,9 @@
 
     <div class="work-card">
       <card-our-work
-        v-for="(card, index) in 6"
-        :key="card"
+        v-for="(card, index) in previewImg"
+        :key="card.id"
+        :src="card.src"
         :number="index + 1"
       />
     </div>
@@ -19,10 +20,21 @@
 </template>
 
 <script setup>
+import { onMounted, computed } from "vue";
+import { useOurWorkData } from "~/stores/ourWorkData";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import CardOurWork from "../components/CardOurWork.vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
+
+const { getData, product } = useOurWorkData();
+
+onMounted(getData);
+const previewImg = computed(() => {
+  return product.filter((el, index) => {
+    return index !== 5;
+  });
+});
 </script>
 
 <style lang="scss" scoped>
@@ -36,7 +48,6 @@ import UiBtn from "~/components/UI/UiBtn.vue";
 .work-card {
   padding: 90px 50px;
   display: grid;
-  //   grid-template-columns: repeat(3, minmax(200px, 1fr));
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
   gap: 50px;

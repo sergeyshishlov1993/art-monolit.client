@@ -12,18 +12,25 @@
       <ui-text-h1 class="center mt-100">НАШІ РОБОТИ</ui-text-h1>
 
       <div class="wrapper">
-        <div class="tab mr-100">
-          <tabs-page :selectedTab="activeTab[0]" @selecTab="selecChangeTab" />
+        <div class="our-work__wrapper">
+          <div class="tab mr-100">
+            <tabs-page :selectedTab="activeTab[0]" @selecTab="selecChangeTab" />
+          </div>
+
+          <div class="our-work__wrapper__card">
+            <work-card
+              v-for="(work, index) in product"
+              :key="work"
+              :src="work.src"
+              :alt="work.alt"
+              :number="index + 1"
+            />
+          </div>
         </div>
 
-        <div class="wrapper__card">
-          <work-card
-            v-for="(work, index) in filterData"
-            :key="work"
-            :src="work.src"
-            :alt="work.alt"
-            :number="index + 1"
-          />
+        <div class="pagination">
+          <ui-btn class="mr-20 button" @click="getPrevData">ПОВЕРНУТИСЯ</ui-btn>
+          <ui-btn class="button" @click="getNextData">ПОКАЗАТИ ЩЕ</ui-btn>
         </div>
       </div>
     </div>
@@ -31,33 +38,35 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from "vue";
+import { onMounted } from "vue";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import TabsPage from "../Catalog/components/TabsPage.vue";
 import WorkCard from "./components/WorkCard.vue";
 import { useOurWorkData } from "~/stores/ourWorkData";
 
-const { activeTab, changeTab, ourWorkData } = useOurWorkData();
+const { activeTab, changeTab, product, getData, getNextData, getPrevData } =
+  useOurWorkData();
 
 onMounted(() => {
-  return changeTab("single");
+  changeTab("single");
+  getData();
 });
 
 function selecChangeTab(tab) {
-  return changeTab(tab);
+  changeTab(tab);
+  getData();
 }
-
-const filterData = computed(() => {
-  return ourWorkData[activeTab[0]];
-});
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  padding: 100px;
+}
 .our__works {
   padding: 75px 50px;
 }
-.wrapper {
+.our-work__wrapper {
   padding-top: 100px;
   display: flex;
   &__card {
@@ -75,6 +84,22 @@ const filterData = computed(() => {
   }
 }
 
+.pagination {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button {
+  &:hover {
+    background: #000;
+    color: white;
+  }
+}
+.mr-20 {
+  margin-right: 20px;
+}
+
 .center {
   text-align: center;
 }
@@ -89,7 +114,7 @@ const filterData = computed(() => {
   .container {
     min-width: 100%;
   }
-  .wrapper {
+  .our-work__wrapper {
     justify-content: space-around;
   }
   .wrapper__card {
@@ -104,7 +129,7 @@ const filterData = computed(() => {
 }
 
 @media screen and (max-width: 1023px) {
-  .wrapper {
+  .our-work__wrapper {
     padding-top: 50px;
     display: block;
   }

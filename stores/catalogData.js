@@ -1,33 +1,20 @@
 import { defineStore } from "pinia";
-import { reactive, computed } from "vue";
+import { reactive } from "vue";
 
 import { app } from "../firebaseConfig";
 import {
   getFirestore,
-  getDoc,
   getDocs,
   collection,
-  doc,
-  deleteDoc,
-  setDoc,
   query,
   startAfter,
   limit,
   orderBy,
   startAt,
-  Timestamp,
 } from "firebase/firestore";
-import {
-  getStorage,
-  ref as storageRef,
-  deleteObject,
-  getDownloadURL,
-  uploadBytesResumable,
-} from "firebase/storage";
 
 const db = getFirestore(app);
-const storage = getStorage(app);
-const now = Timestamp.now();
+
 const lastDoc = ref(null);
 
 export const useCatalogData = defineStore("catalogData", () => {

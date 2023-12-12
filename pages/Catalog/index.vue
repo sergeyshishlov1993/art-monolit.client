@@ -20,7 +20,7 @@
             />
           </div>
 
-          <div class="wrapper__catalog_card">
+          <div class="catalog_card">
             <catalog-card
               v-for="(card, index) in product"
               :key="card"
@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeMount } from "vue";
+import { onMounted } from "vue";
 import { useCatalogData } from "~/stores/catalogData";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
@@ -54,7 +54,8 @@ import TabsPage from "./components/TabsPage.vue";
 
 const { activeTab, changeTab, product, getData, getNextData, getPrevData } =
   useCatalogData();
-onBeforeMount(async () => {
+
+onMounted(async () => {
   await getData();
 });
 
@@ -82,11 +83,11 @@ function changeSelectTab(tab) {
   padding: 108px 50px 50px 50px;
   display: flex;
   align-items: flex-start;
-  &__catalog_card {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+}
+.catalog_card {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .pagination {
@@ -134,9 +135,9 @@ function changeSelectTab(tab) {
 @media screen and (max-width: 1199px) {
   .catalog__wrapper {
     padding: 80px 20px 20px 20px;
-    &__catalog_card {
-      justify-content: center;
-    }
+  }
+  .catalog_card {
+    justify-content: center;
   }
 
   .mr-20 {

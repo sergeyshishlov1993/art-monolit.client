@@ -55,12 +55,6 @@ const card = reactive({
     title: "Меморіальні Комплекси",
     name: "marble",
   },
-  concrete: {
-    src: "bet.png",
-    alt: "Бетоні",
-    title: "Бетоні",
-    name: "concrete",
-  },
   kids: {
     src: "bet.png",
     alt: "Дитячі",
