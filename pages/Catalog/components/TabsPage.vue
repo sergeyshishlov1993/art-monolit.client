@@ -34,6 +34,13 @@
     >
       <ui-text-h4>аксесуари</ui-text-h4>
     </ui-btn>
+
+    <ui-btn
+      :class="{ active: props.selectedTab == 'cross' }"
+      @click="selecTab('cross')"
+    >
+      <ui-text-h4>хрести</ui-text-h4>
+    </ui-btn>
   </div>
 </template>
 

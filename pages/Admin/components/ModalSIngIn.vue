@@ -34,9 +34,9 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import UiInput from "~/components/UI/UiInput.vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
 
-import { useAuthStore } from "~/stores/auth";
+import { useFirebaseAuth } from "~/stores/firebaseAuth";
 
-const { auth } = useAuthStore();
+const { onLoginSuccess } = useFirebaseAuth();
 
 const email = ref("");
 const password = ref("");
@@ -52,8 +52,7 @@ function handleInputValue(event, name) {
 }
 
 const singIn = async () => {
-  console.log("its working....");
-  await auth({ email: email.value, password: password.value });
+  await onLoginSuccess(email.value, password.value);
 };
 </script>
 

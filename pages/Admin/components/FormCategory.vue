@@ -14,6 +14,7 @@
       <option :value="'memorial'">Меморіальні Комплекси</option>
       <option :value="'kids'.type">Дитячі</option>
       <option :value="'accessories'">Аксесуари</option>
+      <option :value="'cross'">Хрести</option>
     </select>
 
     <ui-error

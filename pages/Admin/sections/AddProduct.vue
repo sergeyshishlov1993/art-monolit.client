@@ -10,7 +10,7 @@
       </div>
 
       <div
-        class="tab"
+        class="tab scrin-425"
         :class="{ active: activeTab == 'ourWork' }"
         @click="activeTab = 'ourWork'"
       >
@@ -168,5 +168,26 @@ async function loadProductCard(formData, file, type) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 1199px) {
+  .wrapper {
+    padding: 50px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  form {
+    width: 100%;
+  }
+
+  .mr-50 {
+    margin-right: 20px;
+  }
+}
+@media screen and (max-width: 424px) {
+  .wrapper {
+    padding: 30px 0;
+  }
 }
 </style>

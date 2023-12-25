@@ -67,6 +67,12 @@ const card = reactive({
     title: "Аксесуари",
     name: "accessories",
   },
+  cross: {
+    src: "cross.png",
+    alt: "Хрести",
+    title: "Хрести",
+    name: "cross",
+  },
 });
 </script>
 

@@ -20,18 +20,20 @@
             />
           </div>
 
-          <div class="catalog_card">
+          <div class="catalog_card" v-if="isLoading">
             <catalog-card
-              v-for="(card, index) in product"
+              v-for="card in product"
               :key="card"
               :src="card.src"
               :alt="card.title"
               :title="card.title"
               :price="card.price"
               class="mr-20 mb-20"
-              @click="$router.push(`/catalog/${index}`)"
+              @click="$router.push(`/catalog/${card.id}`)"
             />
           </div>
+
+          <div class="spinner-border" role="status" v-else></div>
         </div>
 
         <div class="pagination">
@@ -54,9 +56,11 @@ import TabsPage from "./components/TabsPage.vue";
 
 const { activeTab, changeTab, product, getData, getNextData, getPrevData } =
   useCatalogData();
+const isLoading = ref(false);
 
 onMounted(async () => {
   await getData();
+  isLoading.value = true;
 });
 
 function changeSelectTab(tab) {
@@ -101,6 +105,10 @@ function changeSelectTab(tab) {
     background: #000;
     color: white;
   }
+}
+.spinner-border {
+  display: block;
+  margin: auto;
 }
 .mr-20 {
   margin-right: 20px;

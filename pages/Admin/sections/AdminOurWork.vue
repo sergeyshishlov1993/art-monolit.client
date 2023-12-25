@@ -4,7 +4,7 @@
       <tabs-page
         :selectedTab="activeTab"
         @selec-tab="changeTab"
-        class="mr-50"
+        class="mr-80"
       />
 
       <div class="card__wrapper">
@@ -14,6 +14,7 @@
           :src="card.src"
           :id="card.id"
           :index="index"
+          :type="card.type"
           @updateFormData="updateDocumentById"
           @remove="removeCard"
         />
@@ -21,8 +22,13 @@
     </div>
 
     <div class="pagination">
-      <ui-btn class="mr-20 button" @click="getPrevData">ПОВЕРНУТИСЯ</ui-btn>
-      <ui-btn class="button" @click="getNextData">ПОКАЗАТИ ЩЕ</ui-btn>
+      <ui-btn class="mr-20 button" @click="getPrevData">
+        <ui-text-h3>ПОВЕРНУТИСЯ</ui-text-h3>
+      </ui-btn>
+
+      <ui-btn class="button" @click="getNextData">
+        <ui-text-h3> ПОКАЗАТИ ЩЕ </ui-text-h3>
+      </ui-btn>
     </div>
   </div>
 </template>
@@ -31,6 +37,7 @@
 import { ref, onMounted, reactive } from "vue";
 import TabsPage from "../../Catalog/components/TabsPage.vue";
 import CardOurWork from "../components/CardOurWork.vue";
+import UiTextH3 from "~/components/UI/UiTextH3.vue";
 
 import { app } from "../firebaseConfig";
 import {
@@ -194,7 +201,30 @@ async function updateDocumentById(date, documentId, url, newImg) {
   grid-template-rows: repeat(3 1fr);
   gap: 30px;
 }
-.mr-50 {
+.mr-80 {
   margin-right: 80px;
+}
+
+@media screen and (max-width: 1199px) {
+  .wrapper {
+    padding: 50px;
+  }
+
+  .admin__catalog {
+    flex-direction: column;
+  }
+
+  .mr-80 {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    padding: 25px;
+  }
+  .admin__catalog {
+    padding: 0;
+  }
 }
 </style>

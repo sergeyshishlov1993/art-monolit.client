@@ -27,6 +27,7 @@ const { showScrollToTop, scrollToTop } = useScrollToTop();
 
 <style lang="scss" scoped>
 .container {
+  padding: 0;
   position: relative;
 }
 .shevron {

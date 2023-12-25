@@ -108,4 +108,27 @@ function removePersone() {
 .btn {
   width: 125px;
 }
+
+@media screen and (max-width: 1023px) {
+  .cell {
+    h2 {
+      font-size: 14px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cell {
+    padding: 30px;
+    flex-direction: column;
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    button {
+      align-self: center;
+    }
+  }
+}
 </style>

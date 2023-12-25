@@ -23,8 +23,13 @@
     </div>
 
     <div class="pagination">
-      <ui-btn class="mr-20 button" @click="getPrevData">ПОВЕРНУТИСЯ</ui-btn>
-      <ui-btn class="button" @click="getNextData">ПОКАЗАТИ ЩЕ</ui-btn>
+      <ui-btn class="mr-20 button" @click="getPrevData">
+        <ui-text-h3>ПОВЕРНУТИСЯ</ui-text-h3>
+      </ui-btn>
+
+      <ui-btn class="button" @click="getNextData">
+        <ui-text-h3> ПОКАЗАТИ ЩЕ </ui-text-h3>
+      </ui-btn>
     </div>
   </div>
 </template>
@@ -129,6 +134,46 @@ async function getNextData() {
   return feedbackData;
 }
 
+// async function getNextData() {
+//   const queryRef = collection(db, "feedback");
+
+//   // Проверяем, есть ли еще документы
+//   if (lastDoc.value) {
+//     const next = query(
+//       queryRef,
+//       orderBy("timestamp"),
+//       startAfter(lastDoc.value),
+//       limit(5)
+//     );
+
+//     const nextSnapshot = await getDocs(next);
+
+//     if (!nextSnapshot.empty) {
+//       const newData = [];
+//       nextSnapshot.docs.map((doc) =>
+//         newData.push({ ...doc.data(), id: doc.id })
+//       );
+
+//       return { data: newData, hasMore: true };
+//     } else {
+//       // Больше документов нет
+//       return { data: [], hasMore: false };
+//     }
+//   } else {
+//     // Обрабатываем начальный запрос без startAfter
+//     const initialQuery = query(queryRef, orderBy("timestamp"), limit(5));
+
+//     const initialSnapshot = await getDocs(initialQuery);
+
+//     const initialData = [];
+//     initialSnapshot.docs.map((doc) =>
+//       initialData.push({ ...doc.data(), id: doc.id })
+//     );
+
+//     return { data: initialData, hasMore: initialSnapshot.docs.length === 5 };
+//   }
+// }
+
 async function getPrevData() {
   const prevQuery = query(
     collection(db, "feedback"),
@@ -182,5 +227,20 @@ async function getPrevData() {
 }
 .mr-20 {
   margin-right: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    padding: 30px;
+  }
+  .table__headers {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .wrapper {
+    padding: 30px 0;
+  }
 }
 </style>
