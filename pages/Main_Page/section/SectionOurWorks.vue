@@ -3,11 +3,14 @@
     <ui-text-h1 class="white">НАШІ РАБОТИ</ui-text-h1>
 
     <div class="work-card">
-      <card-our-work
-        v-for="(card, index) in previewImg"
-        :key="card.id"
-        :src="card.src"
-        :number="index + 1"
+      <div class="sceletor" v-if="isLoadingImg"></div>
+      <img
+        v-for="img in ourWorkStatic"
+        :key="img"
+        :src="getImageUrl(img)"
+        alt="our works img"
+        loading="lazy"
+        @load="isLoadingImg = false"
       />
     </div>
 
@@ -20,21 +23,28 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
-import { useOurWorkData } from "~/stores/ourWorkData";
+import { ref } from "vue";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH3 from "~/components/UI/UiTextH3.vue";
-import CardOurWork from "../components/CardOurWork.vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
 
-const { getData, product } = useOurWorkData();
+const isLoadingImg = ref(true);
+const ourWorkStatic = [
+  "1.jpg",
+  "2.jpg",
+  "3.jpg",
+  "4.jpg",
+  "5.jpg",
+  "6.jpg",
+  "7.jpg",
+  "8.jpg",
+];
 
-onMounted(getData);
-const previewImg = computed(() => {
-  return product.filter((el, index) => {
-    return index !== 5;
-  });
-});
+const getImageUrl = (img) => {
+  const imagePath = `../../../assets/img/ourWork/${img}`;
+  const imageUrl = new URL(imagePath, import.meta.url).href;
+  return imageUrl;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -46,11 +56,49 @@ const previewImg = computed(() => {
 }
 
 .work-card {
+  position: relative;
   padding: 90px 50px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
   gap: 50px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+}
+
+.spinner-border {
+  display: block;
+  margin: auto;
+  margin-top: 50px;
+  color: white;
+}
+
+.sceletor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80%;
+  height: 320px;
+  border-radius: 20px;
+  background: #000;
+  animation: loading 1.5s infinite;
+  z-index: 1;
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }
 .white {
   text-align: center;

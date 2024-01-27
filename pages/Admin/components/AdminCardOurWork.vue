@@ -1,26 +1,13 @@
 <template>
   <div>
-    <form-category
-      class="form_card"
-      v-if="showForm"
-      :type="props.type"
-      :title="props.title"
-      :size="props.size"
-      :material="props.material"
-      :term="props.term"
-      :delivery="props.delivery"
-      :equipment="props.equipment"
-      :src="props.src"
-      :price="props.price"
-      @form-data="updateFormData"
-    />
+    <form-our-work class="form" v-if="showForm" @form-data="updateFormData" />
 
     <div class="catalog__card" v-else>
-      <img :src="props.src" :alt="props.title" />
-      <div>
-        <ui-text-h4 class="mt-25">{{ props.title }}</ui-text-h4>
-        <ui-text-h3 class="mt-25">{{ props.price }}</ui-text-h3>
+      <div class="scelotor__wrapper">
+        <div class="sceletor"></div>
+        <img :src="props.src.stringValue" :alt="props.index" loading="lazy" />
       </div>
+
       <div class="btn__wrapper">
         <button class="btn btn-primary" @click="showForm = true">
           змінити
@@ -35,7 +22,7 @@
 
 <script setup>
 import { ref } from "vue";
-import FormCategory from "../components/FormCategory.vue";
+import FormOurWork from "./FormOurWork.vue";
 
 const emit = defineEmits(["updateFormDate", "removeCard", "changes"]);
 const props = defineProps({
@@ -43,35 +30,8 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  title: {
-    type: String,
-    required: true,
-  },
-  size: {
-    type: String,
-    required: true,
-  },
-  material: {
-    type: String,
-    required: true,
-  },
-  term: {
-    type: String,
-    required: true,
-  },
-  delivery: {
-    type: String,
-    required: true,
-  },
-  equipment: {
-    type: String,
-    required: true,
-  },
+
   src: {
-    type: String,
-    required: true,
-  },
-  price: {
     type: String,
     required: true,
   },
@@ -79,12 +39,17 @@ const props = defineProps({
     type: String,
     required: true,
   },
+
+  index: {
+    type: Number,
+    required: true,
+  },
 });
 
 const showForm = ref(false);
 
 function removeCard(id, path) {
-  return emit("remove", id, path);
+  return emit("remove", id, path.stringValue);
 }
 
 function updateFormData(data, file) {
@@ -102,14 +67,50 @@ function updateFormData(data, file) {
 
 <style lang="scss" scoped>
 .catalog__card {
+  position: relative;
   padding: 20px;
-  width: 250px;
+  width: 300px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(0, 0, 0, 1);
+  box-shadow: 6px 5px 8px 7px rgba(34, 60, 80, 0.2);
   border-radius: 20px;
+  img {
+    max-width: 100%;
+    max-height: 350px;
+    min-height: 250px;
+    border-radius: 10px;
+  }
+}
+
+.white {
+  color: white;
+}
+.scelotor__wrapper {
+  position: relative;
+}
+.sceletor {
+  position: absolute;
+  width: 80%;
+  height: 200px;
+  border-radius: 20px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
+  animation: loading 1.5s infinite;
+  z-index: 1;
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }
 .btn__wrapper {
   margin-top: 15px;
@@ -118,10 +119,9 @@ function updateFormData(data, file) {
     margin-right: 10px;
   }
 }
-.form_card {
-  width: 250px !important;
+.form {
+  width: 250px;
 }
-
 .mt-25 {
   margin-top: 25px;
 }

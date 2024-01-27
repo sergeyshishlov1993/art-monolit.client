@@ -22,12 +22,12 @@
 
           <div class="catalog_card" v-if="isLoading">
             <catalog-card
-              v-for="card in product"
+              v-for="card in pagedData"
               :key="card"
-              :src="card.src"
-              :alt="card.title"
-              :title="card.title"
-              :price="card.price"
+              :src="card.src.stringValue"
+              :alt="card.title.stringValue"
+              :title="card.title.stringValue"
+              :price="card.price.stringValue"
               class="mr-20 mb-20"
               @click="$router.push(`/catalog/${card.id}`)"
             />
@@ -38,6 +38,15 @@
 
         <div class="pagination">
           <ui-btn class="mr-20 button" @click="getPrevData">ПОВЕРНУТИСЯ</ui-btn>
+          <ui-btn
+            v-for="page in totalPage[0]"
+            :key="page"
+            @click="getPageItems(page)"
+            class="button page"
+            :class="{ active: currentPage[0] === page }"
+            >{{ page }}</ui-btn
+          >
+
           <ui-btn class="button" @click="getNextData">ПОКАЗАТИ ЩЕ</ui-btn>
         </div>
       </div>
@@ -54,18 +63,35 @@ import UiBtn from "~/components/UI/UiBtn.vue";
 import CatalogCard from "./components/CatalogCard";
 import TabsPage from "./components/TabsPage.vue";
 
-const { activeTab, changeTab, product, getData, getNextData, getPrevData } =
-  useCatalogData();
+const {
+  activeTab,
+  changeTab,
+  getData,
+  getNextData,
+  getPrevData,
+  totalPage,
+  getPageItems,
+  pagedData,
+  currentPage,
+} = useCatalogData();
 const isLoading = ref(false);
 
 onMounted(async () => {
-  await getData();
+  await getData("catalog", "product");
+  getPageItems(1);
+
   isLoading.value = true;
 });
 
-function changeSelectTab(tab) {
+async function changeSelectTab(tab) {
   changeTab(tab);
-  getData();
+
+  isLoading.value = false;
+
+  await getData("catalog", "product");
+  getPageItems(1);
+
+  isLoading.value = true;
 }
 </script>
 
@@ -89,9 +115,9 @@ function changeSelectTab(tab) {
   align-items: flex-start;
 }
 .catalog_card {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .pagination {
@@ -100,11 +126,24 @@ function changeSelectTab(tab) {
   align-items: center;
   justify-content: center;
 }
+.active {
+  background: #000;
+  color: white;
+}
 .button {
   &:hover {
     background: #000;
     color: white;
   }
+}
+.page {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 10px;
 }
 .spinner-border {
   display: block;

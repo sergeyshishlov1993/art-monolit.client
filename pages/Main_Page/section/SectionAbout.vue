@@ -106,6 +106,7 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
 }
 img {
   max-width: 50%;
+  filter: drop-shadow(10px 10px 15px #000);
 }
 
 @media screen and (max-width: 1281px) {

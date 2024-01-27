@@ -19,7 +19,20 @@ h1 {
   font-family: Roboto;
   font-size: 33px;
   font-weight: 700;
-  color: rgba(161, 138, 104, 1);
+
+  background: linear-gradient(
+    to bottom,
+    #f2be5c 14%,
+    #f2be5c 16%,
+    #d99036 10%,
+    #cfc09f 32%,
+    #ffecb3 40%,
+    #3a2c0f 99%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
 }
 .white {
   color: white;

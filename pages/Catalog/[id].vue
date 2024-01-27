@@ -12,14 +12,16 @@
           <ui-text-h4 class="fw-500">/каталог</ui-text-h4>
         </nuxt-link>
 
-        <ui-text-h4 class="fw-500">/{{ product[0].title }}</ui-text-h4>
+        <ui-text-h4 class="fw-500"
+          >/{{ product[0].title.stringValue }}</ui-text-h4
+        >
       </div>
 
       <div class="product">
         <div class="mr-40">
           <div class="sceletor" v-if="isLoadingImg"></div>
           <img
-            :src="product[0].src"
+            :src="product[0].src.stringValue"
             alt="catalog__item"
             loading="lazy"
             @load="isLoadingImg = false"
@@ -27,21 +29,22 @@
         </div>
 
         <div class="description">
-          <ui-text-h1>{{ product[0].title }}</ui-text-h1>
+          <ui-text-h1>{{ product[0].title.stringValue }}</ui-text-h1>
           <ui-text-h3 class="fw-500 mt-40"
-            >РОЗМІР : {{ product[0].size }}</ui-text-h3
+            >РОЗМІР : {{ product[0].size.stringValue }} ММ</ui-text-h3
           >
           <ui-text-h3 class="fw-500 mt-20"
-            >МАТЕРІАЛ : {{ product[0].material }}</ui-text-h3
+            >МАТЕРІАЛ : {{ product[0].material.stringValue }}</ui-text-h3
           >
           <ui-text-h3 class="fw-500 mt-20"
-            >ТЕРМІН ВИГОТОВЛЕННЯ : {{ product[0].term }} ДНІВ</ui-text-h3
+            >ТЕРМІН ВИГОТОВЛЕННЯ :
+            {{ product[0].term.stringValue }} ДНІВ</ui-text-h3
           >
           <ui-text-h3 class="fw-500 mt-20"
-            >ДОСТАВКА : {{ product[0].delivery }}</ui-text-h3
+            >ДОСТАВКА : {{ product[0].delivery.stringValue }}</ui-text-h3
           >
           <ui-text-h3 class="fw-500 mt-20"
-            >КОМПЛЕКТАЦІЯ : {{ product[0].equipment }}</ui-text-h3
+            >КОМПЛЕКТАЦІЯ : {{ product[0].equipment.stringValue }}</ui-text-h3
           >
 
           <ui-btn
@@ -105,8 +108,9 @@ const showModal = ref(false);
   align-items: flex-start;
   justify-content: center;
   img {
-    width: 100%;
-    height: 650px;
+    max-width: 100%;
+    height: 600px;
+    width: auto;
     border-radius: 20px;
     z-index: 2;
   }
@@ -118,7 +122,7 @@ const showModal = ref(false);
 }
 
 .button {
-  margin-top: 300px;
+  margin-top: 265px;
   &:hover {
     background: #000;
     color: white;
@@ -127,8 +131,9 @@ const showModal = ref(false);
 
 .sceletor {
   position: absolute;
-  min-width: 100%;
-  height: 650px;
+  top: 0;
+  max-width: 100%;
+  height: 600px;
   border-radius: 20px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
   animation: loading 1.5s infinite;
@@ -159,7 +164,7 @@ const showModal = ref(false);
 }
 .mr-40 {
   position: relative;
-  width: 450px;
+  max-width: 100%;
   margin-right: 40px;
 }
 .mt-40 {

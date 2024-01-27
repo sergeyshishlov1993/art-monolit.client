@@ -23,14 +23,15 @@
     >
 
     <div v-if="activeTab === 'catalog'">
-      <form-category
-        v-if="!showSuccessMesage && !showErrorMessage"
+      <admin-form-category
+        v-if="!showSuccessMesage && !showErrorMessage && !showSpiner"
         class="mt-50"
         @formData="loadProductCard"
         @file="loadFileToStorage"
       />
 
       <div class="loader" v-else>
+        <div class="spinner-border" role="status" v-if="showSpiner"></div>
         <success-mesage v-if="showSuccessMesage" />
         <error-message v-if="showErrorMessage" />
       </div>
@@ -45,6 +46,7 @@
       />
 
       <div class="loader" v-else>
+        <div class="spinner-border" role="status" v-if="showSpiner"></div>
         <success-mesage v-if="showSuccessMesage" />
         <error-message v-if="showErrorMessage" />
       </div>
@@ -72,7 +74,7 @@ import { ref } from "vue";
 import UiTextH2 from "~/components/UI/UiTextH2.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 
-import FormCategory from "../components/FormCategory.vue";
+import AdminFormCategory from "../components/AdminFormCatalog.vue";
 import FormOurWork from "../components/FormOurWork.vue";
 import SuccessMesage from "../components/SuccessMesage.vue";
 import ErrorMessage from "../components/ErrorMessage.vue";
@@ -85,6 +87,7 @@ const activeTab = ref("catalog");
 const downloadURL = ref("");
 const showSuccessMesage = ref(false);
 const showErrorMessage = ref(false);
+const showSpiner = ref(false);
 
 async function loadFileToStorage(file) {
   try {
@@ -101,7 +104,8 @@ async function loadFileToStorage(file) {
   }
 }
 
-async function loadProductCard(formData, file, type) {
+async function loadProductCard(formData, file, type, spiner) {
+  showSpiner.value = spiner;
   try {
     const cardCollection = collection(db, `product/${activeTab.value}/${type}`);
     const documentId = uuidv4();
@@ -113,18 +117,19 @@ async function loadProductCard(formData, file, type) {
       { ...formData, src: downloadURL.value, timestamp: now },
       documentId
     );
-
+    showSpiner.value = false;
     showSuccessMesage.value = true;
 
     setTimeout(() => {
       showSuccessMesage.value = false;
-    }, 4000);
+    }, 2000);
   } catch (e) {
+    showSpiner.value = false;
     showErrorMessage.value = true;
 
     setTimeout(() => {
       showErrorMessage.value = false;
-    }, 4000);
+    }, 2000);
   }
 }
 </script>
@@ -147,6 +152,11 @@ async function loadProductCard(formData, file, type) {
   h2 {
     text-align: center;
   }
+}
+.spinner-border {
+  display: block;
+  margin: auto;
+  margin-top: 40px;
 }
 .mr-50 {
   margin-right: 50px;

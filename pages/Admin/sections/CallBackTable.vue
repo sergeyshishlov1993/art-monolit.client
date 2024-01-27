@@ -47,8 +47,9 @@ import {
   query,
   startAfter,
   limit,
+  limitToLast,
   orderBy,
-  startAt,
+  endBefore,
   onSnapshot,
 } from "firebase/firestore";
 
@@ -58,8 +59,16 @@ import UiTextH3 from "~/components/UI/UiTextH3.vue";
 const db = getFirestore(app);
 const feedbackData = reactive([]);
 const lastDoc = ref(null);
+const firstDoc = ref(null);
 
 onBeforeMount(getFeedbackData);
+
+const props = defineProps({
+  adminTab: {
+    type: String,
+    requred: true,
+  },
+});
 
 async function getFeedbackData() {
   try {
@@ -71,6 +80,7 @@ async function getFeedbackData() {
     const querySnapshot = await getDocs(feedbackCollection);
 
     lastDoc.value = querySnapshot.docs[querySnapshot.docs.length - 1];
+    firstDoc.value = querySnapshot.docs[0];
 
     feedbackData.length = 0;
     querySnapshot.forEach((doc) =>
@@ -125,68 +135,39 @@ async function getNextData() {
     limit(5)
   );
 
-  feedbackData.length = 0;
   const nextSnapshot = await getDocs(next);
-  nextSnapshot.docs.map((doc) =>
-    feedbackData.push({ ...doc.data(), id: doc.id })
-  );
+
+  if (nextSnapshot.docs.length > 0) {
+    feedbackData.length = 0;
+    nextSnapshot.docs.map((doc) =>
+      feedbackData.push({ ...doc.data(), id: doc.id })
+    );
+
+    lastDoc.value = nextSnapshot.docs[nextSnapshot.docs.length - 1];
+    firstDoc.value = nextSnapshot.docs[0];
+  }
 
   return feedbackData;
 }
 
-// async function getNextData() {
-//   const queryRef = collection(db, "feedback");
-
-//   // Проверяем, есть ли еще документы
-//   if (lastDoc.value) {
-//     const next = query(
-//       queryRef,
-//       orderBy("timestamp"),
-//       startAfter(lastDoc.value),
-//       limit(5)
-//     );
-
-//     const nextSnapshot = await getDocs(next);
-
-//     if (!nextSnapshot.empty) {
-//       const newData = [];
-//       nextSnapshot.docs.map((doc) =>
-//         newData.push({ ...doc.data(), id: doc.id })
-//       );
-
-//       return { data: newData, hasMore: true };
-//     } else {
-//       // Больше документов нет
-//       return { data: [], hasMore: false };
-//     }
-//   } else {
-//     // Обрабатываем начальный запрос без startAfter
-//     const initialQuery = query(queryRef, orderBy("timestamp"), limit(5));
-
-//     const initialSnapshot = await getDocs(initialQuery);
-
-//     const initialData = [];
-//     initialSnapshot.docs.map((doc) =>
-//       initialData.push({ ...doc.data(), id: doc.id })
-//     );
-
-//     return { data: initialData, hasMore: initialSnapshot.docs.length === 5 };
-//   }
-// }
-
 async function getPrevData() {
-  const prevQuery = query(
+  const prev = query(
     collection(db, "feedback"),
-    orderBy("timestamp", "desc"),
-    startAt(lastDoc.value),
-    limit(5)
+    orderBy("timestamp"),
+    endBefore(firstDoc.value),
+    limitToLast(6)
   );
 
-  feedbackData.length = 0;
-  const nextSnapshot = await getDocs(prevQuery);
-  nextSnapshot.docs.map((doc) =>
-    feedbackData.push({ ...doc.data(), id: doc.id })
-  );
+  const prevSnapshot = await getDocs(prev);
+
+  if (prevSnapshot.docs.length > 0) {
+    feedbackData.length = 0;
+
+    prevSnapshot.docs.map((doc) => product.push({ ...doc.data(), id: doc.id }));
+
+    lastDoc.value = prevSnapshot.docs[prevSnapshot.docs.length - 1];
+    firstDoc.value = prevSnapshot.docs[0];
+  }
 
   return feedbackData;
 }

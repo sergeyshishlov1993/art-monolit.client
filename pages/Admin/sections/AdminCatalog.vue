@@ -3,18 +3,24 @@
     <div class="admin__catalog">
       <tabs-page
         :selectedTab="activeTab"
-        @selecTab="changeSelectTab"
+        @selec-tab="changeSelectTab"
         class="mr-80"
       />
 
       <div class="card__wrapper" v-if="isLoading">
-        <admin-card-our-work
-          v-for="(card, index) in pagedData"
+        <admin-card-catalog
+          v-for="card in pagedData"
           :key="card.id"
           :src="card.src"
+          :title="card.title"
+          :price="card.price"
           :id="card.id"
-          :index="index"
           :type="card.type"
+          :term="card.term"
+          :size="card.size"
+          :material="card.material"
+          :delivery="card.delivery"
+          :equipment="card.equipment"
           @updateFormData="updatedDoc"
           @remove="removeDoc"
         />
@@ -40,21 +46,22 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import TabsPage from "../../Catalog/components/TabsPage.vue";
-import AdminCardOurWork from "../components/AdminCardOurWork.vue";
-import UiTextH3 from "~/components/UI/UiTextH3.vue";
 
+import TabsPage from "../../Catalog/components/TabsPage.vue";
+import UiBtn from "~/components/UI/UiBtn.vue";
+import AdminCardCatalog from "../components/AdminCardCatalog.vue";
+import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import { useCatalogData } from "~/stores/catalogData";
 
 const {
   changeTab,
   getData,
+  getNextData,
+  getPrevData,
   totalPage,
   getPageItems,
   pagedData,
   currentPage,
-  getNextData,
-  getPrevData,
   updateDocumentById,
   removeCard,
 } = useCatalogData();
@@ -81,7 +88,6 @@ function changeSelectTab(tab) {
   getData(props.adminTab, "product");
   getPageItems(1);
 }
-
 function updatedDoc(date, documentId, url, newImg) {
   updateDocumentById(date, documentId, url, newImg, props.adminTab);
 }
@@ -95,21 +101,21 @@ function removeDoc(id, path) {
 .wrapper {
   padding: 100px;
 }
-
+.admin__catalog {
+  padding: 50px;
+  display: flex;
+}
+.card__wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  gap: 40px;
+}
 .pagination {
   margin-top: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.page {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
 }
 .spinner-border {
   display: block;
@@ -121,23 +127,22 @@ function removeDoc(id, path) {
     color: white;
   }
 }
-.mr-20 {
-  margin-right: 20px;
-}
-.admin__catalog {
-  padding: 50px;
-  display: flex;
-}
-.card__wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3 1fr);
-  gap: 30px;
-}
-
 .active {
   background: #000;
   color: white;
+}
+
+.page {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 10px;
+}
+.mr-20 {
+  margin-right: 20px;
 }
 .mr-80 {
   margin-right: 80px;

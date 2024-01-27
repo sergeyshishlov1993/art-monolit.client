@@ -9,7 +9,7 @@
       <option value="">
         <ui-text-h4>Оберіть тип</ui-text-h4>
       </option>
-      <option :value="'single'">Одиночны</option>
+      <option :value="'single'">Одиночні</option>
       <option :value="'double'">Двійні</option>
       <option :value="'memorial'">Меморіальні Комплекси</option>
       <option :value="'kids'.type">Дитячі</option>
@@ -206,6 +206,7 @@ const delivery = ref("" || props.delivery);
 const equipment = ref("" || props.equipment);
 const price = ref("" || props.price);
 const file = ref(null);
+const showSpiner = ref(false);
 
 function handleFocus(event, name) {
   createErrorObj(name);
@@ -218,22 +219,22 @@ const handleInputChange = (event, name) => {
       return (type.value = event.target.value);
 
     case "title":
-      return (title.value = event.target.value);
+      return (title.value = event.target.value.toUpperCase());
 
     case "size":
-      return (size.value = event.target.value);
+      return (size.value = event.target.value.toUpperCase());
 
     case "material":
-      return (material.value = event.target.value);
+      return (material.value = event.target.value.toUpperCase());
 
     case "term":
       return (term.value = event.target.value);
 
     case "delivery":
-      return (delivery.value = event.target.value);
+      return (delivery.value = event.target.value.toUpperCase());
 
     case "equipment":
-      return (equipment.value = event.target.value);
+      return (equipment.value = event.target.value.toUpperCase());
 
     case "price":
       return (price.value = event.target.value);
@@ -274,10 +275,6 @@ function handleBlur(event, name) {
       validateField((equipment.value = event.target.value), name);
       break;
 
-    // case "file":
-    //   validateField((file.value = event.target.files[0]), name);
-    //   break;
-
     case "price":
       validateField((price.value = event.target.value), name);
       break;
@@ -302,7 +299,6 @@ function doValidateForm() {
   validateField(term.value, "term");
   validateField(delivery.value, "delivery");
   validateField(equipment.value, "equipment");
-  // validateField(file.value, "file");
   validateField(price.value, "price");
 }
 
@@ -317,6 +313,7 @@ const handleFormSubmit = (event) => {
   doValidateForm();
 
   if (!isFormValid()) {
+    showSpiner.value = true;
     emit(
       "formData",
       {
@@ -330,7 +327,8 @@ const handleFormSubmit = (event) => {
         price: price.value,
       },
       file.value,
-      type.value
+      type.value,
+      showSpiner.value
     );
 
     type.value = "";

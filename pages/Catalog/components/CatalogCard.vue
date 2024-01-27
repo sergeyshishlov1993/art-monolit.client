@@ -18,9 +18,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
-const isLoadingImg = ref(true);
 
 const props = defineProps({
   src: {
@@ -40,31 +38,36 @@ const props = defineProps({
     requred: true,
   },
 });
+const isLoadingImg = ref(true);
 </script>
 
 <style lang="scss" scoped>
 .catalog__card {
   position: relative;
   padding: 20px;
-  width: 250px;
+  width: 300px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(0, 0, 0, 1);
+  box-shadow: 9px 0px 8px 5px rgba(34, 60, 80, 0.2);
   border-radius: 20px;
+
   img {
-    width: 100%;
-    height: 300px;
+    max-width: 100%;
+    max-height: 350px;
+    min-height: 250px;
     border-radius: 10px;
   }
 }
 
 .sceletor {
   position: absolute;
-
+  top: 0;
+  bottom: 0;
   width: 80%;
-  height: 200px;
+  height: 320px;
   border-radius: 20px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
   animation: loading 1.5s infinite;

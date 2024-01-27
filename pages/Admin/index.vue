@@ -4,8 +4,8 @@
       <div class="admin__wrapper">
         <div class="admin-wrapper__navbar">
           <ui-text-h3
-            @click="changeTab('call')"
-            :class="{ active: activeTab == 'call' }"
+            @click="changeTab('feedback')"
+            :class="{ active: activeTab == 'feedback' }"
             >ПЕРЕДЗВОНИТИ</ui-text-h3
           >
           <ui-text-h3
@@ -26,7 +26,7 @@
         </div>
         <!-- ------------------- -->
 
-        <component :is="tabContent"></component>
+        <component :is="tabContent" :adminTab="activeTab"></component>
       </div>
     </div>
 
@@ -39,7 +39,7 @@ import { ref, computed, onMounted } from "vue";
 import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import CallBackTable from "./sections/CallBackTable.vue";
 import AddProduct from "./sections/AddProduct.vue";
-import AdminCategory from "./sections/AdminCategory.vue";
+import AdminCatalog from "./sections/AdminCatalog.vue";
 import AdminOurWork from "./sections/AdminOurWork.vue";
 import ModalSingIn from "./components/ModalSingIn.vue";
 
@@ -51,7 +51,7 @@ import { useFirebaseAuth } from "~/stores/firebaseAuth";
 
 const { isAuth, refreshTokenIfExpired } = useFirebaseAuth();
 
-const activeTab = ref("call");
+const activeTab = ref("feedback");
 
 function changeTab(name) {
   return (activeTab.value = name);
@@ -59,14 +59,14 @@ function changeTab(name) {
 
 const tabContent = computed(() => {
   switch (activeTab.value) {
-    case "call":
+    case "feedback":
       return CallBackTable;
 
     case "add":
       return AddProduct;
 
     case "catalog":
-      return AdminCategory;
+      return AdminCatalog;
 
     case "ourWork":
       return AdminOurWork;
@@ -87,7 +87,19 @@ const tabContent = computed(() => {
         color: white;
         cursor: pointer;
         &:hover {
-          color: rgba(130, 100, 45, 1);
+          background: linear-gradient(
+            to bottom,
+            #f2be5c 14%,
+            #f2be5c 16%,
+            #d99036 10%,
+            #cfc09f 32%,
+            #ffecb3 40%,
+            #3a2c0f 99%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+
+          color: transparent;
           font-weight: 500;
         }
       }
@@ -100,7 +112,19 @@ const tabContent = computed(() => {
 
 .active {
   font-weight: 500;
-  color: rgba(130, 100, 45, 1) !important;
+  background: linear-gradient(
+    to bottom,
+    #f2be5c 14%,
+    #f2be5c 16%,
+    #d99036 10%,
+    #cfc09f 32%,
+    #ffecb3 40%,
+    #3a2c0f 99%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
 }
 @media screen and (min-width: 1440px) {
   .container {

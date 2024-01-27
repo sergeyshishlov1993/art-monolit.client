@@ -29,8 +29,14 @@
         </div>
 
         <div class="pagination">
-          <ui-btn class="mr-20 button" @click="getPrevData">ПОВЕРНУТИСЯ</ui-btn>
-          <ui-btn class="button" @click="getNextData">ПОКАЗАТИ ЩЕ</ui-btn>
+          <ui-btn
+            class="mr-20 button"
+            @click="getPrevData('ourWork', 'product')"
+            >ПОВЕРНУТИСЯ</ui-btn
+          >
+          <ui-btn class="button" @click="getNextData('ourWork', 'product')"
+            >ПОКАЗАТИ ЩЕ</ui-btn
+          >
         </div>
       </div>
     </div>
@@ -43,19 +49,20 @@ import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import TabsPage from "../Catalog/components/TabsPage.vue";
 import WorkCard from "./components/WorkCard.vue";
-import { useOurWorkData } from "~/stores/ourWorkData";
 
 const { activeTab, changeTab, product, getData, getNextData, getPrevData } =
-  useOurWorkData();
+  useCatalogData();
+const isLoading = ref(false);
 
-onMounted(() => {
-  changeTab("single");
-  getData();
+onMounted(async () => {
+  await getData("ourWork", "product");
+
+  isLoading.value = true;
 });
 
 function selecChangeTab(tab) {
   changeTab(tab);
-  getData();
+  getData("ourWork", "product");
 }
 </script>
 
