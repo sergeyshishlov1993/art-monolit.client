@@ -4,8 +4,13 @@
 
     <div class="catalog__card" v-else>
       <div class="scelotor__wrapper">
-        <div class="sceletor"></div>
-        <img :src="props.src.stringValue" :alt="props.index" loading="lazy" />
+        <img
+          :src="props.src.stringValue"
+          :alt="props.index"
+          loading="lazy"
+          @load="hidenSceletor = false"
+        />
+        <div class="sceletor" v-if="hidenSceletor"></div>
       </div>
 
       <div class="btn__wrapper">
@@ -47,6 +52,7 @@ const props = defineProps({
 });
 
 const showForm = ref(false);
+const hidenSceletor = ref(true);
 
 function removeCard(id, path) {
   return emit("remove", id, path.stringValue);
@@ -67,6 +73,7 @@ function updateFormData(data, file) {
 
 <style lang="scss" scoped>
 .catalog__card {
+  margin: 0 auto;
   position: relative;
   padding: 20px;
   width: 300px;
@@ -82,6 +89,7 @@ function updateFormData(data, file) {
     height: 350px;
     object-fit: cover;
     border-radius: 10px;
+    z-index: 999;
   }
 }
 

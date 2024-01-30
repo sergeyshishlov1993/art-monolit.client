@@ -37,12 +37,8 @@ import { useCatalogData } from "~/stores/catalogData";
 const {
   changeTab,
   getData,
-  totalPage,
   getPageItems,
   pagedData,
-  currentPage,
-  getNextData,
-  getPrevData,
   updateDocumentById,
   removeCard,
 } = useCatalogData();
@@ -84,21 +80,6 @@ function removeDoc(id, path) {
   padding: 100px;
 }
 
-.pagination {
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.page {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-}
 .spinner-border {
   display: block;
   margin: auto;
@@ -130,6 +111,11 @@ function removeDoc(id, path) {
 .mr-80 {
   margin-right: 80px;
 }
+@media screen and (max-width: 1440px) {
+  .card__wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 @media screen and (max-width: 1199px) {
   .wrapper {
@@ -142,6 +128,12 @@ function removeDoc(id, path) {
 
   .mr-80 {
     margin: 0;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .card__wrapper {
+    grid-template-columns: 1fr;
   }
 }
 

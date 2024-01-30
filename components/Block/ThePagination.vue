@@ -60,6 +60,7 @@ const {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 150px !important;
 }
 .active {

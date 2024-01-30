@@ -17,12 +17,12 @@
 
     <div class="catalog__card" v-else>
       <div class="scelotor__wrapper">
-        <div class="sceletor" v-if="isLoadingImg"></div>
+        <div class="sceletor" v-if="hidenSceletor"></div>
         <img
           :src="props.src.stringValue"
           :alt="props.title.stringValue"
           loading="lazy"
-          @load="isLoadingImg = false"
+          @load="hidenSceletor = false"
         />
       </div>
 
@@ -94,7 +94,7 @@ const props = defineProps({
 });
 
 const showForm = ref(false);
-const isLoadingImg = ref(true);
+const hidenSceletor = ref(true);
 
 function removeCard(id, path) {
   return emit("remove", id, path);
@@ -115,6 +115,7 @@ function updateFormData(data, file) {
 
 <style lang="scss" scoped>
 .catalog__card {
+  margin: 0 auto;
   padding: 20px;
   width: 300px;
   height: 550px;
