@@ -185,4 +185,9 @@ function updateFormData(data, file) {
 .mt-25 {
   margin-top: 25px;
 }
+@media screen and (max-width: 767px) {
+  img {
+    height: auto;
+  }
+}
 </style>
