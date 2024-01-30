@@ -105,8 +105,5 @@ const isLoadingImg = ref(true);
   .mt-25 {
     margin-top: 15px;
   }
-  img {
-    height: auto !important;
-  }
 }
 </style>

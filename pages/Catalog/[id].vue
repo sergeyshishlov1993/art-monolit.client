@@ -109,7 +109,7 @@ const showModal = ref(false);
   justify-content: center;
   img {
     max-width: 100%;
-    height: 600px;
+    height: auto;
     width: auto;
     border-radius: 20px;
     z-index: 2;
