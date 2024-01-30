@@ -29,7 +29,11 @@ import IconDone from "~/assets/icon/iconDone.vue";
 
 @media screen and (max-width: 766px) {
   .modal__done {
+    flex-direction: column;
     width: 100%;
+    svg {
+      margin-top: 15px;
+    }
   }
 }
 </style>

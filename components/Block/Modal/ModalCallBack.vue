@@ -160,6 +160,11 @@ async function sendFeedback(event) {
         documentId // id обьекта
       );
 
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
       namePersone.value = "";
       phone.value = "+380";
       form.reset();
