@@ -4,6 +4,7 @@
 
     <div class="work-card">
       <div class="sceletor" v-if="isLoadingImg"></div>
+
       <img
         v-for="img in ourWorkStatic"
         :key="img"
@@ -41,8 +42,7 @@ const ourWorkStatic = [
 ];
 
 const getImageUrl = (img) => {
-  const imagePath = `/assets/img/ourWork/${img}`;
-  const imageUrl = new URL(imagePath, import.meta.url).href;
+  const imageUrl = new URL(`/assets/img/ourWork/${img}`, import.meta.url).href;
   return imageUrl;
 };
 </script>
