@@ -41,7 +41,7 @@ const ourWorkStatic = [
 ];
 
 const getImageUrl = (img) => {
-  const imagePath = `../../../assets/img/ourWork/${img}`;
+  const imagePath = `/assets/img/ourWork/${img}`;
   const imageUrl = new URL(imagePath, import.meta.url).href;
   return imageUrl;
 };
