@@ -57,3 +57,33 @@ const singIn = async () => {
 </script>
 
 <style lang="scss" scoped>
+.sing-in {
+  padding: 100px;
+}
+form {
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  input {
+    width: 100%;
+  }
+  button {
+    width: 100%;
+    &:hover {
+      background: #000;
+      color: white;
+    }
+    h2 {
+      font-weight: 500;
+    }
+  }
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+</style>
