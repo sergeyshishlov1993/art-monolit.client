@@ -41,7 +41,7 @@ import CallBackTable from "./sections/CallBackTable.vue";
 import AddProduct from "./sections/AddProduct.vue";
 import AdminCatalog from "./sections/AdminCatalog.vue";
 import AdminOurWork from "./sections/AdminOurWork.vue";
-import ModalSingIn from "./components/ModalSingIn.vue";
+import ModalSingIn from "./components/AdminModal.vue";
 
 onMounted(async () => {
   await refreshTokenIfExpired();
