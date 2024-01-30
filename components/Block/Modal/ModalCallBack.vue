@@ -2,7 +2,7 @@
   <div class="modal">
     <icon-close class="close" @click="closeModal" />
 
-    <div v-if="showModal == 'empty'">
+    <div v-if="showModal == 'empty'" class="wrapper">
       <ui-text-h1 class="center">ДІЗНАТИСЯ ВАРТІСТЬ</ui-text-h1>
 
       <form @submit.prevent="sendFeedback">
@@ -60,7 +60,6 @@ import {
 } from "firebase/firestore";
 import { ref, computed } from "vue";
 import UiTextH1 from "~/components/UI/UiTextH1";
-import UiTextH2 from "~/components/UI/UiTextH2.vue";
 import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import UiInput from "~/components/UI/UiInput.vue";
 import IconClose from "~/assets/icon/IconClose.vue";
@@ -216,8 +215,13 @@ async function sendFeedback(event) {
   top: 20px;
   right: 20px;
 }
+.wrapper {
+  width: 100%;
+}
 
 form {
+  padding: 20px;
+  width: 100%;
   margin-top: 70px;
   display: flex;
   flex-direction: column;
@@ -261,7 +265,7 @@ form {
 
 @media screen and (max-width: 1023px) {
   .modal {
-    width: 500px;
+    width: 100%;
     &__done {
       flex-direction: column;
     }
@@ -271,17 +275,17 @@ form {
   }
 
   .input {
-    width: 350px;
+    width: 100%;
   }
 
   .button {
-    width: 350px;
+    width: 100%;
   }
 }
 
 @media screen and (max-width: 767px) {
   .modal {
-    width: 320px;
+    width: 100%;
     height: 450px;
   }
 
@@ -291,26 +295,26 @@ form {
   .close {
     width: 20px;
   }
-  .input {
-    width: 300px;
-    margin-bottom: 30px;
-  }
+  // .input {
+  //   width: 300px;
+  //   margin-bottom: 30px;
+  // }
 
-  .button {
-    width: 300px;
-  }
+  // .button {
+  //   width: 300px;
+  // }
 }
-@media screen and (max-width: 424px) {
-  .modal {
-    width: 300px;
-  }
+// @media screen and (max-width: 424px) {
+//   .modal {
+//     width: 300px;
+//   }
 
-  .input {
-    width: 285px;
-  }
+//   .input {
+//     width: 285px;
+//   }
 
-  .button {
-    width: 285px;
-  }
-}
+//   .button {
+//     width: 285px;
+//   }
+// }
 </style>

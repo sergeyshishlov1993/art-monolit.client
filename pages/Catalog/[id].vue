@@ -47,11 +47,7 @@
             >КОМПЛЕКТАЦІЯ : {{ product[0].equipment.stringValue }}</ui-text-h3
           >
 
-          <ui-btn
-            class="button"
-            @click="showModal = !showModal"
-            :disabled="showModal"
-          >
+          <ui-btn class="button" @click="getPrice" :disabled="showModal">
             <ui-text-h3>ДІЗНАТИСЯ ВАРТІСТЬ</ui-text-h3>
           </ui-btn>
         </div>
@@ -88,6 +84,13 @@ onMounted(async () => {
 });
 
 const showModal = ref(false);
+function getPrice() {
+  showModal.value = true;
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
 </script>
 
 <style lang="scss" scoped>
@@ -109,7 +112,7 @@ const showModal = ref(false);
   justify-content: center;
   img {
     max-width: 100%;
-    height: auto;
+    height: 600px;
     width: auto;
     border-radius: 20px;
     z-index: 2;
@@ -184,13 +187,13 @@ const showModal = ref(false);
   }
 }
 
-@media screen and (max-width: 1199px) {
-  .mr-40 {
-    margin-right: 0;
+@media screen and (max-width: 1440px) {
+  .product {
+    padding: 100px 0;
   }
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1199px) {
   .product {
     padding: 50px 20px;
     flex-direction: column;
@@ -199,12 +202,19 @@ const showModal = ref(false);
 
   .description {
     margin-top: 50px;
+    width: 100%;
+  }
+  .mr-40 {
+    margin-right: 0;
   }
 }
 
 @media screen and (max-width: 1023px) {
   .product {
     padding: 50px 0;
+    img {
+      height: auto;
+    }
   }
 }
 </style>

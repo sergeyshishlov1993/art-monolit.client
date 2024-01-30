@@ -218,6 +218,8 @@ form {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 .mt-150 {
   margin-top: 150px;
@@ -253,34 +255,17 @@ form {
   }
 
   .button {
-    max-width: 400px;
+    max-width: 100%;
   }
 
   .input {
-    max-width: 400px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .button {
-    max-width: 300px;
-  }
-
-  .input {
-    max-width: 300px;
+    max-width: 100%;
   }
 }
 
 @media screen and (max-width: 766px) {
   .wrapper {
     padding: 80px 10px;
-  }
-  .button {
-    max-width: 270px;
-  }
-
-  .input {
-    max-width: 270px;
   }
   .mt-150 {
     margin-top: 100px;
