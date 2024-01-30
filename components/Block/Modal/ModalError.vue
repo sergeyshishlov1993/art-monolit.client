@@ -34,4 +34,10 @@ import UiTextH2 from "~/components/UI/UiTextH2.vue";
 .mt-20 {
   margin-top: 20px;
 }
+
+@media screen and (max-width: 766px) {
+  .modal__error {
+    width: 100%;
+  }
+}
 </style>

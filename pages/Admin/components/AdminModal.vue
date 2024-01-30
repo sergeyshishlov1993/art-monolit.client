@@ -86,4 +86,13 @@ form {
 .mt-20 {
   margin-top: 20px;
 }
+
+@media screen and (max-width: 766px) {
+  .sing-in {
+    padding: 10px;
+  }
+  form {
+    width: 100%;
+  }
+}
 </style>

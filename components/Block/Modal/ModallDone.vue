@@ -26,4 +26,10 @@ import IconDone from "~/assets/icon/iconDone.vue";
 .fw-500 {
   font-weight: 500;
 }
+
+@media screen and (max-width: 766px) {
+  .modal__done {
+    width: 100%;
+  }
+}
 </style>
