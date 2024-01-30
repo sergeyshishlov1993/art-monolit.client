@@ -106,7 +106,7 @@ const isLoadingImg = ref(true);
     margin-top: 15px;
   }
   img {
-    height: auto;
+    height: auto !important;
   }
 }
 </style>

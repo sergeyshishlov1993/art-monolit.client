@@ -135,7 +135,7 @@ function updateFormData(data, file) {
 }
 @media screen and (max-width: 767px) {
   img {
-    height: auto;
+    height: auto !important;
   }
 }
 </style>
