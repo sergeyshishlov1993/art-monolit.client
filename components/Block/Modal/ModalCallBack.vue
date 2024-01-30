@@ -238,10 +238,16 @@ form {
   margin-bottom: 42px;
   width: 500px;
   height: 69px;
+
+  box-shadow: 4px 9px 15px 1px rgba(34, 60, 80, 0.35);
+  border: none;
 }
 .button {
   width: 500px;
   height: 69px;
+
+  box-shadow: 4px 9px 15px 1px rgba(34, 60, 80, 0.35);
+  border: none;
   &:hover {
     background: #000;
     h2 {

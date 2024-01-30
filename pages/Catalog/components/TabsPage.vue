@@ -64,6 +64,7 @@ function selecTab(tab) {
 .tabs {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   button {
     min-width: 250px;
     margin-bottom: 18px;

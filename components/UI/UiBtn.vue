@@ -10,6 +10,7 @@
 button {
   padding: 15px;
   border-radius: 20px;
-  border: 1px solid rgba(0, 0, 0, 1);
+  box-shadow: 4px 9px 15px 1px rgba(34, 60, 80, 0.35);
+  border: none;
 }
 </style>

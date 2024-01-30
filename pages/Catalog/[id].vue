@@ -116,6 +116,9 @@ function getPrice() {
     width: auto;
     border-radius: 20px;
     z-index: 2;
+
+    box-shadow: -3px 49px 24px -26px rgba(34, 60, 80, 0.76);
+    border: none;
   }
 }
 

@@ -40,7 +40,7 @@ const card = reactive({
   single: {
     src: "1.png",
     alt: "Одиночні",
-    title: "Одиночні",
+    title: "Одинарні",
     name: "single",
   },
   double: {
