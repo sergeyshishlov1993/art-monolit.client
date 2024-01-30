@@ -125,7 +125,7 @@ function updateFormData(data, file) {
   box-shadow: 6px 5px 8px 7px rgba(34, 60, 80, 0.2);
   border-radius: 20px;
   img {
-    max-width: 100%;
+    width: 100%;
     max-height: 350px;
     min-height: 250px;
     border-radius: 10px;
@@ -156,12 +156,13 @@ function updateFormData(data, file) {
   width: 250px !important;
 }
 .scelotor__wrapper {
+  width: 100%;
   position: relative;
 }
 .sceletor {
-  position: absolute;
-  width: 80%;
-  height: 200px;
+  width: 100%;
+  max-height: 350px;
+  min-height: 250px;
   border-radius: 20px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
   animation: loading 1.5s infinite;

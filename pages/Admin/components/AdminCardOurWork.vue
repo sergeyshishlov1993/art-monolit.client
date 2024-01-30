@@ -27,22 +27,22 @@ import FormOurWork from "./FormOurWork.vue";
 const emit = defineEmits(["updateFormDate", "removeCard", "changes"]);
 const props = defineProps({
   type: {
-    type: String,
-    required: true,
+    type: Object,
+    required: false,
   },
 
   src: {
-    type: String,
-    required: true,
+    type: Object,
+    required: false,
   },
   id: {
     type: String,
-    required: true,
+    required: false,
   },
 
   index: {
     type: Number,
-    required: true,
+    required: false,
   },
 });
 
@@ -60,7 +60,7 @@ function updateFormData(data, file) {
       })
     : (formData = { ...data, src: props.src });
 
-  emit("updateFormData", formData, props.id, props.src, file);
+  emit("updateFormData", formData, props.id, props.src.stringValue, file);
   showForm.value = false;
 }
 </script>
@@ -78,9 +78,9 @@ function updateFormData(data, file) {
   box-shadow: 6px 5px 8px 7px rgba(34, 60, 80, 0.2);
   border-radius: 20px;
   img {
-    max-width: 100%;
-    max-height: 350px;
-    min-height: 250px;
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
     border-radius: 10px;
   }
 }
@@ -90,11 +90,11 @@ function updateFormData(data, file) {
 }
 .scelotor__wrapper {
   position: relative;
+  width: 100%;
 }
 .sceletor {
-  position: absolute;
-  width: 80%;
-  height: 200px;
+  width: 100%;
+  height: 350px;
   border-radius: 20px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
   animation: loading 1.5s infinite;

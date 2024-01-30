@@ -69,6 +69,7 @@ import {
 } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { app } from "../firebaseConfig";
+import { useCatalogData } from "~/stores/catalogData";
 
 import { ref } from "vue";
 import UiTextH2 from "~/components/UI/UiTextH2.vue";
@@ -82,6 +83,7 @@ import ErrorMessage from "../components/ErrorMessage.vue";
 const storage = getStorage(app);
 const db = getFirestore(app);
 const now = Timestamp.now();
+const { getFirebaseData } = useCatalogData();
 
 const activeTab = ref("catalog");
 const downloadURL = ref("");
@@ -119,6 +121,8 @@ async function loadProductCard(formData, file, type, spiner) {
     );
     showSpiner.value = false;
     showSuccessMesage.value = true;
+
+    // getFirebaseData(activeTab.value, "product");
 
     setTimeout(() => {
       showSuccessMesage.value = false;

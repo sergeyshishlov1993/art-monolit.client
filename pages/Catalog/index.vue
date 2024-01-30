@@ -36,19 +36,7 @@
           <div class="spinner-border" role="status" v-else></div>
         </div>
 
-        <div class="pagination">
-          <ui-btn class="mr-20 button" @click="getPrevData">ПОВЕРНУТИСЯ</ui-btn>
-          <ui-btn
-            v-for="page in totalPage[0]"
-            :key="page"
-            @click="getPageItems(page)"
-            class="button page"
-            :class="{ active: currentPage[0] === page }"
-            >{{ page }}</ui-btn
-          >
-
-          <ui-btn class="button" @click="getNextData">ПОКАЗАТИ ЩЕ</ui-btn>
-        </div>
+        <the-pagination />
       </div>
     </div>
   </div>
@@ -59,21 +47,12 @@ import { onMounted } from "vue";
 import { useCatalogData } from "~/stores/catalogData";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
-import UiBtn from "~/components/UI/UiBtn.vue";
+import ThePagination from "~/components/Block/ThePagination.vue";
 import CatalogCard from "./components/CatalogCard";
 import TabsPage from "./components/TabsPage.vue";
 
-const {
-  activeTab,
-  changeTab,
-  getData,
-  getNextData,
-  getPrevData,
-  totalPage,
-  getPageItems,
-  pagedData,
-  currentPage,
-} = useCatalogData();
+const { activeTab, changeTab, getData, getPageItems, pagedData } =
+  useCatalogData();
 const isLoading = ref(false);
 
 onMounted(async () => {
@@ -123,8 +102,10 @@ async function changeSelectTab(tab) {
 .pagination {
   margin-top: 40px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  gap: 15px;
 }
 .active {
   background: #000;
@@ -142,8 +123,6 @@ async function changeSelectTab(tab) {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  margin-right: 10px;
 }
 .spinner-border {
   display: block;
@@ -178,13 +157,16 @@ async function changeSelectTab(tab) {
     min-width: 100%;
   }
 }
+@media screen and (max-width: 1440px) {
+  .catalog_card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 @media screen and (max-width: 1199px) {
   .catalog__wrapper {
+    display: block;
     padding: 80px 20px 20px 20px;
-  }
-  .catalog_card {
-    justify-content: center;
   }
 
   .mr-20 {
@@ -200,11 +182,11 @@ async function changeSelectTab(tab) {
 }
 
 @media screen and (max-width: 1023px) {
+  .wrapper {
+    padding: 0;
+  }
   .catalog {
     padding: 80px 20px 20px 20px;
-  }
-  .catalog__wrapper {
-    display: block;
   }
 
   .mr-100 {
@@ -217,11 +199,17 @@ async function changeSelectTab(tab) {
 }
 
 @media screen and (max-width: 768px) {
+  .wrapper {
+    padding: 20px;
+  }
   .catalog {
     padding: 50px 0px 0px 0px;
   }
   .catalog__wrapper {
     padding: 40px 0px;
+  }
+  .catalog_card {
+    grid-template-columns: 1fr;
   }
 }
 </style>

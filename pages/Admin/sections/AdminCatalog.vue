@@ -28,19 +28,7 @@
       <div class="spinner-border" role="status" v-else></div>
     </div>
 
-    <div class="pagination">
-      <ui-btn class="mr-20 button" @click="getPrevData">ПОВЕРНУТИСЯ</ui-btn>
-      <ui-btn
-        v-for="page in totalPage[0]"
-        :key="page"
-        @click="getPageItems(page)"
-        class="button page"
-        :class="{ active: currentPage[0] === page }"
-        >{{ page }}</ui-btn
-      >
-
-      <ui-btn class="button" @click="getNextData">ПОКАЗАТИ ЩЕ</ui-btn>
-    </div>
+    <the-pagination />
   </div>
 </template>
 
@@ -48,9 +36,8 @@
 import { ref, onMounted } from "vue";
 
 import TabsPage from "../../Catalog/components/TabsPage.vue";
-import UiBtn from "~/components/UI/UiBtn.vue";
 import AdminCardCatalog from "../components/AdminCardCatalog.vue";
-import UiTextH3 from "~/components/UI/UiTextH3.vue";
+import ThePagination from "~/components/Block/ThePagination.vue";
 import { useCatalogData } from "~/stores/catalogData";
 
 const {

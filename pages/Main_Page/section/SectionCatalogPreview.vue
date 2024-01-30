@@ -56,7 +56,7 @@ const card = reactive({
     name: "marble",
   },
   kids: {
-    src: "bet.png",
+    src: "kids.png",
     alt: "Дитячі",
     title: "Дитячі",
     name: "kids",

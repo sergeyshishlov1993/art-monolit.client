@@ -9,7 +9,7 @@
       <option value="">
         <ui-text-h4>Оберіть тип</ui-text-h4>
       </option>
-      <option value="single">Одиночны</option>
+      <option value="single">Одиночні</option>
       <option value="double">Двійні</option>
       <option value="memorial">Меморіальні Комплекси</option>
       <option value="kids">Дитячі</option>

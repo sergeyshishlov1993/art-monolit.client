@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import UiTextH4 from "~/components/UI/UiTextH4.vue";
+import { ref } from "vue";
 
 const props = defineProps({
   src: {
@@ -98,14 +98,9 @@ const isLoadingImg = ref(true);
   font-weight: 700;
 }
 
-@media screen and (max-width: 1199px) {
-  .catalog__card {
-    width: 200px;
-  }
-}
 @media screen and (max-width: 767px) {
   .catalog__card {
-    width: 150px;
+    width: 100%;
   }
   .mt-25 {
     margin-top: 15px;

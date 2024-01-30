@@ -14,30 +14,26 @@
       <div class="wrapper">
         <div class="our-work__wrapper">
           <div class="tab mr-100">
-            <tabs-page :selectedTab="activeTab[0]" @selecTab="selecChangeTab" />
+            <tabs-page
+              :selectedTab="activeTab[0]"
+              @selecTab="changeSelectTab"
+            />
           </div>
 
-          <div class="our-work__wrapper__card">
+          <div class="our-work__wrapper__card" v-if="isLoading">
             <work-card
-              v-for="(work, index) in product"
+              v-for="(work, index) in pagedData"
               :key="work"
               :src="work.src"
               :alt="work.alt"
               :number="index + 1"
             />
           </div>
+
+          <div class="spinner-border" role="status" v-else></div>
         </div>
 
-        <div class="pagination">
-          <ui-btn
-            class="mr-20 button"
-            @click="getPrevData('ourWork', 'product')"
-            >ПОВЕРНУТИСЯ</ui-btn
-          >
-          <ui-btn class="button" @click="getNextData('ourWork', 'product')"
-            >ПОКАЗАТИ ЩЕ</ui-btn
-          >
-        </div>
+        <the-pagination />
       </div>
     </div>
   </div>
@@ -45,24 +41,33 @@
 
 <script setup>
 import { onMounted } from "vue";
+import { useCatalogData } from "~/stores/catalogData";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import TabsPage from "../Catalog/components/TabsPage.vue";
 import WorkCard from "./components/WorkCard.vue";
+import ThePagination from "~/components/Block/ThePagination.vue";
 
-const { activeTab, changeTab, product, getData, getNextData, getPrevData } =
+const { activeTab, changeTab, getData, getPageItems, pagedData } =
   useCatalogData();
 const isLoading = ref(false);
 
 onMounted(async () => {
   await getData("ourWork", "product");
+  getPageItems(1);
 
   isLoading.value = true;
 });
 
-function selecChangeTab(tab) {
+async function changeSelectTab(tab) {
   changeTab(tab);
-  getData("ourWork", "product");
+
+  isLoading.value = false;
+
+  await getData("ourWork", "product");
+  getPageItems(1);
+
+  isLoading.value = true;
 }
 </script>
 
@@ -77,11 +82,11 @@ function selecChangeTab(tab) {
   padding-top: 100px;
   display: flex;
   &__card {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-auto-columns: auto;
-    gap: 10px;
+    grid-auto-rows: auto;
+    gap: 30px;
   }
 }
 .navigation {
@@ -97,11 +102,28 @@ function selecChangeTab(tab) {
   align-items: center;
   justify-content: center;
 }
+.active {
+  background: #000;
+  color: white;
+}
 .button {
   &:hover {
     background: #000;
     color: white;
   }
+}
+.page {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 10px;
+}
+.spinner-border {
+  display: block;
+  margin: auto;
 }
 .mr-20 {
   margin-right: 20px;
@@ -129,16 +151,28 @@ function selecChangeTab(tab) {
   }
 }
 
+@media screen and (max-width: 1440px) {
+  .wrapper {
+    padding: 50px;
+  }
+
+  .our-work__wrapper__card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media screen and (max-width: 1199px) {
   .wrapper__card {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .our-work__wrapper {
+    display: block;
   }
 }
 
 @media screen and (max-width: 1023px) {
   .our-work__wrapper {
     padding-top: 50px;
-    display: block;
   }
   .mr-100 {
     margin-right: 0;
@@ -149,7 +183,16 @@ function selecChangeTab(tab) {
   }
 }
 
+@media screen and (max-width: 991px) {
+  .our-work__wrapper__card {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media screen and (max-width: 767px) {
+  .wrapper {
+    padding: 0;
+  }
   .our__works {
     padding: 70px 0;
   }
