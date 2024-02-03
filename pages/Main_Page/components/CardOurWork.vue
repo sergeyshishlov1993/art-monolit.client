@@ -2,16 +2,10 @@
   <div class="work-item">
     <div class="sceletor"></div>
     <img :src="props.src" :alt="props.number" loading="lazy" />
-
-    <div class="number">
-      <ui-text-h1 class="white">{{ props.number }}</ui-text-h1>
-    </div>
   </div>
 </template>
 
 <script setup>
-import UiTextH1 from "~/components/UI/UiTextH1.vue";
-
 const props = defineProps({
   src: {
     type: String,
@@ -29,23 +23,6 @@ const props = defineProps({
   position: relative;
 }
 
-.number {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(1, 0, 2, 1);
-  min-width: 50px;
-  min-height: 50px;
-  border-radius: 30px;
-}
-
-.white {
-  color: white;
-}
 .sceletor {
   position: absolute;
   width: 80%;

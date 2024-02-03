@@ -11,7 +11,7 @@
 
       <ui-text-h1 class="center mt-100">НАШІ РОБОТИ</ui-text-h1>
 
-      <div class="wrapper">
+      <div class="wrapper" @click="showZoomImg = false">
         <div class="our-work__wrapper">
           <div class="tab mr-100">
             <tabs-page
@@ -22,12 +22,14 @@
 
           <div class="our-work__wrapper__card" v-if="isLoading">
             <work-card
-              v-for="(work, index) in pagedData"
+              v-for="work in pagedData"
               :key="work"
               :src="work.src"
               :alt="work.alt"
-              :number="index + 1"
+              @click.stop="getZoomPath(work.src.stringValue)"
             />
+
+            <zoom-img v-if="showZoomImg && screenWidth > 991" class="zoom" />
           </div>
 
           <div class="spinner-border" role="status" v-else></div>
@@ -46,11 +48,20 @@ import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import TabsPage from "../Catalog/components/TabsPage.vue";
 import WorkCard from "./components/WorkCard.vue";
+import ZoomImg from "~/components/Block/ZoomImg.vue";
 import ThePagination from "~/components/Block/ThePagination.vue";
 
-const { activeTab, changeTab, getData, getPageItems, pagedData } =
-  useCatalogData();
+const {
+  activeTab,
+  changeTab,
+  getData,
+  getPageItems,
+  pagedData,
+  getPathZoomImg,
+} = useCatalogData();
 const isLoading = ref(false);
+const showZoomImg = ref(false);
+const screenWidth = ref(window.innerWidth);
 
 onMounted(async () => {
   await getData("ourWork", "product");
@@ -69,6 +80,11 @@ async function changeSelectTab(tab) {
 
   isLoading.value = true;
 }
+
+const getZoomPath = (path) => {
+  showZoomImg.value = true;
+  getPathZoomImg(path);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -81,8 +97,12 @@ async function changeSelectTab(tab) {
 .our-work__wrapper {
   padding-top: 100px;
   display: flex;
+  width: 100%;
+  height: 100%;
   &__card {
+    position: relative;
     width: 100%;
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: auto;
@@ -124,6 +144,11 @@ async function changeSelectTab(tab) {
 .spinner-border {
   display: block;
   margin: auto;
+}
+.zoom {
+  img {
+    height: 75% !important;
+  }
 }
 .mr-20 {
   margin-right: 20px;

@@ -13,7 +13,7 @@
       <div v-if="currentPage[0] > 4">...</div>
 
       <ui-btn
-        v-for="page in test"
+        v-for="page in filterPage"
         :key="page"
         @click="getPageItems(page)"
         class="button page"
@@ -50,7 +50,7 @@ const {
   getPageItems,
   pagedData,
   currentPage,
-  test,
+  filterPage,
 } = useCatalogData();
 </script>
 

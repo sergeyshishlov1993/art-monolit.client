@@ -59,6 +59,8 @@ const isLoadingImg = ref(true);
     max-height: 350px;
     min-height: 250px;
     border-radius: 10px;
+
+    box-shadow: -5px 16px 19px -5px rgba(34, 60, 80, 1);
   }
 }
 

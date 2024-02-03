@@ -7,6 +7,7 @@ import type NavbarPhoneVue from './components/NavbarPhone.vue';
 
         <the-navbar class="desktop" />
 
+        <h2>ПАМ'ЯТНИКИ</h2>
         <icon-burger
           class="burger"
           @click="showMobileNavbar = !showMobileNavbar"
@@ -61,6 +62,25 @@ const showMobileNavbar = ref(false);
   justify-content: space-between;
   border-bottom: 2px solid rgba(130, 100, 45, 1);
   background: #000;
+
+  h2 {
+    display: none;
+    padding-top: 15px;
+    font-size: 25px;
+    background: linear-gradient(
+      to bottom,
+      #f2be5c 14%,
+      #f2be5c 16%,
+      #d99036 10%,
+      #cfc09f 32%,
+      #ffecb3 40%,
+      #3a2c0f 99%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    color: transparent;
+  }
 }
 .logo {
   max-width: 150px;
@@ -91,7 +111,10 @@ const showMobileNavbar = ref(false);
 
 @media screen and (max-width: 1023px) {
   .header {
-    padding: 14px 20px;
+    padding: 14px 10px;
+    h2 {
+      display: block;
+    }
   }
 
   .logo {

@@ -52,39 +52,39 @@ import AdminFormCatalog from "./AdminFormCatalog.vue";
 const emit = defineEmits(["updateFormDate", "removeCard", "changes"]);
 const props = defineProps({
   type: {
-    type: String,
+    type: Object,
     required: true,
   },
   title: {
-    type: String,
+    type: Object,
     required: true,
   },
   size: {
-    type: String,
+    type: Object,
     required: true,
   },
   material: {
-    type: String,
+    type: Object,
     required: true,
   },
   term: {
-    type: String,
+    type: Object,
     required: true,
   },
   delivery: {
-    type: String,
+    type: Object,
     required: true,
   },
   equipment: {
-    type: String,
+    type: Object,
     required: true,
   },
   src: {
-    type: String,
+    type: Object,
     required: true,
   },
   price: {
-    type: String,
+    type: Object,
     required: true,
   },
   id: {

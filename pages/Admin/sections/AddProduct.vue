@@ -151,7 +151,8 @@ async function loadProductCard(formData, file, type, spiner) {
   padding: 12px;
   background: white;
   border-radius: 20px;
-  border: 1px solid black;
+  box-shadow: 4px 9px 15px 1px rgba(34, 60, 80, 0.35);
+  border: none;
   width: 220px;
   h2 {
     text-align: center;

@@ -7,15 +7,6 @@
       loading="lazy"
       @load="isLoadingImg = false"
     />
-    <!-- <div
-      :style="{
-        backgroundImage: 'url(' + props.src.stringValue + ')',
-        width: '100%',
-        height: '500px',
-        backgroundSize: 'cover',
-        borderRadius: '20px',
-      }"
-    ></div> -->
   </div>
 </template>
 
@@ -23,12 +14,7 @@
 import { ref } from "vue";
 const props = defineProps({
   src: {
-    type: String,
-    requred: true,
-  },
-
-  number: {
-    type: Number,
+    type: Object,
     requred: true,
   },
 });
@@ -39,21 +25,23 @@ const isLoadingImg = ref(true);
 <style lang="scss" scoped>
 .card__wrapper {
   position: relative;
-  box-shadow: 6px 5px 8px 7px rgba(34, 60, 80, 0.2);
+  box-shadow: -13px -3px 19px -2px rgba(0, 0, 0, 0.86);
   border-radius: 20px;
 }
 
 img {
   width: 100%;
-  height: 500px;
-  object-fit: cover;
+  height: 100%;
+  min-height: 500px;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .sceletor {
+  position: absolute;
   width: 100%;
-  min-height: 400px;
-  max-height: 100%;
+  height: auto;
+  min-height: 500px;
   border-radius: 20px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
   animation: loading 1.5s infinite;

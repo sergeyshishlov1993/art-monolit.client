@@ -349,13 +349,15 @@ form {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  gap: 15px;
   width: 500px;
 }
 select {
   padding: 12px 0 12px 24px;
   background: white;
   border-radius: 20px;
-  border: 1px solid black;
+  box-shadow: 4px 9px 15px 1px rgba(34, 60, 80, 0.35);
+  border: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

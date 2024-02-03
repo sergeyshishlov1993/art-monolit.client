@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" @click="showZoomImg = false">
     <ui-text-h1 class="white">НАШІ РАБОТИ</ui-text-h1>
 
     <div class="work-card">
@@ -12,7 +12,9 @@
         alt="our works img"
         loading="lazy"
         @load="isLoadingImg = false"
+        @click.stop="getZoomPath(getImageUrl(img))"
       />
+      <zoom-img v-if="showZoomImg && screenWidth > 991" class="zoom" />
     </div>
 
     <ui-btn class="button">
@@ -25,25 +27,36 @@
 
 <script setup>
 import { ref } from "vue";
+import { useCatalogData } from "~/stores/catalogData";
+const { getPathZoomImg } = useCatalogData();
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
+import ZoomImg from "~/components/Block/ZoomImg.vue";
 
 const isLoadingImg = ref(true);
+const showZoomImg = ref(false);
+const screenWidth = ref(window.innerWidth);
+
 const ourWorkStatic = [
-  "1.jpg",
-  "2.jpg",
-  "3.jpg",
-  "4.jpg",
-  "5.jpg",
-  "6.jpg",
-  "7.jpg",
-  "8.jpg",
+  "1.webp",
+  "2.webp",
+  "3.webp",
+  "4.webp",
+  "5.webp",
+  "6.webp",
+  "7.webp",
+  "8.webp",
 ];
 
 const getImageUrl = (img) => {
   const imageUrl = new URL(`/assets/img/ourWork/${img}`, import.meta.url).href;
   return imageUrl;
+};
+
+const getZoomPath = (path) => {
+  showZoomImg.value = true;
+  getPathZoomImg(path);
 };
 </script>
 
@@ -60,7 +73,6 @@ const getImageUrl = (img) => {
   padding: 90px 50px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
   gap: 50px;
   img {
     width: 100%;
@@ -119,7 +131,7 @@ const getImageUrl = (img) => {
     }
   }
 }
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1199px) {
   .work-card {
     grid-template-columns: repeat(2, 1fr);
   }

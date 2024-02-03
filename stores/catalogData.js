@@ -25,19 +25,19 @@ const now = Timestamp.now();
 const totalPage = reactive([1]);
 const currentPage = reactive([1]);
 const itemsPerPage = 6;
+const zoomPathImg = reactive([null]);
 
 export const useCatalogData = defineStore("catalogData", () => {
   const product = reactive([]);
   const pagedData = reactive([]);
-  const test = reactive([]);
+  const filterPage = reactive([]);
 
   const activeTab = reactive(["single"]);
 
   const changeTab = (tab) => {
+    product.length = 0;
     return (activeTab[0] = tab);
   };
-
-  const nuxtApp = useNuxtApp();
 
   async function getFirebaseData(adminTab, collectionName) {
     const cacheKey = `${collectionName}_${adminTab}_${activeTab[0]}`;
@@ -58,8 +58,8 @@ export const useCatalogData = defineStore("catalogData", () => {
       });
 
       //actual time cache localStorage
-      const currentTime = new Date().getTime();
-      const dataWithTime = { documents: product, currentTime };
+      const timestamp = new Date().getTime() + 24 * 60 * 60;
+      const dataWithTime = { documents: product, timestamp };
 
       localStorage.setItem(cacheKey, JSON.stringify(dataWithTime));
 
@@ -73,62 +73,109 @@ export const useCatalogData = defineStore("catalogData", () => {
 
   //get data cache || local storage || firebase
 
+  // async function getData(adminTab, collectionName) {
+  //   try {
+  //     const cacheKey = `${collectionName}_${adminTab}_${activeTab[0]}`;
+
+  //     const localStorageData = JSON.parse(localStorage.getItem(cacheKey));
+  //     const currentTimeInMillis = new Date().getTime();
+  //     const expiresInCache = localStorageData?.timestamp;
+
+  //     if (
+  //       localStorageData?.documents &&
+  //       (!expiresInCache || expiresInCache > currentTimeInMillis)
+  //     ) {
+  //       product.length = 0;
+  //       product.push(...localStorageData.documents);
+  //       console.log("local");
+
+  //       getTotalPage(product);
+  //     } else {
+  //       await getFirebaseData(adminTab, collectionName);
+  //       console.log("firebase");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error while getting data:", error);
+  //   }
+  // }
+
+  async function getDataLocal(key) {
+    return await new Promise((resolve) => {
+      const data = localStorage.getItem(key);
+      resolve(data);
+    });
+  }
+
   async function getData(adminTab, collectionName) {
+    const cacheKey = `${collectionName}_${adminTab}_${activeTab[0]}`;
+    const local = await getDataLocal(cacheKey);
+    const localStorageData = await JSON.parse(local);
     try {
-      const cacheKey = `${collectionName}_${adminTab}_${activeTab[0]}`;
+      const currentTimeInMillis = new Date().getTime();
+      const expiresInCache = localStorageData?.timestamp;
 
-      const localStorageData = JSON.parse(localStorage.getItem(cacheKey));
-
-      if (localStorageData?.documents) {
+      if (
+        localStorageData?.documents &&
+        (!expiresInCache || expiresInCache > currentTimeInMillis)
+      ) {
         product.length = 0;
         product.push(...localStorageData.documents);
         console.log("local");
 
         getTotalPage(product);
       } else {
-        const firebaseData = await getFirebaseData(adminTab, collectionName);
+        await getFirebaseData(adminTab, collectionName);
         console.log("firebase");
-
-        if (firebaseData?.value?.documents) {
-          product.push(...firebaseData.value.documents);
-
-          getTotalPage(product);
-
-          const currentTimeInMillis = new Date().getTime();
-          const expiresInCache = localStorageData?.currentTime + 24 * 60 * 60;
-
-          if (!expiresInCache || expiresInCache < currentTimeInMillis) {
-            await getFirebaseData(adminTab, collectionName);
-            console.log("update cache");
-
-            // Обновляем кеш в локальном хранилище
-            localStorage.setItem(
-              cacheKey,
-              JSON.stringify({
-                currentTime: currentTimeInMillis,
-                documents: product,
-              })
-            );
-          }
-        }
       }
     } catch (error) {
       console.error("Error while getting data:", error);
     }
   }
 
+  // async function getData(adminTab, collectionName) {
+  //   async function getDataLocal(key) {
+  //     return await new Promise((resolve) => {
+  //       const value = localStorage.getItem(key);
+  //       resolve(value);
+  //     });
+  //   }
+  //   const cacheKey = `${collectionName}_${adminTab}_${activeTab[0]}`;
+  //   const local = await getDataLocal(cacheKey);
+  //   try {
+  //     const localStorageData = await JSON.parse(local);
+  //     const currentTimeInMillis = new Date().getTime();
+  //     const expiresInCache = localStorageData?.timestamp;
+
+  //     if (
+  //       localStorageData?.documents &&
+  //       (!expiresInCache || expiresInCache > currentTimeInMillis)
+  //     ) {
+  //       product.length = 0;
+  //       product.push(...localStorageData.documents);
+  //       console.log("local");
+
+  //       getTotalPage(product);
+  //     } else {
+  //       await getFirebaseData(adminTab, collectionName);
+  //       console.log("firebase");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error while getting data:", error);
+  //   }
+  // }
+
   function getTotalPage(arr) {
     totalPage[0] = Math.ceil(arr.length / itemsPerPage);
 
     if (totalPage[0] <= 3) {
-      test.length = 0;
+      filterPage.length = 0;
       for (let i = totalPage[0]; i > totalPage[0]; i++) {
-        test.length = 0;
-        test.push(i);
+        filterPage.length = 0;
+        filterPage.push(i);
       }
     } else {
-      test.length = 0;
-      test.push(2, 3, 4);
+      filterPage.length = 0;
+      filterPage.push(2, 3, 4);
     }
 
     return totalPage[0];
@@ -142,9 +189,9 @@ export const useCatalogData = defineStore("catalogData", () => {
     pagedData.length = 0;
     pagedData.push(...product.slice(startIndex, endIndex));
 
-    if (currentPage[0] == 1 && test.length > 2) {
-      test.length = 0;
-      test.push(2, 3, 4);
+    if (currentPage[0] == 1 && filterPage.length > 2) {
+      filterPage.length = 0;
+      filterPage.push(2, 3, 4);
     }
 
     window.scrollTo({
@@ -160,8 +207,8 @@ export const useCatalogData = defineStore("catalogData", () => {
       getPageItems(currentPage[0] + 1);
     }
     if (currentPage[0] > 4 && currentPage[0] != totalPage[0]) {
-      test.shift();
-      test.push(currentPage[0]);
+      filterPage.shift();
+      filterPage.push(currentPage[0]);
     }
   }
 
@@ -171,8 +218,8 @@ export const useCatalogData = defineStore("catalogData", () => {
     }
 
     if (currentPage[0] >= 4) {
-      for (let i = 0; i < test.length; i++) {
-        test[i] = test[i] - 1;
+      for (let i = 0; i < filterPage.length; i++) {
+        filterPage[i] = filterPage[i] - 1;
       }
     }
   }
@@ -242,6 +289,10 @@ export const useCatalogData = defineStore("catalogData", () => {
     }
   }
 
+  function getPathZoomImg(path) {
+    zoomPathImg[0] = path;
+  }
+
   return {
     activeTab,
     changeTab,
@@ -257,6 +308,8 @@ export const useCatalogData = defineStore("catalogData", () => {
     pagedData,
     currentPage,
     getFirebaseData,
-    test,
+    filterPage,
+    zoomPathImg,
+    getPathZoomImg,
   };
 });
