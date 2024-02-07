@@ -8,8 +8,9 @@
       @load="isLoadingImg = false"
     />
 
-    <div>
+    <div class="text__wrapper">
       <ui-text-h4 class="mt-25 fw-700">{{ props.title }}</ui-text-h4>
+      <hr />
       <ui-text-h4 class="mt-25">
         від <span>{{ props.price }} </span> UAH</ui-text-h4
       >
@@ -88,12 +89,23 @@ const isLoadingImg = ref(true);
   }
 }
 
+.text__wrapper {
+  width: 100%;
+  h2 {
+    text-align: center;
+    span {
+      color: darkred;
+      font-weight: 500;
+    }
+  }
+  hr {
+    color: rgb(130, 100, 45);
+    height: 2px;
+  }
+}
+
 .mt-25 {
   margin-top: 25px;
-  span {
-    color: darkred;
-    font-weight: 700;
-  }
 }
 .fw-700 {
   text-align: center;

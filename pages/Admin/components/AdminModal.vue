@@ -9,7 +9,16 @@
         name="email"
         class="mt-20"
         :value="email"
+        @focus="(event) => handleFocus(event, 'email')"
         @input="(event) => handleInputValue(event, 'email')"
+        @blur="(event) => handleBlur(event, 'email')"
+      />
+
+      <ui-error
+        v-for="error in errorsFormData?.email?.errors ?? []"
+        :key="error"
+        :text="error"
+        class="error"
       />
 
       <ui-input
@@ -18,8 +27,18 @@
         placeholder="password"
         name="password"
         :value="password"
+        @focus="(event) => handleFocus(event, 'password')"
         @input="(event) => handleInputValue(event, 'password')"
+        @blur="(event) => handleBlur(event, 'password')"
       />
+
+      <ui-error
+        v-for="error in errorsFormData?.password?.errors ?? []"
+        :key="error"
+        :text="error"
+        class="error"
+      />
+
       <ui-btn class="mt-20">
         <ui-text-h4> ВХІД </ui-text-h4>
       </ui-btn>
@@ -29,10 +48,17 @@
 
 <script setup>
 import { ref } from "vue";
+import {
+  errorsFormData,
+  validateField,
+  createErrorObj,
+} from "~/utils/validation";
+
 import UiTextH2 from "~/components/UI/UiTextH2.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import UiInput from "~/components/UI/UiInput.vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
+import UiError from "~/components/UI/UiError.vue";
 
 import { useFirebaseAuth } from "~/stores/firebaseAuth";
 
@@ -40,6 +66,11 @@ const { onLoginSuccess } = useFirebaseAuth();
 
 const email = ref("");
 const password = ref("");
+
+function handleFocus(event, name) {
+  createErrorObj(name);
+  errorsFormData[name].isDirty = true;
+}
 
 function handleInputValue(event, name) {
   switch (name) {
@@ -51,12 +82,44 @@ function handleInputValue(event, name) {
   }
 }
 
+function handleBlur(event, name) {
+  switch (name) {
+    case "email":
+      validateField((email.value = event.target.value), name);
+      break;
+
+    case "password":
+      validateField((password.value = event.target.value), name);
+      break;
+  }
+}
+
+function doValidateForm() {
+  createErrorObj("email");
+  createErrorObj("password");
+
+  validateField(email.value, "email");
+  validateField(password.value, "password");
+}
+
+function isFormValid() {
+  return Object.values(errorsFormData).some((e) => {
+    return e.errors.length > 0;
+  });
+}
+
 const singIn = async () => {
-  await onLoginSuccess(email.value, password.value);
+  doValidateForm();
+  if (!isFormValid()) {
+    await onLoginSuccess(email.value, password.value);
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.error {
+  margin-top: 20px;
+}
 .sing-in {
   padding: 100px;
 }
@@ -90,6 +153,7 @@ form {
 @media screen and (max-width: 766px) {
   .sing-in {
     padding: 10px;
+    padding-bottom: 100px;
   }
   form {
     width: 100%;

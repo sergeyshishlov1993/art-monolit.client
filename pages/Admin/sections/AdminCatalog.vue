@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <component :is="choiceSucsesMessage" />
     <div class="admin__catalog">
       <tabs-page
         :selectedTab="activeTab"
@@ -33,12 +34,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 
 import TabsPage from "../../Catalog/components/TabsPage.vue";
 import AdminCardCatalog from "../components/AdminCardCatalog.vue";
 import ThePagination from "~/components/Block/ThePagination.vue";
 import { useCatalogData } from "~/stores/catalogData";
+import SucsesMessageRemove from "../components/SucsesMessageRemove.vue";
+import SucsesMessageChange from "../components/SucsesMessageChange.vue";
 
 const {
   changeTab,
@@ -47,6 +50,7 @@ const {
   pagedData,
   updateDocumentById,
   removeCard,
+  showSucsesMesage,
 } = useCatalogData();
 
 const activeTab = ref("single");
@@ -65,10 +69,18 @@ onMounted(async () => {
   isLoading.value = true;
 });
 
-function changeSelectTab(tab) {
+const choiceSucsesMessage = computed(() => {
+  if (showSucsesMesage[0] == "remove") {
+    return SucsesMessageRemove;
+  } else if (showSucsesMesage[0] == "change") {
+    return SucsesMessageChange;
+  }
+});
+
+async function changeSelectTab(tab) {
   changeTab(tab);
   activeTab.value = tab;
-  getData(props.adminTab, "product");
+  await getData(props.adminTab, "product");
   getPageItems(1);
 }
 function updatedDoc(date, documentId, url, newImg) {
@@ -82,8 +94,10 @@ function removeDoc(id, path) {
 
 <style lang="scss" scoped>
 .wrapper {
+  position: relative;
   padding: 100px;
 }
+
 .admin__catalog {
   padding: 50px;
   display: flex;
@@ -99,29 +113,7 @@ function removeDoc(id, path) {
   display: block;
   margin: auto;
 }
-.button {
-  &:hover {
-    background: #000;
-    color: white;
-  }
-}
-.active {
-  background: #000;
-  color: white;
-}
 
-.page {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-right: 10px;
-}
-.mr-20 {
-  margin-right: 20px;
-}
 .mr-80 {
   margin-right: 80px;
 }

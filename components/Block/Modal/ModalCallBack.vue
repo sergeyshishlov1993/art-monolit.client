@@ -15,6 +15,7 @@
           @blur="(event) => handleBlur(event, 'persone')"
           :value="namePersone"
         />
+
         <ui-error
           v-for="error in errorsFormData?.persone?.errors ?? []"
           :key="error"
@@ -32,6 +33,7 @@
           @blur="(event) => handleBlur(event, 'phone')"
           :value="phoneMask"
         />
+
         <ui-error
           v-for="error in errorsFormData?.phone?.errors ?? []"
           :key="error"
@@ -59,6 +61,12 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { ref, computed } from "vue";
+import {
+  errorsFormData,
+  validateField,
+  createErrorObj,
+} from "~/utils/validation";
+
 import UiTextH1 from "~/components/UI/UiTextH1";
 import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import UiInput from "~/components/UI/UiInput.vue";

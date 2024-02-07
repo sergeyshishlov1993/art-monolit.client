@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="wrapper__catalog-admin">
     <admin-form-catalog
-      class="form_card"
       v-if="showForm"
+      class="form_card"
       :type="props.type.stringValue"
       :title="props.title.stringValue"
       :size="props.size.stringValue"
@@ -33,21 +33,26 @@
           >від <span>{{ props.price.stringValue }}</span> UAH</ui-text-h3
         >
       </div>
+
       <div class="btn__wrapper">
-        <button class="btn btn-primary" @click="showForm = true">
-          змінити
-        </button>
-        <button class="btn btn-danger" @click="removeCard(props.id, props.src)">
+        <ui-btn class="btn primary" @click="showForm = true">змінити</ui-btn>
+        <ui-btn
+          class="btn danger"
+          @click="removeCard(props.id, props.src.stringValue)"
+        >
           видалити
-        </button>
+        </ui-btn>
       </div>
     </div>
+    <icon-close @click="showForm = false" v-if="showForm" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import AdminFormCatalog from "./AdminFormCatalog.vue";
+import UiBtn from "~/components/UI/UiBtn.vue";
+import IconClose from "~/assets/icon/IconClose.vue";
 
 const emit = defineEmits(["updateFormDate", "removeCard", "changes"]);
 const props = defineProps({
@@ -106,9 +111,9 @@ function updateFormData(data, file) {
     ? (formData = {
         ...data,
       })
-    : (formData = { ...data, src: props.src });
+    : (formData = { ...data, src: props.src.stringValue });
 
-  emit("updateFormData", formData, props.id, props.src, file);
+  emit("updateFormData", formData, props.id, props.src.stringValue, file);
   showForm.value = false;
 }
 </script>
@@ -132,12 +137,46 @@ function updateFormData(data, file) {
     border-radius: 10px;
   }
 }
+
+.wrapper__catalog-admin {
+  position: relative;
+
+  svg {
+    width: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
 .btn__wrapper {
   margin-top: 15px;
+  display: flex;
+  gap: 20px;
   button {
-    border-radius: 15px;
-    margin-right: 10px;
+    width: 105px;
+    padding: 10px;
+    color: white;
   }
+}
+.primary {
+  background: rgb(91, 145, 145);
+  background: linear-gradient(
+    90deg,
+    rgba(91, 145, 145, 1) 0%,
+    rgba(77, 163, 88, 1) 35%,
+    rgba(63, 182, 114, 1) 62%,
+    rgba(66, 245, 103, 1) 100%
+  );
+}
+.danger {
+  background: rgb(138, 110, 110);
+  background: linear-gradient(
+    90deg,
+    rgba(138, 110, 110, 1) 0%,
+    rgba(166, 79, 65, 1) 35%,
+    rgba(170, 68, 68, 1) 62%,
+    rgba(227, 60, 29, 1) 100%
+  );
 }
 .text__wrapper {
   width: 100%;

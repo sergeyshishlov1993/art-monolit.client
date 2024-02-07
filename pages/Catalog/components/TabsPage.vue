@@ -11,7 +11,7 @@
       :class="{ active: props.selectedTab == 'double' }"
       @click="selecTab('double')"
     >
-      <ui-text-h4>двійні</ui-text-h4>
+      <ui-text-h4>подвійні</ui-text-h4>
     </ui-btn>
 
     <ui-btn

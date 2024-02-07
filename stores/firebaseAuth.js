@@ -37,6 +37,7 @@ export const useFirebaseAuth = defineStore("firebaseAuth", () => {
       }
     } catch (error) {
       console.error("Ошибка при обновлении токена:", error);
+
       isAuth[0] = false;
     }
   };
@@ -61,14 +62,14 @@ export const useFirebaseAuth = defineStore("firebaseAuth", () => {
       saveTokenInfoToLocalStorage(userInfo);
     } catch (error) {
       console.log("Ошибка при входе в систему:", error.message);
+
       isAuth[0] = false;
     }
   };
 
   const refreshAuthToken = async () => {
     try {
-      //   const apiKey = "AIzaSyA9n3gXB8aFAPalpJhSvn4HolQfGfY0JRo";
-      const apiKey = import.meta.env.VITE_API_KEY;
+      const apiKey = "AIzaSyA9n3gXB8aFAPalpJhSvn4HolQfGfY0JRo";
 
       const newTokens = await axios.post(
         `https://securetoken.googleapis.com/v1/token?key=${apiKey}`,
@@ -94,7 +95,6 @@ export const useFirebaseAuth = defineStore("firebaseAuth", () => {
 
       saveTokenInfoToLocalStorage(userInfo);
     } catch (error) {
-      console.error("Ошибка при обновлении токена:", error);
       isAuth[0] = false;
     }
   };

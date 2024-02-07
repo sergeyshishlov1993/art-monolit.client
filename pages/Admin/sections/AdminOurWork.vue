@@ -59,10 +59,10 @@ onMounted(async () => {
   isLoading.value = true;
 });
 
-function changeSelectTab(tab) {
+async function changeSelectTab(tab) {
   changeTab(tab);
   activeTab.value = tab;
-  getData(props.adminTab, "product");
+  await getData(props.adminTab, "product");
   getPageItems(1);
 }
 

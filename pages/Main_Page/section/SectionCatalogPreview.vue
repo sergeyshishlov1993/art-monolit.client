@@ -45,15 +45,15 @@ const card = reactive({
   },
   double: {
     src: "2.png",
-    alt: "Двійні",
-    title: "Двійні",
+    alt: "Подвійні",
+    title: "Подвійні",
     name: "double",
   },
   marble: {
     src: "mram.png",
     alt: "Меморіальні Комплекси",
     title: "Меморіальні Комплекси",
-    name: "marble",
+    name: "memorial",
   },
   kids: {
     src: "kids.png",

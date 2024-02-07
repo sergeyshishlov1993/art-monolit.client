@@ -12,7 +12,7 @@
       <option :value="'single'">Одиночні</option>
       <option :value="'double'">Двійні</option>
       <option :value="'memorial'">Меморіальні Комплекси</option>
-      <option :value="'kids'.type">Дитячі</option>
+      <option :value="'kids'">Дитячі</option>
       <option :value="'accessories'">Аксесуари</option>
       <option :value="'cross'">Хрести</option>
     </select>

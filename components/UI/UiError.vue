@@ -20,7 +20,8 @@ h2 {
   font-family: Roboto, sans-serif;
   font-weight: 500;
   font-size: 13px;
-  color: rgb(255, 189, 189);
+  color: red;
+
   text-align: left;
 }
 </style>

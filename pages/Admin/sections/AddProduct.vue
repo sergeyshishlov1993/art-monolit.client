@@ -108,6 +108,7 @@ async function loadFileToStorage(file) {
 
 async function loadProductCard(formData, file, type, spiner) {
   showSpiner.value = spiner;
+  const localStorageKey = `product_${activeTab.value}_${type}`;
   try {
     const cardCollection = collection(db, `product/${activeTab.value}/${type}`);
     const documentId = uuidv4();
@@ -122,11 +123,11 @@ async function loadProductCard(formData, file, type, spiner) {
     showSpiner.value = false;
     showSuccessMesage.value = true;
 
-    // getFirebaseData(activeTab.value, "product");
-
     setTimeout(() => {
       showSuccessMesage.value = false;
     }, 2000);
+
+    localStorage.removeItem(localStorageKey);
   } catch (e) {
     showSpiner.value = false;
     showErrorMessage.value = true;

@@ -85,6 +85,17 @@ const getZoomPath = (path) => {
   showZoomImg.value = true;
   getPathZoomImg(path);
 };
+
+useHead({
+  title: "НАШІ РОБОТИ",
+  meta: [
+    {
+      name: "description",
+      content:
+        "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, красивые памятники из гранита, качественые памятники, ",
+    },
+  ],
+});
 </script>
 
 <style lang="scss" scoped>

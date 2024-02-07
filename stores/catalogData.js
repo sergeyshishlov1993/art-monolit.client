@@ -26,12 +26,11 @@ const totalPage = reactive([1]);
 const currentPage = reactive([1]);
 const itemsPerPage = 6;
 const zoomPathImg = reactive([null]);
+const showSucsesMesage = reactive([]);
 
 export const useCatalogData = defineStore("catalogData", () => {
   const product = reactive([]);
   const pagedData = reactive([]);
-  const filterPage = reactive([]);
-
   const activeTab = reactive(["single"]);
 
   const changeTab = (tab) => {
@@ -58,7 +57,8 @@ export const useCatalogData = defineStore("catalogData", () => {
       });
 
       //actual time cache localStorage
-      const timestamp = new Date().getTime() + 24 * 60 * 60;
+      const timestamp = new Date().getTime() + 24 * 60 * 60 * 1000;
+
       const dataWithTime = { documents: product, timestamp };
 
       localStorage.setItem(cacheKey, JSON.stringify(dataWithTime));
@@ -72,32 +72,6 @@ export const useCatalogData = defineStore("catalogData", () => {
   }
 
   //get data cache || local storage || firebase
-
-  // async function getData(adminTab, collectionName) {
-  //   try {
-  //     const cacheKey = `${collectionName}_${adminTab}_${activeTab[0]}`;
-
-  //     const localStorageData = JSON.parse(localStorage.getItem(cacheKey));
-  //     const currentTimeInMillis = new Date().getTime();
-  //     const expiresInCache = localStorageData?.timestamp;
-
-  //     if (
-  //       localStorageData?.documents &&
-  //       (!expiresInCache || expiresInCache > currentTimeInMillis)
-  //     ) {
-  //       product.length = 0;
-  //       product.push(...localStorageData.documents);
-  //       console.log("local");
-
-  //       getTotalPage(product);
-  //     } else {
-  //       await getFirebaseData(adminTab, collectionName);
-  //       console.log("firebase");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error while getting data:", error);
-  //   }
-  // }
 
   async function getDataLocal(key) {
     return await new Promise((resolve) => {
@@ -114,10 +88,7 @@ export const useCatalogData = defineStore("catalogData", () => {
       const currentTimeInMillis = new Date().getTime();
       const expiresInCache = localStorageData?.timestamp;
 
-      if (
-        localStorageData?.documents &&
-        (!expiresInCache || expiresInCache > currentTimeInMillis)
-      ) {
+      if (localStorageData?.documents || expiresInCache > currentTimeInMillis) {
         product.length = 0;
         product.push(...localStorageData.documents);
         console.log("local");
@@ -132,51 +103,9 @@ export const useCatalogData = defineStore("catalogData", () => {
     }
   }
 
-  // async function getData(adminTab, collectionName) {
-  //   async function getDataLocal(key) {
-  //     return await new Promise((resolve) => {
-  //       const value = localStorage.getItem(key);
-  //       resolve(value);
-  //     });
-  //   }
-  //   const cacheKey = `${collectionName}_${adminTab}_${activeTab[0]}`;
-  //   const local = await getDataLocal(cacheKey);
-  //   try {
-  //     const localStorageData = await JSON.parse(local);
-  //     const currentTimeInMillis = new Date().getTime();
-  //     const expiresInCache = localStorageData?.timestamp;
-
-  //     if (
-  //       localStorageData?.documents &&
-  //       (!expiresInCache || expiresInCache > currentTimeInMillis)
-  //     ) {
-  //       product.length = 0;
-  //       product.push(...localStorageData.documents);
-  //       console.log("local");
-
-  //       getTotalPage(product);
-  //     } else {
-  //       await getFirebaseData(adminTab, collectionName);
-  //       console.log("firebase");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error while getting data:", error);
-  //   }
-  // }
-
+  // ----------------------pagination------------------------------
   function getTotalPage(arr) {
     totalPage[0] = Math.ceil(arr.length / itemsPerPage);
-
-    if (totalPage[0] <= 3) {
-      filterPage.length = 0;
-      for (let i = totalPage[0]; i > totalPage[0]; i++) {
-        filterPage.length = 0;
-        filterPage.push(i);
-      }
-    } else {
-      filterPage.length = 0;
-      filterPage.push(2, 3, 4);
-    }
 
     return totalPage[0];
   }
@@ -188,11 +117,6 @@ export const useCatalogData = defineStore("catalogData", () => {
 
     pagedData.length = 0;
     pagedData.push(...product.slice(startIndex, endIndex));
-
-    if (currentPage[0] == 1 && filterPage.length > 2) {
-      filterPage.length = 0;
-      filterPage.push(2, 3, 4);
-    }
 
     window.scrollTo({
       top: 0,
@@ -206,22 +130,10 @@ export const useCatalogData = defineStore("catalogData", () => {
     if (totalPage != currentPage[0]) {
       getPageItems(currentPage[0] + 1);
     }
-    if (currentPage[0] > 4 && currentPage[0] != totalPage[0]) {
-      filterPage.shift();
-      filterPage.push(currentPage[0]);
-    }
   }
 
   function getPrevData() {
-    if (currentPage[0] !== 1) {
-      getPageItems(currentPage[0] - 1);
-    }
-
-    if (currentPage[0] >= 4) {
-      for (let i = 0; i < filterPage.length; i++) {
-        filterPage[i] = filterPage[i] - 1;
-      }
-    }
+    getPageItems(currentPage[0] - 1);
   }
 
   function getItemProduct(id) {
@@ -238,6 +150,7 @@ export const useCatalogData = defineStore("catalogData", () => {
 
     return product;
   }
+  // ----------------------------------------
 
   async function removeCard(id, path, adminTab) {
     const cacheKey = `product_${adminTab}_${activeTab[0]}`;
@@ -245,18 +158,27 @@ export const useCatalogData = defineStore("catalogData", () => {
     const documentRef = doc(db, `product/${adminTab}/${activeTab[0]}`, id);
     const idx = pagedData.findIndex((el) => el.id === id);
     pagedData.splice(idx, 1);
-    localStorageData.documents = localStorageData.documents.filter(
-      (el) => el.id !== id
-    );
+    localStorageData.documents.splice(idx, 1);
 
     try {
       const storageReference = storageRef(storage, path);
       await deleteDoc(documentRef);
       await deleteObject(storageReference);
       console.log("Document deleted successfully");
-      localStorage.setItem(cacheKey, JSON.stringify(localStorageData));
+      showSucsesMesage[0] = "remove";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+      setTimeout(() => {
+        showSucsesMesage[0] = "";
+      }, 1000);
     } catch (error) {
       console.error("Error deleting document:", error);
+    } finally {
+      localStorage.setItem(cacheKey, JSON.stringify(localStorageData));
     }
   }
 
@@ -281,9 +203,22 @@ export const useCatalogData = defineStore("catalogData", () => {
     }
 
     try {
-      const docRef = doc(db, `product/${adminTab}/${activeTab[0]}`, documentId);
+      const key = `product/${adminTab}/${activeTab[0]}`;
+      const docRef = doc(db, key, documentId);
       await setDoc(docRef, newData);
+
+      await getFirebaseData(adminTab, "product");
       console.log("Document updated successfully");
+      showSucsesMesage[0] = "change";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+      setTimeout(() => {
+        showSucsesMesage[0] = "";
+      }, 1000);
     } catch (error) {
       console.error("Error updating document:", error);
     }
@@ -308,8 +243,8 @@ export const useCatalogData = defineStore("catalogData", () => {
     pagedData,
     currentPage,
     getFirebaseData,
-    filterPage,
     zoomPathImg,
     getPathZoomImg,
+    showSucsesMesage,
   };
 });

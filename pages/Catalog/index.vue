@@ -72,11 +72,22 @@ async function changeSelectTab(tab) {
 
   isLoading.value = true;
 }
+
+useHead({
+  title: "КАТАЛОГ",
+  meta: [
+    {
+      name: "description",
+      content:
+        "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, красивые памятники из гранита, качественые памятники, ",
+    },
+  ],
+});
 </script>
 
 <style lang="scss" scoped>
 .catalog {
-  padding: 75px 20px 20px 20px;
+  padding: 75px 50px;
 }
 .navigation {
   display: flex;

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <form-our-work class="form" v-if="showForm" @form-data="updateFormData" />
+    <div v-if="showForm" class="wrapper__ourWork-admin">
+      <form-our-work class="form" @form-data="updateFormData" />
+      <icon-close @click="showForm = false" />
+    </div>
 
     <div class="catalog__card" v-else>
       <div class="scelotor__wrapper">
@@ -14,12 +17,10 @@
       </div>
 
       <div class="btn__wrapper">
-        <button class="btn btn-primary" @click="showForm = true">
-          змінити
-        </button>
-        <button class="btn btn-danger" @click="removeCard(props.id, props.src)">
+        <ui-btn class="btn primary" @click="showForm = true">змінити</ui-btn>
+        <ui-btn class="btn danger" @click="removeCard(props.id, props.src)">
           видалити
-        </button>
+        </ui-btn>
       </div>
     </div>
   </div>
@@ -28,6 +29,8 @@
 <script setup>
 import { ref } from "vue";
 import FormOurWork from "./FormOurWork.vue";
+import UiBtn from "~/components/UI/UiBtn.vue";
+import IconClose from "~/assets/icon/IconClose.vue";
 
 const emit = defineEmits(["updateFormDate", "removeCard", "changes"]);
 const props = defineProps({
@@ -77,7 +80,7 @@ function updateFormData(data, file) {
   position: relative;
   padding: 20px;
   width: 300px;
-  height: 450px;
+  min-height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,9 +96,17 @@ function updateFormData(data, file) {
   }
 }
 
-.white {
-  color: white;
+.wrapper__ourWork-admin {
+  position: relative;
+
+  svg {
+    width: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
+
 .scelotor__wrapper {
   position: relative;
   width: 100%;
@@ -122,10 +133,33 @@ function updateFormData(data, file) {
 }
 .btn__wrapper {
   margin-top: 15px;
+  display: flex;
+  gap: 20px;
   button {
-    border-radius: 15px;
-    margin-right: 10px;
+    width: 105px;
+    padding: 10px;
+    color: white;
   }
+}
+.primary {
+  background: rgb(91, 145, 145);
+  background: linear-gradient(
+    90deg,
+    rgba(91, 145, 145, 1) 0%,
+    rgba(77, 163, 88, 1) 35%,
+    rgba(63, 182, 114, 1) 62%,
+    rgba(66, 245, 103, 1) 100%
+  );
+}
+.danger {
+  background: rgb(138, 110, 110);
+  background: linear-gradient(
+    90deg,
+    rgba(138, 110, 110, 1) 0%,
+    rgba(166, 79, 65, 1) 35%,
+    rgba(170, 68, 68, 1) 62%,
+    rgba(227, 60, 29, 1) 100%
+  );
 }
 .form {
   width: 250px;
