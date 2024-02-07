@@ -66,6 +66,7 @@ const showMobileNavbar = ref(false);
   h2 {
     display: none;
     padding-top: 15px;
+
     font-size: 25px;
     background: linear-gradient(
       to bottom,

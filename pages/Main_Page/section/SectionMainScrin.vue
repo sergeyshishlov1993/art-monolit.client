@@ -5,14 +5,12 @@
   </div>
 </template>
 
-<script setup>
-import UITextH3 from "~/components/UI/UiTextH3.vue";
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 .wrapper {
   padding: 204px 0 312px 118px;
-  background: url(~/assets/img/mainBg.jpeg) center top / cover no-repeat;
+  background: url(~/assets/img/mainBg.webp) center top / cover no-repeat;
 }
 h1 {
   margin-top: 19px;

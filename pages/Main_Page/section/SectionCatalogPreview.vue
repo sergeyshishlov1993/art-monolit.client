@@ -38,37 +38,37 @@ function goToCatalog(id) {
 
 const card = reactive({
   single: {
-    src: "1.png",
+    src: "1.webp",
     alt: "Одиночні",
     title: "Одинарні",
     name: "single",
   },
   double: {
-    src: "2.png",
+    src: "2.webp",
     alt: "Подвійні",
     title: "Подвійні",
     name: "double",
   },
   marble: {
-    src: "mram.png",
+    src: "mram.webp",
     alt: "Меморіальні Комплекси",
     title: "Меморіальні Комплекси",
     name: "memorial",
   },
   kids: {
-    src: "kids.png",
+    src: "kids.webp",
     alt: "Дитячі",
     title: "Дитячі",
     name: "kids",
   },
   accessories: {
-    src: "acs.png",
+    src: "acs.webp",
     alt: "Аксесуари",
     title: "Аксесуари",
     name: "accessories",
   },
   cross: {
-    src: "cross.png",
+    src: "cross.webp",
     alt: "Хрести",
     title: "Хрести",
     name: "cross",

@@ -96,6 +96,7 @@ const isLoadingImg = ref(true);
     span {
       color: darkred;
       font-weight: 500;
+      font-size: 22px;
     }
   }
   hr {
@@ -115,9 +116,6 @@ const isLoadingImg = ref(true);
 @media screen and (max-width: 767px) {
   .catalog__card {
     width: 100%;
-  }
-  .mt-25 {
-    margin-top: 15px;
   }
 }
 </style>

@@ -3,7 +3,7 @@
     <ui-text-h1 class="center">ПРО НАС</ui-text-h1>
 
     <div class="wrapper__text">
-      <img src="~/assets/img/aboutOur.png" alt="about" />
+      <img src="~/assets/img/aboutOur.webp" alt="about" />
 
       <div class="text">
         <ui-text-h3 class="fw-300">
