@@ -47,6 +47,7 @@
 import { ref } from "vue";
 import UiInput from "~/components/UI/UiInput.vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
+import { v4 as uuidv4 } from "uuid";
 const emit = defineEmits(["formData"]);
 const props = defineProps({
   type: {
@@ -70,7 +71,10 @@ const handleInputChange = (event, name) => {
 };
 
 const handleFileChange = (event) => {
-  file.value = event.target.files[0];
+  const nameFile = uuidv4();
+  file.value = new File([event.target.files[0]], nameFile, {
+    type: file.type,
+  });
 };
 
 function handleBlur(event, name) {

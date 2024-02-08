@@ -5,7 +5,7 @@
       :src="props.src"
       :alt="props.title"
       loading="lazy"
-      @load="isLoadingImg = false"
+      @load="checkLoadImg"
     />
 
     <div class="text__wrapper">
@@ -20,6 +20,8 @@
 
 <script setup>
 import { ref } from "vue";
+import { useCatalogData } from "~/stores/catalogData";
+const { getFirebaseData } = useCatalogData();
 
 const props = defineProps({
   src: {
@@ -39,7 +41,18 @@ const props = defineProps({
     requred: true,
   },
 });
+
 const isLoadingImg = ref(true);
+
+function checkLoadImg() {
+  isLoadingImg.value = false;
+
+  if (isLoadingImg.value) {
+    setTimeout(async () => {
+      await getFirebaseData("catalog", "product");
+    }, 5000);
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -62,6 +75,7 @@ const isLoadingImg = ref(true);
     border-radius: 10px;
 
     box-shadow: -5px 16px 19px -5px rgba(34, 60, 80, 1);
+    z-index: 100;
   }
 }
 
@@ -74,7 +88,7 @@ const isLoadingImg = ref(true);
   border-radius: 20px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
   animation: loading 1.5s infinite;
-  z-index: 1;
+  z-index: 0;
 }
 
 @keyframes loading {
