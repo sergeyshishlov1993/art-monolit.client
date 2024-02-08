@@ -1,6 +1,7 @@
 <template>
   <div class="catalog__card">
     <div class="sceletor" v-if="isLoadingImg"></div>
+
     <img
       :src="props.src"
       :alt="props.title"
@@ -20,9 +21,8 @@
 
 <script setup>
 import { ref } from "vue";
-import { useCatalogData } from "~/stores/catalogData";
-const { getFirebaseData } = useCatalogData();
 
+const emit = defineEmits(["loadingImg"]);
 const props = defineProps({
   src: {
     type: String,
@@ -47,11 +47,7 @@ const isLoadingImg = ref(true);
 function checkLoadImg() {
   isLoadingImg.value = false;
 
-  if (isLoadingImg.value) {
-    setTimeout(async () => {
-      await getFirebaseData("catalog", "product");
-    }, 5000);
-  }
+  console.log(isLoadingImg.value);
 }
 </script>
 
