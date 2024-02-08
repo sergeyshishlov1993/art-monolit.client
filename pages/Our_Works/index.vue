@@ -230,7 +230,7 @@ useHead({
     padding: 0;
   }
   .our__works {
-    padding: 70px 0;
+    padding: 70px 20px;
   }
 }
 </style>

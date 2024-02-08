@@ -1,13 +1,6 @@
 <template>
   <div class="catalog__card">
-    <div class="sceletor" v-if="isLoadingImg"></div>
-
-    <img
-      :src="props.src"
-      :alt="props.title"
-      loading="lazy"
-      @load="checkLoadImg"
-    />
+    <img :src="props.src" :alt="props.title" loading="lazy" />
 
     <div class="text__wrapper">
       <ui-text-h4 class="mt-25 fw-700">{{ props.title }}</ui-text-h4>
@@ -20,9 +13,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
-const emit = defineEmits(["loadingImg"]);
 const props = defineProps({
   src: {
     type: String,
@@ -41,14 +31,6 @@ const props = defineProps({
     requred: true,
   },
 });
-
-const isLoadingImg = ref(true);
-
-function checkLoadImg() {
-  isLoadingImg.value = false;
-
-  console.log(isLoadingImg.value);
-}
 </script>
 
 <style lang="scss" scoped>
@@ -70,32 +52,8 @@ function checkLoadImg() {
     min-height: 250px;
     border-radius: 10px;
 
-    box-shadow: -5px 16px 19px -5px rgba(34, 60, 80, 1);
-    z-index: 100;
-  }
-}
-
-.sceletor {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 80%;
-  height: 320px;
-  border-radius: 20px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
-  animation: loading 1.5s infinite;
-  z-index: 0;
-}
-
-@keyframes loading {
-  0% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0.6;
+    // box-shadow: -5px 16px 19px -5px rgba(34, 60, 80, 1);
+    box-shadow: 0px 11px 8px -6px rgba(0, 0, 0, 0.75);
   }
 }
 

@@ -17,12 +17,10 @@
 
     <div class="catalog__card" v-else>
       <div class="scelotor__wrapper">
-        <div class="sceletor" v-if="hidenSceletor"></div>
         <img
           :src="props.src.stringValue"
           :alt="props.title.stringValue"
           loading="lazy"
-          @load="hidenSceletor = false"
         />
       </div>
 
@@ -99,7 +97,6 @@ const props = defineProps({
 });
 
 const showForm = ref(false);
-const hidenSceletor = ref(true);
 
 function removeCard(id, path) {
   return emit("remove", id, path);
@@ -198,27 +195,6 @@ function updateFormData(data, file) {
 .scelotor__wrapper {
   width: 100%;
   position: relative;
-}
-.sceletor {
-  width: 100%;
-  max-height: 350px;
-  min-height: 250px;
-  border-radius: 20px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
-  animation: loading 1.5s infinite;
-  z-index: 1;
-}
-
-@keyframes loading {
-  0% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0.6;
-  }
 }
 
 .mt-25 {
