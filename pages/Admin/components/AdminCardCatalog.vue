@@ -125,7 +125,7 @@ function updateFormData(data, file) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 6px 5px 8px 7px rgba(34, 60, 80, 0.2);
+  box-shadow: 9px 0px 8px 5px rgba(34, 60, 80, 0.2);
   border-radius: 20px;
   img {
     width: 100%;

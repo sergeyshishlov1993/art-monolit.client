@@ -44,6 +44,7 @@ const props = defineProps({
   align-items: center;
   justify-content: center;
   box-shadow: 9px 0px 8px 5px rgba(34, 60, 80, 0.2);
+
   border-radius: 20px;
 
   img {
@@ -52,7 +53,6 @@ const props = defineProps({
     min-height: 250px;
     border-radius: 10px;
 
-    // box-shadow: -5px 16px 19px -5px rgba(34, 60, 80, 1);
     box-shadow: 0px 11px 8px -6px rgba(0, 0, 0, 0.75);
   }
 }

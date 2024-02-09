@@ -22,8 +22,7 @@ const props = defineProps({
 
 img {
   width: 100%;
-  height: 100%;
-  min-height: 350px;
+  height: 500px;
   border-radius: 10px;
   object-fit: cover;
 }

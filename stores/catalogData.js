@@ -60,7 +60,7 @@ export const useCatalogData = defineStore("catalogData", () => {
       });
 
       //actual time cache localStorage
-      const timestamp = new Date().getTime() + 24 * 60 * 60 * 1000;
+      const timestamp = new Date().getTime() + 12 * 60 * 60 * 1000;
 
       const dataWithTime = { documents: product, timestamp };
 
@@ -91,7 +91,7 @@ export const useCatalogData = defineStore("catalogData", () => {
       const currentTimeInMillis = new Date().getTime();
       const expiresInCache = localStorageData?.timestamp;
 
-      if (localStorageData?.documents || expiresInCache > currentTimeInMillis) {
+      if (localStorageData?.documents && expiresInCache > currentTimeInMillis) {
         product.length = 0;
         product.push(...localStorageData.documents);
         console.log("local");

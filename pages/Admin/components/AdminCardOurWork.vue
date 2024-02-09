@@ -73,19 +73,19 @@ function updateFormData(data, file) {
   position: relative;
   padding: 20px;
   width: 300px;
-  min-height: 450px;
+  // min-height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 6px 5px 8px 7px rgba(34, 60, 80, 0.2);
+  box-shadow: 9px 0px 8px 5px rgba(34, 60, 80, 0.2);
   border-radius: 20px;
   img {
     width: 100%;
-    min-height: 350px;
-    object-fit: cover;
+    height: 100%;
+    min-height: 500px;
     border-radius: 10px;
-    z-index: 999;
+    object-fit: cover;
   }
 }
 

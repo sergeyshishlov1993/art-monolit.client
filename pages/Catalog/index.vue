@@ -115,31 +115,6 @@ useHead({
   gap: 20px;
 }
 
-.pagination {
-  margin-top: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-.active {
-  background: #000;
-  color: white;
-}
-.button {
-  &:hover {
-    background: #000;
-    color: white;
-  }
-}
-.page {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .spinner-border {
   display: block;
   margin: auto;
