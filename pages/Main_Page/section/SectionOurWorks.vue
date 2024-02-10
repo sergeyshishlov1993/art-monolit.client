@@ -10,7 +10,6 @@
         :key="img"
         :src="getImageUrl(img)"
         alt="our works img"
-        loading="lazy"
         @load="isLoadingImg = false"
         @click.stop="getZoomPath(getImageUrl(img))"
       />

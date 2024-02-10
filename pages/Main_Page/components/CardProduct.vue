@@ -1,6 +1,6 @@
 <template>
   <div class="card__product">
-    <img :src="imageUrl" :alt="props.alt" loading="lazy" />
+    <img :src="imageUrl" :alt="props.alt" />
     <ui-text-h2 class="fw-500">{{ props.title }}</ui-text-h2>
   </div>
 </template>
