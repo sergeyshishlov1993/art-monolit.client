@@ -59,4 +59,10 @@ export default defineNuxtConfig({
       title: "АРТ - МОНОЛІТ",
     },
   },
+  // runtimeConfig: {
+  //   public: {
+  //     gtagId: "AW-16457131804",
+  //   },
+  // },
+  plugins: ["~/plugins/gtag.client.js"],
 });
