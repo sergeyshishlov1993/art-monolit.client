@@ -20,12 +20,17 @@
             />
           </div>
 
-          <div class="our-work__wrapper__card" v-if="isLoading">
+          <div
+            class="our-work__wrapper__card"
+            :class="{ test: activeTab[0] === 'double' }"
+            v-if="isLoading"
+          >
             <work-card
               v-for="work in pagedData"
               :key="work"
               :src="work.src"
               :alt="work.alt"
+              :current-tab="activeTab"
               @click.stop="getZoomPath(work.src.stringValue)"
             />
 
@@ -116,9 +121,14 @@ useHead({
     height: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-auto-rows: auto;
     gap: 30px;
   }
+}
+
+.test {
+  grid-template-columns: repeat(2, 1fr);
 }
 .navigation {
   display: flex;
@@ -127,31 +137,6 @@ useHead({
   }
 }
 
-.pagination {
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.active {
-  background: #000;
-  color: white;
-}
-.button {
-  &:hover {
-    background: #000;
-    color: white;
-  }
-}
-.page {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-right: 10px;
-}
 .spinner-border {
   display: block;
   margin: auto;
