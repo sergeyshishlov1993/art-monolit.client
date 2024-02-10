@@ -12,6 +12,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "nuxt": "^3.8.1",
+    "nuxt-gtag": "^1.2.0",
     "sass": "^1.69.5",
     "typescript": "^5.2.2",
     "vue": "latest",
@@ -30,7 +31,9 @@
     "nuxt-lazy-load": "^3.0.4",
     "nuxt-multi-cache": "^3.1.1",
     "pinia": "^2.1.7",
+    "std-env": "^3.7.0",
     "uuid": "^9.0.1",
-    "v-lazy-image": "^2.1.1"
+    "v-lazy-image": "^2.1.1",
+    "vue-gtag-next": "^1.14.0"
   }
 }

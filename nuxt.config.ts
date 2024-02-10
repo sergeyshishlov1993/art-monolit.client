@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { isProduction } from "std-env";
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/app.scss"],
@@ -59,9 +60,11 @@ export default defineNuxtConfig({
       title: "АРТ - МОНОЛІТ",
     },
   },
+
   runtimeConfig: {
     public: {
-      gtagId: "AW-16457131804",
+      google_analytics_id: "AW-16457131804", // Убедитесь, что здесь указан правильный идентификатор Google Analytics
+      production_mode: Boolean(isProduction), // Предполагая, что isProduction - это переменная, определяющая режим продакшн
     },
   },
 });
