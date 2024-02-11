@@ -22,7 +22,7 @@
 
           <div
             class="our-work__wrapper__card"
-            :class="{ test: activeTab[0] === 'double' }"
+            :class="{ double: activeTab[0] === 'double' }"
             v-if="isLoading"
           >
             <work-card
@@ -127,7 +127,7 @@ useHead({
   }
 }
 
-.test {
+.double {
   grid-template-columns: repeat(2, 1fr);
 }
 .navigation {

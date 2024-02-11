@@ -13,7 +13,9 @@
         </nuxt-link>
 
         <ui-text-h4 class="fw-500"
-          >/{{ product[0].title.stringValue }}</ui-text-h4
+          >/{{
+            currentProduct[0].title.stringValue || currentProduct[0].title
+          }}</ui-text-h4
         >
       </div>
 
@@ -21,7 +23,7 @@
         <div class="mr-40">
           <div class="sceletor" v-if="isLoadingImg"></div>
           <img
-            :src="product[0].src.stringValue"
+            :src="currentProduct[0].src.stringValue || currentProduct[0].src"
             alt="catalog__item"
             loading="lazy"
             @load="isLoadingImg = false"
@@ -29,22 +31,39 @@
         </div>
 
         <div class="description">
-          <ui-text-h1>{{ product[0].title.stringValue }}</ui-text-h1>
+          <ui-text-h1>{{
+            currentProduct[0].title.stringValue || currentProduct[0].title
+          }}</ui-text-h1>
           <ui-text-h3 class="fw-500 mt-40"
-            >РОЗМІР : {{ product[0].size.stringValue }} ММ</ui-text-h3
+            >РОЗМІР :
+            {{ currentProduct[0].size.stringValue || currentProduct[0].size }}
+            ММ</ui-text-h3
           >
           <ui-text-h3 class="fw-500 mt-20"
-            >МАТЕРІАЛ : {{ product[0].material.stringValue }}</ui-text-h3
+            >МАТЕРІАЛ :
+            {{
+              currentProduct[0].material.stringValue ||
+              currentProduct[0].material
+            }}</ui-text-h3
           >
           <ui-text-h3 class="fw-500 mt-20"
             >ТЕРМІН ВИГОТОВЛЕННЯ :
-            {{ product[0].term.stringValue }} ДНІВ</ui-text-h3
+            {{ currentProduct[0].term.stringValue || currentProduct[0].term }}
+            ДНІВ</ui-text-h3
           >
           <ui-text-h3 class="fw-500 mt-20"
-            >ДОСТАВКА : {{ product[0].delivery.stringValue }}</ui-text-h3
+            >ДОСТАВКА :
+            {{
+              currentProduct[0].delivery.stringValue ||
+              currentProduct[0].delivery
+            }}</ui-text-h3
           >
           <ui-text-h3 class="fw-500 mt-20"
-            >КОМПЛЕКТАЦІЯ : {{ product[0].equipment.stringValue }}</ui-text-h3
+            >КОМПЛЕКТАЦІЯ :
+            {{
+              currentProduct[0].equipment.stringValue ||
+              currentProduct[0].equipment
+            }}</ui-text-h3
           >
 
           <ui-btn class="button" @click="getPrice" :disabled="showModal">
@@ -59,6 +78,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+
 import { useCatalogData } from "~/stores/catalogData";
 import { useRoute } from "vue-router";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
@@ -67,15 +87,18 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import UiBtn from "~/components/UI/UiBtn";
 import ModalCallBack from "~/components/Block/Modal/ModalCallBack.vue";
 
-const { getItemProduct } = useCatalogData();
-const product = ref();
+const { getItemProduct, activeTab, currentProduct } = useCatalogData();
 const route = useRoute();
 const isLoading = ref(true);
-const isLoadingImg = ref(true);
+const isLoadingImg = true;
 
 onMounted(async () => {
+  console.log(currentProduct);
   try {
-    product.value = await getItemProduct(route.params.id);
+    let productData = await getItemProduct(
+      `product/catalog/${activeTab[0]}`,
+      route.params.id
+    );
 
     isLoading.value = false;
   } catch (error) {
@@ -91,6 +114,64 @@ function getPrice() {
     behavior: "smooth",
   });
 }
+
+useHead(async () => ({
+  title: (await currentProduct[0].title.stringValue) || currentProduct[0].title,
+  meta: [
+    {
+      hid: "og:title",
+      property: "og:title",
+      content: "АРТ - МОНОЛІТ",
+    },
+    {
+      hid: "og:description",
+      property: "og:description",
+      content:
+        "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
+    },
+    {
+      hid: "og:image",
+      property: "og:image",
+      content: currentProduct[0].src.stringValue || currentProduct[0].src,
+    },
+    {
+      hid: "og:url",
+      property: "og:url",
+      content: currentProduct[0].src.stringValue || currentProduct[0].src,
+    },
+    {
+      hid: "og:type",
+      property: "og:type",
+      content: "website",
+    },
+    {
+      hid: "twitter:card",
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+    {
+      hid: "twitter:title",
+      name: "twitter:title",
+      content: "АРТ - МОНОЛІТ",
+    },
+    {
+      hid: "twitter:description",
+      name: "twitter:description",
+      content:
+        "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
+    },
+    {
+      hid: "twitter:image",
+      name: "twitter:image",
+      content: currentProduct[0].src.stringValue || currentProduct[0].src,
+    },
+    {
+      hid: "twitter:url",
+      name: "twitter:url",
+      content: currentProduct[0].src.stringValue || currentProduct[0].src,
+    },
+  ],
+}));
 </script>
 
 <style lang="scss" scoped>
