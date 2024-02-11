@@ -133,53 +133,52 @@ useHead(() => {
       title: title || "АРТ - МОНОЛІТ",
       meta: [
         {
-          hid: "og:title",
+          hid: "og:title:id",
           property: "og:title",
           content: "АРТ - МОНОЛІТ",
         },
         {
-          hid: "og:description",
+          hid: "og:description:id",
           property: "og:description",
-          content: `${title}, ${image} виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье`,
+          content: `${title}виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье`,
         },
         {
-          hid: "og:image",
+          hid: "og:image:id",
           property: "og:image",
           content: image || "",
         },
         {
-          hid: "og:url",
+          hid: "og:url:id",
           property: "og:url",
           content: image || "",
         },
         {
-          hid: "og:type",
+          hid: "og:type:id",
           property: "og:type",
           content: "website",
         },
         {
-          hid: "twitter:card",
+          hid: "twitter:card:id",
           name: "twitter:card",
           content: "summary_large_image",
         },
         {
-          hid: "twitter:title",
+          hid: "twitter:title:id",
           name: "twitter:title",
           content: "АРТ - МОНОЛІТ",
         },
         {
-          hid: "twitter:description",
+          hid: "twitter:description:id",
           name: "twitter:description",
-          content:
-            "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
+          content: ` ${title}виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье`,
         },
         {
-          hid: "twitter:image",
+          hid: "twitter:image:id",
           name: "twitter:image",
           content: image || "",
         },
         {
-          hid: "twitter:url",
+          hid: "twitter:url:id",
           name: "twitter:url",
           content: image || "",
         },
@@ -190,63 +189,63 @@ useHead(() => {
       title: "АРТ - МОНОЛІТ",
       meta: [
         {
-          hid: "og:title",
+          hid: "og:title:id",
           property: "og:title",
           content: "АРТ - МОНОЛІТ",
         },
 
         {
-          hid: "og:description",
+          hid: "og:description:id",
           property: "og:description",
           content:
             "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
         },
 
         {
-          hid: "og:image",
+          hid: "og:image:id",
           property: "og:image",
           content: "",
         },
 
         {
-          hid: "og:url",
+          hid: "og:url:id",
           property: "og:url",
           content: "",
         },
 
         {
-          hid: "og:type",
+          hid: "og:type:id",
           property: "og:type",
           content: "website",
         },
 
         {
-          hid: "twitter:card",
+          hid: "twitter:card:id",
           name: "twitter:card",
           content: "summary_large_image",
         },
 
         {
-          hid: "twitter:title",
+          hid: "twitter:title:id",
           name: "twitter:title",
           content: "АРТ - МОНОЛІТ",
         },
 
         {
-          hid: "twitter:description",
+          hid: "twitter:description:id",
           name: "twitter:description",
           content:
             "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
         },
 
         {
-          hid: "twitter:image",
+          hid: "twitter:image:id",
           name: "twitter:image",
           content: "",
         },
 
         {
-          hid: "twitter:url",
+          hid: "twitter:url:id",
           name: "twitter:url",
           content: "",
         },

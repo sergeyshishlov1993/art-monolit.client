@@ -68,6 +68,7 @@ const {
 const isLoading = ref(false);
 const showZoomImg = ref(false);
 const screenWidth = ref(window.innerWidth);
+const imageUrl = new URL(`/assets/img/ourWork/1.webp`, import.meta.url).href;
 
 onMounted(async () => {
   await getData("ourWork", "product");
@@ -123,12 +124,12 @@ useHead({
     {
       hid: "og:image",
       property: "og:image",
-      content: "/assets/img/ourWork/1.webp",
+      content: imageUrl,
     },
     {
       hid: "og:url",
       property: "og:url",
-      content: "/assets/img/ourWork/1.webp",
+      content: imageUrl,
     },
     {
       hid: "og:type",
@@ -154,12 +155,12 @@ useHead({
     {
       hid: "twitter:image",
       name: "twitter:image",
-      content: "/assets/img/ourWork/1.webp",
+      content: imageUrl,
     },
     {
       hid: "twitter:url",
       name: "twitter:url",
-      content: "/assets/img/ourWork/1.webp",
+      content: imageUrl,
     },
   ],
 });

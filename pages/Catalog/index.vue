@@ -55,6 +55,7 @@ import TabsPage from "./components/TabsPage.vue";
 const { activeTab, changeTab, getData, getPageItems, pagedData } =
   useCatalogData();
 const isLoading = ref(false);
+const imageUrl = new URL(`/assets/img/catalog/1.webp`, import.meta.url).href;
 
 onMounted(async () => {
   await getData("catalog", "product");
@@ -78,70 +79,70 @@ useHead({
   title: "КАТАЛОГ",
   meta: [
     {
-      hid: "description",
+      hid: "main-description",
       name: "description",
       content:
         "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
     },
 
     {
-      hid: "keywords",
+      hid: "main-keywords",
       name: "keywords",
       content:
         "купить мраморные и гранитные памятники, памятники Запорожье, гранитные памятники, купить гранитный памятник в Запорожье, красивые надгробные памятники, качественые надгробные памятники в запорожье, памятники под ключ, памятники под ключ в запорожье, одинарные памятники, двойные памятники,одинарные памятники в Запорожье , двойные памятники в Запорожье, бюджетыне гранитные памятники в запорожье купить, пам'ятники для військових, пам'ятники для військових купити в запоріжжі, памятники гранитные запорожье, гранитная ваза купить в запорожье, гранитные памятники запорожье, памятники из мрамора запорожье, гранитные памятники запорожье цена, памятники на кладбище святого николая запорожье цены  ",
     },
 
     {
-      hid: "og:title",
+      hid: "og:title-main",
       property: "og:title",
       content: "АРТ - МОНОЛІТ",
     },
     {
-      hid: "og:description",
+      hid: "og:description-main",
       property: "og:description",
       content:
         "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
     },
     {
-      hid: "og:image",
+      hid: "og:image-main",
       property: "og:image",
-      content: "/assets/img/catalog/1.webp",
+      content: imageUrl,
     },
     {
-      hid: "og:url",
+      hid: "og:url-main",
       property: "og:url",
-      content: "/assets/img/catalog/1.webp",
+      content: imageUrl,
     },
     {
-      hid: "og:type",
+      hid: "og:type-main",
       property: "og:type",
       content: "website",
     },
     {
-      hid: "twitter:card",
+      hid: "twitter:card-main",
       name: "twitter:card",
       content: "summary_large_image",
     },
     {
-      hid: "twitter:title",
+      hid: "twitter:title-main",
       name: "twitter:title",
       content: "АРТ - МОНОЛІТ",
     },
     {
-      hid: "twitter:description",
+      hid: "twitter:description-main",
       name: "twitter:description",
       content:
         "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
     },
     {
-      hid: "twitter:image",
+      hid: "twitter:image-main",
       name: "twitter:image",
-      content: "/assets/img/catalog/1.webp",
+      content: imageUrl,
     },
     {
-      hid: "twitter:url",
+      hid: "twitter:url-main",
       name: "twitter:url",
-      content: "/assets/img/catalog/1.webp",
+      content: imageUrl,
     },
   ],
 });
