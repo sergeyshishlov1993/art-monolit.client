@@ -116,21 +116,19 @@ function getPrice() {
 }
 
 useHead(() => {
-  // Проверяем существует ли currentProduct и не является ли он пустым массивом
   if (currentProduct && currentProduct.length > 0) {
     const product = currentProduct[0];
-    // Проверяем существует ли у продукта свойство title
+
     const title =
       product.title && product.title.stringValue
         ? product.title.stringValue
         : product.title;
-    // Проверяем существует ли у продукта свойство src
+
     const image =
       product.src && product.src.stringValue
         ? product.src.stringValue
         : product.src;
 
-    // Возвращаем объект с метаданными
     return {
       title: title || "Заголовок по умолчанию",
       meta: [
@@ -189,7 +187,6 @@ useHead(() => {
       ],
     };
   } else {
-    // Если currentProduct не существует или пустой массив, возвращаем метаданные по умолчанию
     return {
       title: "АРТ - МОНОЛІТ",
       meta: [
