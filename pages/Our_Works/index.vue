@@ -32,6 +32,7 @@
               :alt="work.alt"
               :current-tab="activeTab"
               @click.stop="getZoomPath(work.src.stringValue)"
+              id="ourWork"
             />
 
             <zoom-img v-if="showZoomImg && screenWidth > 991" class="zoom" />
@@ -40,7 +41,7 @@
           <div class="spinner-border" role="status" v-else></div>
         </div>
 
-        <the-pagination />
+        <the-pagination idBlock="ourWork" />
       </div>
     </div>
   </div>
@@ -88,7 +89,7 @@ async function changeSelectTab(tab) {
 
 const getZoomPath = (path) => {
   showZoomImg.value = true;
-  getPathZoomImg(path);
+  getPathZoomImg(path, "ourWork");
 };
 
 useHead({

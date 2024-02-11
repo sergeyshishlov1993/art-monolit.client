@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="zoomPathImg[0]" alt="" />
+    <img :src="zoomPathImg[0]" alt="img big" loading="lazy" />
   </div>
 </template>
 

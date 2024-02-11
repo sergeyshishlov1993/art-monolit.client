@@ -111,7 +111,7 @@ export const useCatalogData = defineStore("catalogData", () => {
     return totalPage[0];
   }
 
-  function getPageItems(pageNumber) {
+  function getPageItems(pageNumber, id) {
     currentPage[0] = pageNumber;
     const startIndex = (currentPage[0] - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -119,22 +119,42 @@ export const useCatalogData = defineStore("catalogData", () => {
     pagedData.length = 0;
     pagedData.push(...product.slice(startIndex, endIndex));
 
+    const block = document.getElementById(id);
+    const blockTop = !block
+      ? ""
+      : block.getBoundingClientRect().top + window.scrollY;
+
     window.scrollTo({
-      top: 0,
+      top: blockTop,
       behavior: "smooth",
     });
 
     return pagedData;
   }
 
-  function getNextData() {
+  function getNextData(idBlock) {
     if (totalPage != currentPage[0]) {
       getPageItems(currentPage[0] + 1);
     }
+    const block = document.getElementById(idBlock);
+    const blockTop = block.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+      top: blockTop,
+      behavior: "smooth",
+    });
   }
 
-  function getPrevData() {
+  function getPrevData(idBlock) {
     getPageItems(currentPage[0] - 1);
+
+    const block = document.getElementById(idBlock);
+    const blockTop = block.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+      top: blockTop,
+      behavior: "smooth",
+    });
   }
 
   const currentProduct = reactive([]);
@@ -237,8 +257,15 @@ export const useCatalogData = defineStore("catalogData", () => {
     }
   }
 
-  function getPathZoomImg(path) {
+  function getPathZoomImg(path, idBlock) {
+    const block = document.getElementById(idBlock);
+    const blockTop = block.getBoundingClientRect().top + window.scrollY;
     zoomPathImg[0] = path;
+
+    window.scrollTo({
+      top: blockTop,
+      behavior: "smooth",
+    });
   }
 
   return {

@@ -2,7 +2,7 @@
   <div class="pagination">
     <ui-btn
       class="mr-20 button"
-      @click="getPrevData"
+      @click="getPrevData(props.idBlock)"
       :disabled="currentPage[0] === 1"
       >ПОВЕРНУТИСЯ</ui-btn
     >
@@ -11,7 +11,7 @@
       <ui-btn
         v-for="page in visiblePages"
         :key="page"
-        @click="page !== '...' ? getPageItems(page) : null"
+        @click="page !== '...' ? getPageItems(page, props.idBlock) : null"
         class="button page"
         :class="{ active: currentPage[0] === page }"
         >{{ page }}</ui-btn
@@ -20,7 +20,7 @@
 
     <ui-btn
       class="button"
-      @click="getNextData"
+      @click="getNextData(props.idBlock)"
       :disabled="currentPage === totalPage[0]"
       >ПОКАЗАТИ ЩЕ</ui-btn
     >
@@ -31,6 +31,12 @@
 import { computed } from "vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
 import { useCatalogData } from "~/stores/catalogData";
+
+const props = defineProps({
+  idBlock: {
+    type: String,
+  },
+});
 const {
   activeTab,
   changeTab,

@@ -123,6 +123,11 @@ export default defineNuxtConfig({
           name: "twitter:url",
           content: "/assets/img/mainBg.webp",
         },
+
+        {
+          name: "google-site-verification",
+          content: "x3lktmFtn_dq-e5JemJe2aVqSQs3F8t5ttEtM_Lio9k",
+        },
       ],
       title: "АРТ - МОНОЛІТ",
     },

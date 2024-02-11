@@ -30,13 +30,14 @@
               :price="card.price.stringValue"
               class="mr-20 mb-20"
               @click="$router.push(`/catalog/${card.id}`)"
+              id="catalog"
             />
           </div>
 
           <div class="spinner-border" role="status" v-else></div>
         </div>
 
-        <the-pagination />
+        <the-pagination idBlock="catalog" />
       </div>
     </div>
   </div>

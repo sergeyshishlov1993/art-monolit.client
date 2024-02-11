@@ -8,7 +8,7 @@
         class="mr-80"
       />
 
-      <div class="card__wrapper" v-if="isLoading">
+      <div class="card__wrapper" v-if="isLoading" id="adminCatalog">
         <admin-card-catalog
           v-for="card in pagedData"
           :key="card.id"
@@ -29,7 +29,7 @@
       <div class="spinner-border" role="status" v-else></div>
     </div>
 
-    <the-pagination />
+    <the-pagination idBlock="adminCatalog" />
   </div>
 </template>
 

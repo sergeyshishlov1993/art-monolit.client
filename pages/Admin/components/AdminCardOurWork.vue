@@ -73,7 +73,7 @@ function updateFormData(data, file) {
   position: relative;
   padding: 20px;
   width: 300px;
-  // min-height: 450px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,8 +82,7 @@ function updateFormData(data, file) {
   border-radius: 20px;
   img {
     width: 100%;
-    height: 100%;
-    min-height: 500px;
+    height: 500px;
     border-radius: 10px;
     object-fit: cover;
   }

@@ -7,7 +7,7 @@
         class="mr-80"
       />
 
-      <div class="card__wrapper" v-if="isLoading">
+      <div class="card__wrapper" v-if="isLoading" id="adminOurWork">
         <admin-card-our-work
           v-for="(card, index) in pagedData"
           :key="card.id"
@@ -22,7 +22,7 @@
       <div class="spinner-border" role="status" v-else></div>
     </div>
 
-    <the-pagination />
+    <the-pagination idBlock="adminOurWork" />
   </div>
 </template>
 
