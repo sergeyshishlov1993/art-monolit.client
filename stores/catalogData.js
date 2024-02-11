@@ -139,22 +139,9 @@ export const useCatalogData = defineStore("catalogData", () => {
 
   const currentProduct = reactive([]);
   async function getItemProduct(collectionName, id) {
-    // if (product.length !== 0) {
-    //   localStorage.setItem(
-    //     "itemProduct",
-    //     JSON.stringify(product.filter((el) => el.id === id))
-    //   );
-    //   return product.filter((el) => el.id === id);
-    // } else {
-    //   const res = JSON.parse(localStorage.getItem("itemProduct"));
-    //   product.push(res[0]);
-    // }
-
-    // return product;
-
     if (product.length !== 0) {
       const filteredProduct = product.filter((el) => el.id === id);
-       currentProduct[0] = filteredProduct[0];
+      currentProduct[0] = filteredProduct[0];
     } else {
       try {
         const docRef = doc(db, collectionName, id);
