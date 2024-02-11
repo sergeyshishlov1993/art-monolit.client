@@ -130,7 +130,7 @@ useHead(() => {
         : product.src;
 
     return {
-      title: title || "Заголовок по умолчанию",
+      title: title || "АРТ - МОНОЛІТ",
       meta: [
         {
           hid: "og:title",
