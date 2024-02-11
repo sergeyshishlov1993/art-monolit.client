@@ -150,7 +150,7 @@ export const useCatalogData = defineStore("catalogData", () => {
         if (docSnap.exists()) {
           // Документ найден
           product.length = 0;
-          console.log("Данные документа:", docSnap.data());
+
           return (currentProduct[0] = { ...docSnap.data(), id: docSnap.id });
         } else {
           // Документ не найден

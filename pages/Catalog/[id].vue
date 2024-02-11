@@ -13,9 +13,7 @@
         </nuxt-link>
 
         <ui-text-h4 class="fw-500"
-          >/{{
-            currentProduct[0].title.stringValue || currentProduct[0].title
-          }}</ui-text-h4
+          >/{{ titelToLoverCase.toLowerCase() }}</ui-text-h4
         >
       </div>
 
@@ -77,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 
 import { useCatalogData } from "~/stores/catalogData";
 import { useRoute } from "vue-router";
@@ -93,7 +91,6 @@ const isLoading = ref(true);
 const isLoadingImg = true;
 
 onMounted(async () => {
-  console.log(currentProduct);
   try {
     let productData = await getItemProduct(
       `product/catalog/${activeTab[0]}`,
@@ -104,6 +101,9 @@ onMounted(async () => {
   } catch (error) {
     console.error("Ошибка при получении данных:", error);
   }
+});
+const titelToLoverCase = computed(() => {
+  return currentProduct[0].title.stringValue || currentProduct[0].title;
 });
 
 const showModal = ref(false);
