@@ -2,7 +2,7 @@
   <div class="wrapper" @click="showZoomImg = false">
     <ui-text-h1 class="white">НАШІ РАБОТИ</ui-text-h1>
 
-    <div class="work-card">
+    <div class="work-card" id="mainOurWork">
       <div class="sceletor" v-if="isLoadingImg"></div>
 
       <img
@@ -55,7 +55,7 @@ const getImageUrl = (img) => {
 
 const getZoomPath = (path) => {
   showZoomImg.value = true;
-  getPathZoomImg(path);
+  getPathZoomImg(path, "mainOurWork");
 };
 </script>
 
