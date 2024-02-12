@@ -5,7 +5,10 @@
     <div class="text__wrapper">
       <ui-text-h4 class="mt-25 fw-700">{{ props.title }}</ui-text-h4>
       <hr />
-      <ui-text-h4 class="mt-25">
+      <ui-text-h4 class="mt-25" v-if="props.type == 'memorial'"
+        >ЦІНУ УТОЧНЮЙТЕ</ui-text-h4
+      >
+      <ui-text-h4 class="mt-25" v-else>
         від <span>{{ props.price }} </span> UAH</ui-text-h4
       >
     </div>
@@ -30,7 +33,13 @@ const props = defineProps({
     type: String,
     requred: true,
   },
+  type: {
+    type: String,
+    requred: true,
+  },
 });
+
+console.log(props["active-tab"]);
 </script>
 
 <style lang="scss" scoped>
