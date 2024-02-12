@@ -172,6 +172,16 @@ useHead(() => {
         },
         {
           hid: "og:image:id",
+          property: "og:image:width",
+          content: 400,
+        },
+        {
+          hid: "og:image:id",
+          property: "og:image:height",
+          content: 600,
+        },
+        {
+          hid: "og:image:id",
           property: "og:image",
           content: image,
         },
@@ -242,6 +252,17 @@ useHead(() => {
           property: "og:description",
           content:
             "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
+        },
+
+        {
+          hid: "og:image:id",
+          property: "og:image:width",
+          content: 400,
+        },
+        {
+          hid: "og:image:id",
+          property: "og:image:height",
+          content: 600,
         },
 
         {
