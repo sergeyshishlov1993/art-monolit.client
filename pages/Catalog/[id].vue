@@ -129,9 +129,37 @@ useHead(() => {
         ? product.src.stringValue
         : product.src;
 
+    const term =
+      product.term && product.term.stringValue
+        ? product.term.stringValue
+        : product.term;
+
+    const material =
+      product.material && product.material.stringValue
+        ? product.material.stringValue
+        : product.material;
+
+    const size =
+      product.size && product.size.stringValue
+        ? product.size.stringValue
+        : product.material;
+
     return {
       title: title || "АРТ - МОНОЛІТ",
       meta: [
+        {
+          hid: "description:id",
+          name: "description",
+          content: `назва ${title} розмір ${size} виготовимо з ${material} за ${term} днів, пам'ятник запоріжжя гранітна майстерння арт моноліт, одинарні та подвійні памʼятники в запооріжжі `,
+        },
+
+        {
+          hid: "keywords:id",
+          name: "keywords",
+          content:
+            "одинарні, подвійні памʼятники в запоріжжі, памʼятники для військових, гранітна майстерня арт моноліт, арт моноліт Запоріжжя ",
+        },
+
         {
           hid: "og:title:id",
           property: "og:title",
@@ -140,17 +168,17 @@ useHead(() => {
         {
           hid: "og:description:id",
           property: "og:description",
-          content: `${title}виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье`,
+          content: `${title} пам'ятник купити в запоріжжі`,
         },
         {
           hid: "og:image:id",
           property: "og:image",
-          content: image || "",
+          content: image,
         },
         {
           hid: "og:url:id",
           property: "og:url",
-          content: image || "",
+          content: image,
         },
         {
           hid: "og:type:id",
@@ -170,17 +198,32 @@ useHead(() => {
         {
           hid: "twitter:description:id",
           name: "twitter:description",
-          content: ` ${title}виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье`,
+          content: `${title}`,
         },
         {
           hid: "twitter:image:id",
           name: "twitter:image",
-          content: image || "",
+          content: image,
         },
         {
           hid: "twitter:url:id",
           name: "twitter:url",
-          content: image || "",
+          content: image,
+        },
+      ],
+      script: [
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-CGMKTLYTRQ",
+          async: true,
+        },
+
+        {
+          innerHTML: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-CGMKTLYTRQ');
+          `,
         },
       ],
     };
@@ -189,65 +232,80 @@ useHead(() => {
       title: "АРТ - МОНОЛІТ",
       meta: [
         {
-          hid: "og:title:id",
+          hid: "og:title-id",
           property: "og:title",
           content: "АРТ - МОНОЛІТ",
         },
 
         {
-          hid: "og:description:id",
+          hid: "og:description-id",
           property: "og:description",
           content:
             "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
         },
 
         {
-          hid: "og:image:id",
+          hid: "og:image-id",
           property: "og:image",
           content: "",
         },
 
         {
-          hid: "og:url:id",
+          hid: "og:url-id",
           property: "og:url",
           content: "",
         },
 
         {
-          hid: "og:type:id",
+          hid: "og:type-id",
           property: "og:type",
           content: "website",
         },
 
         {
-          hid: "twitter:card:id",
+          hid: "twitter:card-id",
           name: "twitter:card",
           content: "summary_large_image",
         },
 
         {
-          hid: "twitter:title:id",
+          hid: "twitter:title-id",
           name: "twitter:title",
           content: "АРТ - МОНОЛІТ",
         },
 
         {
-          hid: "twitter:description:id",
+          hid: "twitter:description-id",
           name: "twitter:description",
           content:
             "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
         },
 
         {
-          hid: "twitter:image:id",
+          hid: "twitter:image-id",
           name: "twitter:image",
           content: "",
         },
 
         {
-          hid: "twitter:url:id",
+          hid: "twitter:url-id",
           name: "twitter:url",
           content: "",
+        },
+      ],
+      script: [
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-CGMKTLYTRQ",
+          async: true,
+        },
+
+        {
+          innerHTML: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-CGMKTLYTRQ');
+          `,
         },
       ],
     };
