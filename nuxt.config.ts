@@ -135,7 +135,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      google_analytics_id: "AW-16457131804", // Убедитесь, что здесь указан правильный идентификатор Google Analytics
+      google_analytics_id: "G-53XP3ZSTBN", // Убедитесь, что здесь указан правильный идентификатор Google Analytics
+      // google_analytics_id: "AW-16457131804",
       production_mode: Boolean(isProduction), // Предполагая, что isProduction - это переменная, определяющая режим продакшн
     },
   },
