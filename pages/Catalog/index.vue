@@ -77,7 +77,8 @@ async function changeSelectTab(tab) {
 }
 
 useHead({
-  title: "КАТАЛОГ",
+  title:
+    "Каталог одинарных, двойных памятников - памятники для военых - бюджетные и качественые памятники - памятники под ключ запорожье",
   meta: [
     {
       hid: "main-description",
@@ -118,32 +119,6 @@ useHead({
       hid: "og:type-main",
       property: "og:type",
       content: "website",
-    },
-    {
-      hid: "twitter:card-main",
-      name: "twitter:card",
-      content: "summary_large_image",
-    },
-    {
-      hid: "twitter:title-main",
-      name: "twitter:title",
-      content: "АРТ - МОНОЛІТ",
-    },
-    {
-      hid: "twitter:description-main",
-      name: "twitter:description",
-      content:
-        "каталог з одинарними та подвійми пам'ятниками у місті Запоржжя, пам'ятнки під ключ, пам'ятники для військових, меморіальні пам'ятники, виготовлення пам'ятників під ключ к місті Запоріжжя",
-    },
-    {
-      hid: "twitter:image-main",
-      name: "twitter:image",
-      content: imageUrl,
-    },
-    {
-      hid: "twitter:url-main",
-      name: "twitter:url",
-      content: imageUrl,
     },
   ],
   script: [
