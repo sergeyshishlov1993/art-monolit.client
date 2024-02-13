@@ -194,7 +194,7 @@ useHead(() => {
         {
           hid: "og:type:id",
           property: "og:type",
-          content: "website",
+          content: "article",
         },
         {
           hid: "twitter:card:id",
@@ -281,7 +281,7 @@ useHead(() => {
         {
           hid: "og:type-id",
           property: "og:type",
-          content: "website",
+          content: "article",
         },
 
         {
