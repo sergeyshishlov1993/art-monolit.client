@@ -80,7 +80,7 @@ import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
 
-const imageUrl = new URL(`/assets/img/catalog/1.webp`, import.meta.url).href;
+const imageUrl = new URL(`/assets/img/aboutOur.webp`, import.meta.url).href;
 
 useHead({
   title: "АРТ - МОНОЛІТ",
@@ -96,6 +96,11 @@ useHead({
       name: "keywords",
       content:
         "купить мраморные и гранитные памятники, памятники Запорожье, гранитные памятники, купить гранитный памятник в Запорожье, красивые надгробные памятники, качественые надгробные памятники в запорожье, памятники под ключ, памятники под ключ в запорожье, одинарные памятники, двойные памятники,одинарные памятники в Запорожье , двойные памятники в Запорожье, бюджетыне гранитные памятники в запорожье купить, пам'ятники для військових, пам'ятники для військових купити в запоріжжі, памятники гранитные запорожье, гранитная ваза купить в запорожье, гранитные памятники запорожье, памятники из мрамора запорожье, гранитные памятники запорожье цена, памятники на кладбище святого николая запорожье цены  ",
+    },
+
+    {
+      name: "robots",
+      content: "index, follow",
     },
 
     {
@@ -118,6 +123,16 @@ useHead({
       hid: "og:url-page",
       property: "og:url",
       content: imageUrl,
+    },
+    {
+      hid: "og:image-page",
+      property: "og:image:width",
+      content: 800,
+    },
+    {
+      hid: "og:image-page",
+      property: "og:image:height",
+      content: 800,
     },
     {
       hid: "og:type-page",
@@ -143,12 +158,23 @@ useHead({
     {
       hid: "twitter:image-page",
       name: "twitter:image",
-      content: "assets/img/mainBg.webp",
+      content: imageUrl,
     },
     {
       hid: "twitter:url-page",
       name: "twitter:url",
-      content: "assets/img/mainBg.webp",
+      content: imageUrl,
+    },
+
+    {
+      hid: "og:image-page",
+      property: "og:image:width",
+      content: 800,
+    },
+    {
+      hid: "og:image-page",
+      property: "og:image:height",
+      content: 800,
     },
   ],
 

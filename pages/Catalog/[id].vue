@@ -170,20 +170,21 @@ useHead(() => {
           property: "og:description",
           content: `${title} пам'ятник купити в запоріжжі`,
         },
-        {
-          hid: "og:image:id",
-          property: "og:image:width",
-          content: 400,
-        },
-        {
-          hid: "og:image:id",
-          property: "og:image:height",
-          content: 600,
-        },
+
         {
           hid: "og:image:id",
           property: "og:image",
           content: image,
+        },
+        {
+          hid: "og:image:id",
+          property: "og:image:width",
+          content: 800,
+        },
+        {
+          hid: "og:image:id",
+          property: "og:image:height",
+          content: 800,
         },
         {
           hid: "og:url:id",
