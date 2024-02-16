@@ -12,6 +12,7 @@
         alt="our works img"
         @load="isLoadingImg = false"
         @click.stop="getZoomPath(getImageUrl(img))"
+        data-nosnippet
       />
       <zoom-img v-if="showZoomImg && screenWidth > 991" class="zoom" />
     </div>

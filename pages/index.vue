@@ -71,6 +71,19 @@ useHead({
             gtag('config', 'G-CGMKTLYTRQ');
           `,
     },
+
+    {
+      src: "https://www.googletagmanager.com/gtag/js?id=AW-16457131804",
+      async: true,
+    },
+
+    {
+      innerHTML: `
+              window.dataLayer = window.dataLayer || [];
+             function gtag(){dataLayer.push(arguments);}
+             gtag('js', new Date());
+             gtag('config', 'AW-16457131804');`,
+    },
   ],
 });
 </script>
