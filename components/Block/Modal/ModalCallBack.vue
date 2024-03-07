@@ -31,7 +31,7 @@
           @focus="(event) => handleFocus(event, 'phone')"
           @input="(event) => getInputVal(event, 'phone')"
           @blur="(event) => handleBlur(event, 'phone')"
-          :value="phoneMask"
+          :value="phone"
         />
 
         <ui-error
@@ -60,7 +60,7 @@ import {
   addDoc,
   Timestamp,
 } from "firebase/firestore";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import {
   errorsFormData,
   validateField,
@@ -85,12 +85,6 @@ const phone = ref("+380");
 const date = new Date();
 const dateFeedback = ref();
 const now = Timestamp.now();
-
-const phoneMask = computed(() => {
-  const regex = /(\d?)(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/g;
-  const subst = "$1 380 ($3)-$4-$5-$6";
-  return phone.value.replace(regex, subst);
-});
 
 const closeModal = () => {
   emit("closeModal");

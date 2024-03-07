@@ -20,6 +20,11 @@ export function validateField(value, name, password) {
     errorsFormData[name].errors.push("Це поле обов'язкове до заповнення!");
   }
 
+  if (!!value && name === "phone" && value.length != 13) {
+    errorsFormData[name].errors = [];
+    errorsFormData[name].errors.push("Введіть номер телефону");
+  }
+
   if (!!value && name === "phone" && /[a-z].*\d|\d.*[a-z]/i.test(value)) {
     errorsFormData[name].errors = [];
     errorsFormData[name].errors.push("Тільки цифри");

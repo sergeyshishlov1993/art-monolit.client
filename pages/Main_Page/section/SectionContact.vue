@@ -34,7 +34,7 @@
         @focus="(event) => handleFocus(event, 'phone')"
         @input="(event) => getInputVal(event, 'phone')"
         @blur="(event) => handleBlur(event, 'phone')"
-        :value="phoneMask"
+        :value="phone"
         :class="{
           invalid: errorsFormData?.phone?.errors.length != 0,
         }"
@@ -85,12 +85,6 @@ const date = new Date();
 const dateFeedback = ref();
 const showModal = ref("empty");
 const now = Timestamp.now();
-
-const phoneMask = computed(() => {
-  const regex = /(\d?)(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/g;
-  const subst = "$1 380 ($3)-$4-$5-$6";
-  return phone.value.replace(regex, subst);
-});
 
 function handleFocus(event, name) {
   createErrorObj(name);
