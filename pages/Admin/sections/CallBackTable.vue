@@ -74,7 +74,7 @@ async function getFeedbackData() {
   try {
     const feedbackCollection = query(
       collection(db, "feedback"),
-      orderBy("timestamp"),
+      orderBy("timestamp", "desc"),
       limit(5)
     );
     const querySnapshot = await getDocs(feedbackCollection);
