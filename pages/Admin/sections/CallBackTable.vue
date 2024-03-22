@@ -130,7 +130,7 @@ async function removePersone(id, idx) {
 async function getNextData() {
   const next = query(
     collection(db, `feedback`),
-    orderBy("timestamp"),
+    orderBy("timestamp", "desc"),
     startAfter(lastDoc.value),
     limit(5)
   );
@@ -153,9 +153,9 @@ async function getNextData() {
 async function getPrevData() {
   const prev = query(
     collection(db, "feedback"),
-    orderBy("timestamp"),
+    orderBy("timestamp", "desc"),
     endBefore(firstDoc.value),
-    limitToLast(6)
+    limitToLast(5)
   );
 
   const prevSnapshot = await getDocs(prev);
@@ -163,7 +163,9 @@ async function getPrevData() {
   if (prevSnapshot.docs.length > 0) {
     feedbackData.length = 0;
 
-    prevSnapshot.docs.map((doc) => product.push({ ...doc.data(), id: doc.id }));
+    prevSnapshot.docs.forEach((doc) =>
+      feedbackData.push({ ...doc.data(), id: doc.id })
+    );
 
     lastDoc.value = prevSnapshot.docs[prevSnapshot.docs.length - 1];
     firstDoc.value = prevSnapshot.docs[0];
