@@ -59,16 +59,17 @@ useHead({
 
   script: [
     {
-      src: "https://www.googletagmanager.com/gtag/js?id=G-CGMKTLYTRQ",
+      src: "//www.googletagmanager.com/gtag/js?id=G-5LE543317L",
       async: true,
     },
 
     {
       innerHTML: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-CGMKTLYTRQ');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5LE543317L');
           `,
     },
 
