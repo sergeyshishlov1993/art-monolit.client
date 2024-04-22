@@ -55,6 +55,10 @@ useHead({
       name: "robots",
       content: "index, follow",
     },
+    {
+      name: "google-site-verification",
+      content: "x3lktmFtn_dq-e5JemJe2aVqSQs3F8t5ttEtM_Lio9k",
+    },
   ],
 
   script: [
