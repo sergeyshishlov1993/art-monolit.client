@@ -32,7 +32,7 @@
     <section-catalog-preview />
     <section-our-works />
     <section-about id="about" />
-    <section-contact />
+    <section-contact id="form" />
     <section-map id="map" />
   </div>
 </template>
