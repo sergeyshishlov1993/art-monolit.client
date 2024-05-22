@@ -52,6 +52,7 @@ export const useCatalogData = defineStore("catalogData", () => {
 
       product.length = 0;
 
+      console.log("data", data.value);
       data.value.documents.map((doc) => {
         const id = doc.name.split("/").pop();
         product.push({ ...doc.fields, id: id });

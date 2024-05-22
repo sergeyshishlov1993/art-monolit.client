@@ -43,30 +43,42 @@ const card = reactive({
     title: "Одинарні",
     name: "single",
   },
+
   double: {
     src: "2.webp",
     alt: "Подвійні",
     title: "Подвійні",
     name: "double",
   },
+
+  war: {
+    src: "war.webp",
+    alt: "Памʼятники військовим",
+    title: "Військовим",
+    name: "war",
+  },
+
   marble: {
     src: "mram.webp",
     alt: "Меморіальні Комплекси",
     title: "Меморіальні Комплекси",
     name: "memorial",
   },
+
   kids: {
     src: "kids.webp",
     alt: "Дитячі",
     title: "Дитячі",
     name: "kids",
   },
+
   accessories: {
     src: "acs.webp",
     alt: "Аксесуари",
     title: "Аксесуари",
     name: "accessories",
   },
+
   cross: {
     src: "cross.webp",
     alt: "Хрести",

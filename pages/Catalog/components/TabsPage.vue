@@ -4,42 +4,49 @@
       :class="{ active: props.selectedTab == 'single' }"
       @click="selecTab('single')"
     >
-      <ui-text-h4>одинарні</ui-text-h4>
+      <ui-text-h4>Одинарні</ui-text-h4>
     </ui-btn>
 
     <ui-btn
       :class="{ active: props.selectedTab == 'double' }"
       @click="selecTab('double')"
     >
-      <ui-text-h4>подвійні</ui-text-h4>
+      <ui-text-h4>Подвійні</ui-text-h4>
     </ui-btn>
 
     <ui-btn
       :class="{ active: props.selectedTab == 'kids' }"
       @click="selecTab('kids')"
     >
-      <ui-text-h4>дитячі</ui-text-h4>
+      <ui-text-h4>Дитячі</ui-text-h4>
     </ui-btn>
 
     <ui-btn
       :class="{ active: props.selectedTab == 'memorial' }"
       @click="selecTab('memorial')"
     >
-      <ui-text-h4>меморіальні комплекси</ui-text-h4>
+      <ui-text-h4>Меморіальні комплекси</ui-text-h4>
     </ui-btn>
 
     <ui-btn
       :class="{ active: props.selectedTab == 'accessories' }"
       @click="selecTab('accessories')"
     >
-      <ui-text-h4>аксесуари</ui-text-h4>
+      <ui-text-h4>Аксесуари</ui-text-h4>
     </ui-btn>
 
     <ui-btn
       :class="{ active: props.selectedTab == 'cross' }"
       @click="selecTab('cross')"
     >
-      <ui-text-h4>хрести</ui-text-h4>
+      <ui-text-h4>Хрести</ui-text-h4>
+    </ui-btn>
+
+    <ui-btn
+      :class="{ active: props.selectedTab == 'war' }"
+      @click="selecTab('war')"
+    >
+      <ui-text-h4>Військовим</ui-text-h4>
     </ui-btn>
   </div>
 </template>

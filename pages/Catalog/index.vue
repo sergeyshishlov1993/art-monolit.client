@@ -56,7 +56,7 @@ import TabsPage from "./components/TabsPage.vue";
 const { activeTab, changeTab, getData, getPageItems, pagedData } =
   useCatalogData();
 const isLoading = ref(false);
-const imageUrl = new URL(`/assets/img/catalog/1.webp`, import.meta.url).href;
+const imageUrl = new URL(`/assets/img/catalog/war.webp`, import.meta.url).href;
 
 onMounted(async () => {
   await getData("catalog", "product");
@@ -78,13 +78,13 @@ async function changeSelectTab(tab) {
 
 useHead({
   title:
-    "Каталог одинарных памятников - Двойные памятников - Памятники для военых - Бюджетные и качественые памятники - Памятники под ключ запорожье",
+    "Памятника Запорожье - Гранитные Памятники Запорожье - Каталог одинарных памятников - Двойные памятников - Памятники для военых - Бюджетные и качественые памятники - Памятники под ключ запорожье",
   meta: [
     {
       hid: "main-description",
       name: "description",
       content:
-        "каталог з одинарними та подвійми пам'ятниками у місті Запоржжя, пам'ятнки під ключ, пам'ятники для військових, меморіальні пам'ятники, виготовлення пам'ятників під ключ к місті Запоріжжя",
+        "Каталог з одинарними та подвійми пам'ятниками у місті Запоржжя, Пам'ятнки під ключ, Пам'ятники для військових, Меморіальні пам'ятники, Виготовлення пам'ятників під ключ к місті Запоріжжя",
     },
 
     {

@@ -15,6 +15,7 @@
       <option :value="'kids'">Дитячі</option>
       <option :value="'accessories'">Аксесуари</option>
       <option :value="'cross'">Хрести</option>
+      <option :value="'war'">Військовим</option>
     </select>
 
     <ui-error
