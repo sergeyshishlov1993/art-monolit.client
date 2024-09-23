@@ -4,11 +4,7 @@
 
     <div class="container">
       <NuxtPage />
-      <icon-shevron
-        class="shevron"
-        v-if="showScrollToTop"
-        @click="scrollToTop"
-      />
+      <icon-shevron class="shevron" v-if="showScrollToTop" @click="scrollToTop" />
     </div>
 
     <the-footer />
