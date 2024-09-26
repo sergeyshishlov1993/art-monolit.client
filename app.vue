@@ -4,7 +4,11 @@
 
     <div class="container">
       <NuxtPage />
-      <icon-shevron class="shevron" v-if="showScrollToTop" @click="scrollToTop" />
+      <icon-shevron
+        class="shevron"
+        v-if="showScrollToTop"
+        @click="scrollToTop"
+      />
     </div>
 
     <the-footer />
@@ -21,6 +25,22 @@ import useScrollToTop from "./utils/useScrollToTop";
 const { showScrollToTop, scrollToTop } = useScrollToTop();
 
 useHead({
+  script: [
+    {
+      src: "https://www.googletagmanager.com/gtag/js?id=AW-16514962201",
+      async: true,
+    },
+    {
+      children: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-16514962201');
+      `,
+      type: "text/javascript",
+    },
+  ],
+
   meta: [
     {
       name: "google-site-verification",
