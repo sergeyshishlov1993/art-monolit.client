@@ -36,6 +36,7 @@ useHead({
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'AW-16514962201');
+        gtag('event', 'conversion', {'send_to': 'AW-16514962201/qellCICYw9YZEJmm-cI9'});
       `,
       type: "text/javascript",
     },
