@@ -69,7 +69,11 @@
           </ui-btn>
         </div>
       </div>
-      <modal-call-back v-if="showModal" @closeModal="showModal = false" />
+      <modal-call-back
+        v-if="showModal"
+        @closeModal="showModal = false"
+        :qwery="route.query.pixel"
+      />
     </div>
   </div>
 </template>

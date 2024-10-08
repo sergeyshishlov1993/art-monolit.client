@@ -49,7 +49,7 @@ function linkToSection(section) {
 
 function goToCatalog() {
   changeTab("single");
-  return router.push("/catalog");
+  return router.push(`/catalog?pixel=${route.query.pixel}`);
 }
 </script>
 

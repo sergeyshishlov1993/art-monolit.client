@@ -30,7 +30,9 @@
               :price="card.price.stringValue"
               :type="card.type.stringValue"
               class="mr-20 mb-20"
-              @click="$router.push(`/catalog/${card.id}`)"
+              @click="
+                $router.push(`/catalog/${card.id}?pixel=${$route.query.pixel}`)
+              "
               id="catalog"
             />
           </div>

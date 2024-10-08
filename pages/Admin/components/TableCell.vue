@@ -26,6 +26,8 @@
     <button class="btn btn-primary" @click="updatePersonStatus" v-else>
       завершити
     </button>
+
+    <ui-text-h4>{{ props.qwery }}</ui-text-h4>
   </div>
 </template>
 
@@ -55,6 +57,7 @@ const props = defineProps({
     type: String,
     requred: true,
   },
+  qwery: String,
   index: {
     type: Number,
     requred: true,

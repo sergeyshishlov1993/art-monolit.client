@@ -51,6 +51,7 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import SectionMainScrin from "./Main_Page/section/SectionMainScrin.vue";
 import SectionCatalogPreview from "./Main_Page/section/SectionCatalogPreview.vue";
 import SectionOurWorks from "./Main_Page/section/SectionOurWorks.vue";
@@ -59,6 +60,7 @@ import SectionContact from "./Main_Page/section/SectionContact.vue";
 import SectionMap from "./Main_Page/section/SectionMap.vue";
 
 const imageUrl = new URL(`/assets/img/aboutOur.webp`, import.meta.url).href;
+const mapSection = ref(null);
 
 useHead({
   title:

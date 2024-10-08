@@ -7,6 +7,7 @@
         <ui-text-h-3>дата</ui-text-h-3>
         <ui-text-h-3>статус</ui-text-h-3>
         <ui-text-h-3>виконано</ui-text-h-3>
+        <ui-text-h-3>pixel</ui-text-h-3>
       </div>
 
       <table-cell
@@ -16,6 +17,7 @@
         :date="persone.date"
         :phone="persone.phone"
         :status="persone.status"
+        :qwery="persone.qwery"
         :id="persone.id"
         :index="index"
         @remove="removePersone"

@@ -3,7 +3,7 @@ import type NavbarPhoneVue from './components/NavbarPhone.vue';
   <div class="container">
     <div class="position">
       <header class="header">
-        <icon-logo class="logo" @click="$router.push('/')" />
+        <icon-logo class="logo" @click="goHome" />
 
         <the-navbar class="desktop" />
 
@@ -32,13 +32,20 @@ import type NavbarPhoneVue from './components/NavbarPhone.vue';
 
 <script setup>
 import { ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import IconLogo from "~/assets/icon/IconLogo";
 import IconBurger from "~/assets/icon/IconBurger";
 import IconClose from "~/assets/icon/IconClose";
 import TheNavbar from "./components/TheNavbar.vue";
 import NavbarMobile from "./components/NavbarMobile.vue";
+const router = useRouter();
+const route = useRoute();
 
 const showMobileNavbar = ref(false);
+
+function goHome() {
+  router.push(`/?pixel=${route.query.pixel}`);
+}
 </script>
 
 <style lang="scss" scoped>

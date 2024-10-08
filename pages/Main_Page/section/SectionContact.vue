@@ -64,6 +64,7 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 import {
   errorsFormData,
   validateField,
@@ -85,6 +86,7 @@ const date = new Date();
 const dateFeedback = ref();
 const showModal = ref("empty");
 const now = Timestamp.now();
+const route = useRoute();
 
 function handleFocus(event, name) {
   createErrorObj(name);
@@ -142,6 +144,7 @@ async function sendFeedback(event) {
 
   if (!isFormValid()) {
     const form = event.target;
+
     try {
       const cardCollection = collection(db, "feedback");
       const documentId = uuidv4();
@@ -153,6 +156,7 @@ async function sendFeedback(event) {
           phone: phone.value,
           date: getDateFeedback().format(date),
           status: "в обробці",
+          qwery: route.query.pixel || "",
           timestamp: now,
         },
         documentId // id обьекта
@@ -167,6 +171,7 @@ async function sendFeedback(event) {
         showModal.value = "empty";
       }, 4000);
     } catch (error) {
+      console.error("ошибка", error);
       showModal.value = "error";
 
       setInterval(() => {

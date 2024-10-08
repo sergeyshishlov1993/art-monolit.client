@@ -61,6 +61,7 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { ref } from "vue";
+import { useRoute } from "vue-router";
 import {
   errorsFormData,
   validateField,
@@ -77,6 +78,9 @@ import ModalError from "~/components/Block/Modal/ModalError.vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
 
 const emit = defineEmits(["closeModal"]);
+const props = defineProps({
+  qwery: String,
+});
 
 const showModal = ref("empty");
 const db = getFirestore(app);
@@ -85,6 +89,7 @@ const phone = ref("+380");
 const date = new Date();
 const dateFeedback = ref();
 const now = Timestamp.now();
+const route = useRoute();
 
 const closeModal = () => {
   emit("closeModal");
@@ -157,6 +162,7 @@ async function sendFeedback(event) {
           phone: phone.value,
           date: getDateFeedback().format(date),
           status: "в обробці",
+          qwery: props.qwery || "",
           timestamp: now,
         },
         documentId // id обьекта
