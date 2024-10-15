@@ -16,6 +16,7 @@
 </template>
 
 <script setup>
+const imageUrl = new URL(`/assets/img/catalog/war.webp`, import.meta.url).href;
 import TheHeader from "~/components/Block/TheHeader";
 import IconShevron from "./assets/icon/IconShevron.vue";
 import TheFooter from "~/components/Block/TheFooter";
@@ -43,6 +44,46 @@ useHead({
   ],
 
   meta: [
+    {
+      hid: "main-description",
+      name: "description",
+      content:
+        "Каталог з одинарними та подвійми пам'ятниками у місті Запоржжя, Пам'ятнки під ключ, Пам'ятники для військових, Меморіальні пам'ятники, Виготовлення пам'ятників під ключ к місті Запоріжжя",
+    },
+
+    {
+      hid: "main-keywords",
+      name: "keywords",
+      content:
+        "купити одинарні пам'ятники у Запоріжжі, купити подвійний пам'ятник у Запоріжжі,пам'ятник для військових, купить памятник одинарный, цена одинарного памятника запорожье, цена двойного памятника запорожье, установка памятников под ключ запорожье  ",
+    },
+
+    {
+      hid: "og:title-main",
+      property: "og:title",
+      content: "АРТ - МОНОЛІТ",
+    },
+    {
+      hid: "og:description-main",
+      property: "og:description",
+      content:
+        "каталог з одинарними та подвійми пам'ятниками у місті Запоржжя, пам'ятнки під ключ, пам'ятники для військових, меморіальні пам'ятники, виготовлення пам'ятників під ключ к місті Запоріжжя",
+    },
+    {
+      hid: "og:image-main",
+      property: "og:image",
+      content: imageUrl,
+    },
+    {
+      hid: "og:url-main",
+      property: "og:url",
+      content: imageUrl,
+    },
+    {
+      hid: "og:type-main",
+      property: "og:type",
+      content: "website",
+    },
     {
       name: "google-site-verification",
       content: "x3lktmFtn_dq-e5JemJe2aVqSQs3F8t5ttEtM_Lio9k",
