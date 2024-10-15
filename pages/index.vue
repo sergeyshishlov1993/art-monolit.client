@@ -116,6 +116,11 @@ useHead({
       fbq('track', 'PageView');
       `,
     },
+
+    {
+      name: "facebook-domain-verification",
+      content: "2yjcqfjbbbf03oiqfngtlkweldzmpy",
+    },
   ],
 });
 </script>
