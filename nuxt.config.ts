@@ -3,7 +3,7 @@ import { isProduction } from "std-env";
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/app.scss"],
-  ssr: false,
+  ssr: true,
   modules: ["@pinia/nuxt", "nuxt-lazy-load"],
 
   app: {

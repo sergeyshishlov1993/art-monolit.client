@@ -23,8 +23,8 @@ const props = defineProps({
   },
 });
 
-const imageUrl = new URL(`/assets/img/catalog/${props.src}`, import.meta.url)
-  .href;
+// const imageUrl = new URL(`/assets/img/catalog/${props.src}`, import.meta.url)
+const imageUrl = `/catalog/${props.src}`;
 </script>
 
 <style lang="scss" scoped>

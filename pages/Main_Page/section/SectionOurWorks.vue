@@ -26,7 +26,48 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+// import { ref } from "vue";
+// import { useCatalogData } from "~/stores/catalogData";
+// const { getPathZoomImg } = useCatalogData();
+// import UiTextH1 from "~/components/UI/UiTextH1.vue";
+// import UiTextH3 from "~/components/UI/UiTextH3.vue";
+// import UiBtn from "~/components/UI/UiBtn.vue";
+// import ZoomImg from "~/components/Block/ZoomImg.vue";
+
+// const isLoadingImg = ref(true);
+// const showZoomImg = ref(false);
+// // const screenWidth = ref(window.innerWidth);
+
+// const screenWidth = ref(null);
+
+// onMounted(() => {
+//   if (typeof window !== "undefined") {
+//     screenWidth.value = window.innerWidth;
+//   }
+// });
+
+// const ourWorkStatic = [
+//   "1.webp",
+//   "2.webp",
+//   "3.webp",
+//   "4.webp",
+//   "5.webp",
+//   "6.webp",
+//   "7.webp",
+//   "8.webp",
+// ];
+
+// const getImageUrl = (img) => {
+//   const imageUrl = new URL(`/assets/img/ourWork/${img}`, import.meta.url).href;
+//   return imageUrl;
+// };
+
+// const getZoomPath = (path) => {
+//   showZoomImg.value = true;
+//   getPathZoomImg(path, "mainOurWork");
+// };
+
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useCatalogData } from "~/stores/catalogData";
 const { getPathZoomImg } = useCatalogData();
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
@@ -34,10 +75,11 @@ import UiTextH3 from "~/components/UI/UiTextH3.vue";
 import UiBtn from "~/components/UI/UiBtn.vue";
 import ZoomImg from "~/components/Block/ZoomImg.vue";
 
-const isLoadingImg = ref(true);
 const showZoomImg = ref(false);
-const screenWidth = ref(window.innerWidth);
+const screenWidth = ref(null);
+const isLoadingImg = ref([]); // Масив для відстеження завантаження кожного зображення
 
+// Статичний список зображень
 const ourWorkStatic = [
   "1.webp",
   "2.webp",
@@ -49,11 +91,39 @@ const ourWorkStatic = [
   "8.webp",
 ];
 
+// Отримуємо URL для зображення
 const getImageUrl = (img) => {
-  const imageUrl = new URL(`/assets/img/ourWork/${img}`, import.meta.url).href;
-  return imageUrl;
+  // return new URL(`/assets/img/ourWork/${img}`, import.meta.url).href;
+  return `/ourWork/${img}`;
 };
 
+// Відстежуємо завантаження кожного зображення
+const handleImageLoad = (index) => {
+  isLoadingImg.value[index] = false; // При завантаженні зображення приховуємо скелет
+};
+
+// Ініціалізуємо масив стану завантаження зображень
+ourWorkStatic.forEach(() => isLoadingImg.value.push(true));
+
+// Визначаємо ширину екрану на стороні клієнта
+onMounted(() => {
+  if (typeof window !== "undefined") {
+    screenWidth.value = window.innerWidth;
+
+    const handleResize = () => {
+      screenWidth.value = window.innerWidth;
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Видаляємо слухач при розмонтуванні компонента
+    onBeforeUnmount(() => {
+      window.removeEventListener("resize", handleResize);
+    });
+  }
+});
+
+// Обробляємо клік на зображенні для збільшення
 const getZoomPath = (path) => {
   showZoomImg.value = true;
   getPathZoomImg(path, "mainOurWork");
