@@ -3,7 +3,11 @@
     <ui-text-h1 class="center">ПРО НАС</ui-text-h1>
 
     <div class="wrapper__text">
-      <img src="~/assets/img/aboutOur.webp" alt="about" />
+      <img
+        src="~/assets/img/aboutOur.webp"
+        alt="about"
+        @load="isLoadingImg = false"
+      />
 
       <div class="text">
         <ui-text-h3 class="fw-300">
@@ -18,33 +22,27 @@
 
         <div class="wrapper__icon mt-31">
           <icon-hammer />
-          <ui-text-h4 class="ml-15">Розробка макету </ui-text-h4>
+          <ui-text-h4>Розробка макету </ui-text-h4>
         </div>
 
         <div class="wrapper__icon mt-25">
           <icon-hammer />
-          <ui-text-h4 class="ml-15"
-            >Виготовлення, доставка замовлення
-          </ui-text-h4>
+          <ui-text-h4>Виготовлення, доставка замовлення </ui-text-h4>
         </div>
 
         <div class="wrapper__icon mt-25">
           <icon-hammer />
-          <ui-text-h4 class="ml-15">Благоустрій місць поховання</ui-text-h4>
+          <ui-text-h4>Благоустрій місць поховання</ui-text-h4>
         </div>
 
         <div class="wrapper__icon mt-25">
           <icon-hammer />
-          <ui-text-h4 class="ml-15"
-            >Укладення тротуарної облицювальна плитки
-          </ui-text-h4>
+          <ui-text-h4>Укладення тротуарної облицювальна плитки </ui-text-h4>
         </div>
 
         <div class="wrapper__icon mt-25">
           <icon-hammer />
-          <ui-text-h4 class="ml-15"
-            >Встановлення столів, лавок, огорож
-          </ui-text-h4>
+          <ui-text-h4>Встановлення столів, лавок, огорож </ui-text-h4>
         </div>
 
         <ui-text-h3 class="fw-300 mt-31"
@@ -69,6 +67,7 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
 <style lang="scss" scoped>
 .wrapper {
   padding: 150px 50px;
+  min-height: 700px;
   &__text {
     margin-top: 150px;
     display: flex;
@@ -77,11 +76,13 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
   }
   &__icon {
     display: flex;
+    align-items: center;
+    gap: 15px;
   }
 }
 
 .text {
-  direction: flex;
+  display: flex;
   flex-direction: column;
 }
 .title {
@@ -95,9 +96,6 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
   line-height: revert;
 }
 
-.ml-15 {
-  margin-left: 15px;
-}
 .mt-25 {
   margin-top: 25px;
 }
@@ -106,6 +104,7 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
 }
 img {
   max-width: 50%;
+
   filter: drop-shadow(10px 10px 15px #000);
 }
 

@@ -1,6 +1,7 @@
 <template>
   <div class="card__product">
     <img :src="imageUrl" :alt="props.alt" />
+
     <ui-text-h2 class="fw-500">{{ props.title }}</ui-text-h2>
   </div>
 </template>
@@ -23,7 +24,6 @@ const props = defineProps({
   },
 });
 
-// const imageUrl = new URL(`/assets/img/catalog/${props.src}`, import.meta.url)
 const imageUrl = `/catalog/${props.src}`;
 </script>
 
@@ -41,6 +41,7 @@ const imageUrl = `/catalog/${props.src}`;
 }
 img {
   max-width: 350px;
+  min-height: 100%;
   margin-bottom: 20px;
 }
 .fw-500 {

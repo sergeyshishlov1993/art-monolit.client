@@ -1,28 +1,28 @@
 <template>
   <div class="wrapper">
-    <ui-text-h3 class="white mt-15"
+    <ui-text-h3 class="white"
       ><nuxt-link @click="goToCatalog" style="cursor: pointer"
         >каталог</nuxt-link
       >
     </ui-text-h3>
-    <ui-text-h3 class="white mt-15"
+    <ui-text-h3 class="white"
       ><nuxt-link :to="linkToSection('about')">про нас</nuxt-link></ui-text-h3
     >
-    <ui-text-h3 class="white mt-15"
+    <ui-text-h3 class="white"
       ><nuxt-link to="/our_works">наші работи</nuxt-link></ui-text-h3
     >
-    <ui-text-h3 class="white mt-15"
+    <ui-text-h3 class="white"
       ><nuxt-link :to="linkToSection('map')"
         >як нас знайти</nuxt-link
       ></ui-text-h3
     >
 
-    <div class="mt-25">
+    <div class="wrapper__phone">
       <a href="tel:380508520594">
         <ui-text-h3 class="white">+380-50-852-05-94</ui-text-h3>
       </a>
 
-      <a href="tel:380508520590" class="mt-10">
+      <a href="tel:380508520590">
         <ui-text-h3 class="white">+380-50-852-05-90</ui-text-h3>
       </a>
     </div>
@@ -41,10 +41,12 @@ const emit = defineEmits(["closeMenu"]);
 
 function linkToSection(section) {
   const currentPath = route.path;
+
   emit("closeMenu");
-  return currentPath == "/"
+
+  return currentPath === "/"
     ? { path: "/", hash: `#${section}` }
-    : "/" && { path: "/", hash: `#${section}` };
+    : { path: "/", hash: `#${section}` };
 }
 
 function goToCatalog() {
@@ -60,8 +62,16 @@ function goToCatalog() {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 15px;
   border-top: solid 1px #82642d;
   z-index: 20;
+
+  &__phone {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 }
 
 a {
@@ -85,15 +95,5 @@ a {
 
     color: transparent;
   }
-}
-
-.mt-10 {
-  margin-top: 10px;
-}
-.mt-15 {
-  margin-top: 15px;
-}
-.mt-25 {
-  margin-top: 25px;
 }
 </style>

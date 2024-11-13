@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 import { useCatalogData } from "~/stores/catalogData";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH4 from "~/components/UI/UiTextH4.vue";
@@ -67,7 +67,7 @@ const {
 } = useCatalogData();
 const isLoading = ref(false);
 const showZoomImg = ref(false);
-const screenWidth = ref(window.innerWidth);
+const screenWidth = ref(0);
 const imageUrl = new URL(`/assets/img/ourWork/1.webp`, import.meta.url).href;
 
 onMounted(async () => {
@@ -75,6 +75,20 @@ onMounted(async () => {
   getPageItems(1);
 
   isLoading.value = true;
+
+  if (typeof window !== "undefined") {
+    screenWidth.value = window.innerWidth;
+
+    const handleResize = () => {
+      screenWidth.value = window.innerWidth;
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    onUnmounted(() => {
+      window.removeEventListener("resize", handleResize);
+    });
+  }
 });
 
 async function changeSelectTab(tab) {

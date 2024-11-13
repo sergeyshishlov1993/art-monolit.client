@@ -3,17 +3,15 @@
     <ui-text-h1 class="white">НАШІ РАБОТИ</ui-text-h1>
 
     <div class="work-card" id="mainOurWork">
-      <div class="sceletor" v-if="isLoadingImg"></div>
-
       <img
         v-for="img in ourWorkStatic"
         :key="img"
         :src="getImageUrl(img)"
         alt="our works img"
-        @load="isLoadingImg = false"
         @click.stop="getZoomPath(getImageUrl(img))"
         data-nosnippet
       />
+
       <zoom-img v-if="showZoomImg && screenWidth > 991" class="zoom" />
     </div>
 
@@ -26,48 +24,7 @@
 </template>
 
 <script setup>
-// import { ref } from "vue";
-// import { useCatalogData } from "~/stores/catalogData";
-// const { getPathZoomImg } = useCatalogData();
-// import UiTextH1 from "~/components/UI/UiTextH1.vue";
-// import UiTextH3 from "~/components/UI/UiTextH3.vue";
-// import UiBtn from "~/components/UI/UiBtn.vue";
-// import ZoomImg from "~/components/Block/ZoomImg.vue";
-
-// const isLoadingImg = ref(true);
-// const showZoomImg = ref(false);
-// // const screenWidth = ref(window.innerWidth);
-
-// const screenWidth = ref(null);
-
-// onMounted(() => {
-//   if (typeof window !== "undefined") {
-//     screenWidth.value = window.innerWidth;
-//   }
-// });
-
-// const ourWorkStatic = [
-//   "1.webp",
-//   "2.webp",
-//   "3.webp",
-//   "4.webp",
-//   "5.webp",
-//   "6.webp",
-//   "7.webp",
-//   "8.webp",
-// ];
-
-// const getImageUrl = (img) => {
-//   const imageUrl = new URL(`/assets/img/ourWork/${img}`, import.meta.url).href;
-//   return imageUrl;
-// };
-
-// const getZoomPath = (path) => {
-//   showZoomImg.value = true;
-//   getPathZoomImg(path, "mainOurWork");
-// };
-
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, onUnmounted } from "vue";
 import { useCatalogData } from "~/stores/catalogData";
 const { getPathZoomImg } = useCatalogData();
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
@@ -76,10 +33,8 @@ import UiBtn from "~/components/UI/UiBtn.vue";
 import ZoomImg from "~/components/Block/ZoomImg.vue";
 
 const showZoomImg = ref(false);
-const screenWidth = ref(null);
-const isLoadingImg = ref([]); // Масив для відстеження завантаження кожного зображення
+const screenWidth = ref(0);
 
-// Статичний список зображень
 const ourWorkStatic = [
   "1.webp",
   "2.webp",
@@ -91,21 +46,10 @@ const ourWorkStatic = [
   "8.webp",
 ];
 
-// Отримуємо URL для зображення
 const getImageUrl = (img) => {
-  // return new URL(`/assets/img/ourWork/${img}`, import.meta.url).href;
   return `/ourWork/${img}`;
 };
 
-// Відстежуємо завантаження кожного зображення
-const handleImageLoad = (index) => {
-  isLoadingImg.value[index] = false; // При завантаженні зображення приховуємо скелет
-};
-
-// Ініціалізуємо масив стану завантаження зображень
-ourWorkStatic.forEach(() => isLoadingImg.value.push(true));
-
-// Визначаємо ширину екрану на стороні клієнта
 onMounted(() => {
   if (typeof window !== "undefined") {
     screenWidth.value = window.innerWidth;
@@ -116,14 +60,12 @@ onMounted(() => {
 
     window.addEventListener("resize", handleResize);
 
-    // Видаляємо слухач при розмонтуванні компонента
     onBeforeUnmount(() => {
       window.removeEventListener("resize", handleResize);
     });
   }
 });
 
-// Обробляємо клік на зображенні для збільшення
 const getZoomPath = (path) => {
   showZoomImg.value = true;
   getPathZoomImg(path, "mainOurWork");
@@ -144,10 +86,11 @@ const getZoomPath = (path) => {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 50px;
+
   img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    min-height: 500px;
+    max-height: 500px;
     border-radius: 20px;
   }
 }

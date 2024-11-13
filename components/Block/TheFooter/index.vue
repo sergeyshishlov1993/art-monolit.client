@@ -7,23 +7,23 @@
 
       <div class="wrapper__address">
         <ui-text-h4 class="white">м.Запоріжжя</ui-text-h4>
-        <ui-text-h4 class="white mt-14">вул. Космічна 63</ui-text-h4>
+        <ui-text-h4 class="white">вул. Космічна 63</ui-text-h4>
       </div>
 
       <div class="schedule">
         <ui-text-h4 class="white">пн-сб: 09:00 до 16:00</ui-text-h4>
-        <ui-text-h4 class="white mt-14">вс вихідний</ui-text-h4>
+        <ui-text-h4 class="white">вс вихідний</ui-text-h4>
       </div>
 
       <div class="wrapper__phone">
-        <icon-phone class="phone mr-10" />
+        <icon-phone class="phone" />
 
         <div>
           <ui-text-h4 class="white">
             <a href="+380508520594">+380508520594</a>
           </ui-text-h4>
 
-          <ui-text-h4 class="white mt-14">
+          <ui-text-h4 class="white">
             <a href="+380508520590">+380508520590</a>
           </ui-text-h4>
         </div>
@@ -56,8 +56,29 @@ footer {
   align-items: center;
 }
 
+.wrapper__address {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
 .wrapper__phone {
   display: flex;
+  gap: 14px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 .white {
@@ -129,6 +150,8 @@ a {
   }
 
   .wrapper__address {
+    display: flex;
+    gap: 14px;
     margin-top: 20px;
     text-align: center;
   }

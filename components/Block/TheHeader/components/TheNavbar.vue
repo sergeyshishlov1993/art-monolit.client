@@ -17,14 +17,14 @@
     </nuxt-link>
 
     <div class="wrapper-phone">
-      <icon-phone class="mr-10" />
+      <icon-phone class="mr-2" />
 
       <div>
         <a href="tel:380508520594">
           <ui-text-h3 class="white">+380-50-852-05-94</ui-text-h3>
         </a>
 
-        <a href="tel:380508520590" class="mt-10">
+        <a href="tel:380508520590" class="mt-2">
           <ui-text-h3 class="white">+380-50-852-05-90</ui-text-h3>
         </a>
       </div>
@@ -45,9 +45,9 @@ const { changeTab } = useCatalogData();
 
 function linkToSection(section) {
   const currentPath = route.path;
-  return currentPath == "/"
+  return currentPath === "/"
     ? { path: "/", hash: `#${section}` }
-    : "/" && { path: "/", hash: `#${section}` };
+    : { path: "/", hash: `#${section}` };
 }
 
 function goToCatalog() {
