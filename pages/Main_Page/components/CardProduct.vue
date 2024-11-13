@@ -41,7 +41,6 @@ const imageUrl = `/catalog/${props.src}`;
 }
 img {
   max-width: 350px;
-  min-height: 100%;
   margin-bottom: 20px;
 }
 .fw-500 {

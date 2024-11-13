@@ -94,6 +94,7 @@ const card = reactive({
   padding: 150px 50px 50px 50px;
   display: flex;
   flex-direction: column;
+
   &__product {
     display: flex;
     justify-content: center;
