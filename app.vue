@@ -52,6 +52,14 @@ useHead({
     },
   ],
 
+  link: [
+    {
+      rel: "preload",
+      href: "https://firebasestorage.googleapis.com/v0/b/art-monolit-8898c.appspot.com/o/logo%2F%D0%90%D0%9C.jpg?alt=media&token=5fa568a8-8d6d-486d-8dc0-4e2f00a1dad4",
+      as: "image",
+    },
+  ],
+
   meta: [
     {
       hid: "main-description",
@@ -81,12 +89,14 @@ useHead({
     {
       hid: "og:image-main",
       property: "og:image",
-      content: imageUrl,
+      content:
+        "https://firebasestorage.googleapis.com/v0/b/art-monolit-8898c.appspot.com/o/logo%2F%D0%90%D0%9C.jpg?alt=media&token=5fa568a8-8d6d-486d-8dc0-4e2f00a1dad4",
     },
     {
       hid: "og:url-main",
       property: "og:url",
-      content: imageUrl,
+      content:
+        "https://firebasestorage.googleapis.com/v0/b/art-monolit-8898c.appspot.com/o/logo%2F%D0%90%D0%9C.jpg?alt=media&token=5fa568a8-8d6d-486d-8dc0-4e2f00a1dad4",
     },
     {
       hid: "og:type-main",
