@@ -80,6 +80,7 @@ import UiBtn from "~/components/UI/UiBtn.vue";
 const emit = defineEmits(["closeModal"]);
 const props = defineProps({
   qwery: String,
+  currentPath: String,
 });
 
 const showModal = ref("empty");
@@ -163,6 +164,7 @@ async function sendFeedback(event) {
           date: getDateFeedback().format(date),
           status: "в обробці",
           qwery: props.qwery || "",
+          item: props.currentPath || "",
           timestamp: now,
         },
         documentId // id обьекта

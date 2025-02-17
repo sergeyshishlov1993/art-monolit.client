@@ -73,6 +73,7 @@
         v-if="showModal"
         @closeModal="showModal = false"
         :qwery="route.query.pixel"
+        :currentPath="route.path"
       />
     </div>
   </div>

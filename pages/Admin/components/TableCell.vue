@@ -27,7 +27,9 @@
       завершити
     </button>
 
-    <ui-text-h4>{{ props.qwery }}</ui-text-h4>
+    <ui-text-h4 class="new-item">{{ props.qwery }}</ui-text-h4>
+
+    <ui-text-h4 class="new-item"> <a :href="props.item">Ссылка</a></ui-text-h4>
   </div>
 </template>
 
@@ -58,6 +60,7 @@ const props = defineProps({
     requred: true,
   },
   qwery: String,
+  item: String,
   index: {
     type: Number,
     requred: true,
@@ -133,5 +136,8 @@ function removePersone() {
       align-self: center;
     }
   }
+}
+.new-item {
+  padding-left: 50px;
 }
 </style>
