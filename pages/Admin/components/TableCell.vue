@@ -16,6 +16,14 @@
       >виконанно</ui-text-h4
     >
 
+    <ui-text-h4 class="new-item">{{ props.qwery }}</ui-text-h4>
+
+    <ui-text-h4 class="new-item" v-if="props.item">
+      <a :href="props.item">
+        {{ props.item ? "Переглянути" : "" }}</a
+      ></ui-text-h4
+    >
+
     <button
       class="btn btn-danger"
       v-if="isDone || props.status === 'виконанно'"
@@ -26,10 +34,6 @@
     <button class="btn btn-primary" @click="updatePersonStatus" v-else>
       завершити
     </button>
-
-    <ui-text-h4 class="new-item">{{ props.qwery }}</ui-text-h4>
-
-    <ui-text-h4 class="new-item"> <a :href="props.item">Ссылка</a></ui-text-h4>
   </div>
 </template>
 
@@ -136,8 +140,9 @@ function removePersone() {
       align-self: center;
     }
   }
-}
-.new-item {
-  padding-left: 50px;
+
+  .new-item {
+    margin-top: 10px;
+  }
 }
 </style>

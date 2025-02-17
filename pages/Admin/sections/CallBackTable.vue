@@ -6,9 +6,9 @@
         <ui-text-h-3>номер</ui-text-h-3>
         <ui-text-h-3>дата</ui-text-h-3>
         <ui-text-h-3>статус</ui-text-h-3>
-        <ui-text-h-3>виконано</ui-text-h-3>
         <ui-text-h-3>pixel</ui-text-h-3>
         <ui-text-h-3>продукт</ui-text-h-3>
+        <ui-text-h-3>виконано</ui-text-h-3>
       </div>
 
       <table-cell
