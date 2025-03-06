@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, onUnmounted } from "vue";
+import { ref, onMounted, onBeforeUnmount, onUnmounted, nextTick } from "vue";
 import { useCatalogData } from "~/stores/catalogData";
 const { getPathZoomImg } = useCatalogData();
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
@@ -34,6 +34,7 @@ import ZoomImg from "~/components/Block/ZoomImg.vue";
 
 const showZoomImg = ref(false);
 const screenWidth = ref(0);
+const imagesLoaded = ref(0);
 
 const ourWorkStatic = [
   "1.webp",
@@ -86,6 +87,7 @@ const getZoomPath = (path) => {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 50px;
+  min-height: 600px;
 
   img {
     width: 100%;
@@ -107,7 +109,7 @@ const getZoomPath = (path) => {
   top: 0;
   bottom: 0;
   width: 80%;
-  height: 320px;
+  min-height: 600px;
   border-radius: 20px;
   background: #000;
   animation: loading 1.5s infinite;
