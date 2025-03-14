@@ -107,7 +107,12 @@ function getInputVal(event, name) {
       return (namePersone.value = event.target.value);
 
     case "phone":
-      return (phone.value = event.target.value);
+      event.target.value = event.target.value.replace(/[^0-9+]/g, "");
+      if (!event.target.value.startsWith("+380")) {
+        event.target.value =
+          "+380" + event.target.value.replace(/[^0-9]/g, "").substring(3);
+      }
+      phone.value = event.target.value;
   }
 }
 

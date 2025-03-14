@@ -105,7 +105,6 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
 img {
   max-width: 50%;
   height: auto;
-  min-height: 700px;
   filter: drop-shadow(10px 10px 15px #000);
 }
 
