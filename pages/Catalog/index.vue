@@ -31,7 +31,9 @@
               :type="card.type.stringValue"
               class="mr-20 mb-20"
               @click="
-                $router.push(`/catalog/${card.id}?pixel=${$route.query.pixel}`)
+                $router.push(
+                  `/catalog/${card.id}?activeTab=${activeTab[0]}&pixel=${$route.query.pixel}`
+                )
               "
               id="catalog"
             />
@@ -76,6 +78,16 @@ async function changeSelectTab(tab) {
   getPageItems(1);
 
   isLoading.value = true;
+}
+
+function goToCard(cardId) {
+  router.push({
+    path: `/catalog/${cardId}`,
+    query: {
+      activeTab: activeTab[0],
+      pixel: route.query.pixel,
+    },
+  });
 }
 
 useHead({

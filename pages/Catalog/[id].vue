@@ -90,13 +90,17 @@ import UiTextH4 from "~/components/UI/UiTextH4.vue";
 import UiBtn from "~/components/UI/UiBtn";
 import ModalCallBack from "~/components/Block/Modal/ModalCallBack.vue";
 
-const { getItemProduct, activeTab, currentProduct } = useCatalogData();
+const { getItemProduct, activeTab, currentProduct, changeTab } =
+  useCatalogData();
 const route = useRoute();
 const isLoading = ref(true);
 const isLoadingImg = true;
 
 onMounted(async () => {
+  console.log("ROUTE", route);
   try {
+    changeTab(route.query.activeTab);
+
     let productData = await getItemProduct(
       `product/catalog/${activeTab[0]}`,
       route.params.id
