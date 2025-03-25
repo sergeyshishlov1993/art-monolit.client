@@ -35,12 +35,15 @@ const imageUrl = `/catalog/${props.src}`;
   flex-direction: column;
   align-items: center;
   border: none;
+
   &:hover {
     color: #82642d;
   }
 }
 img {
   max-width: 350px;
+  min-height: 300px;
+  height: auto;
   margin-bottom: 20px;
 }
 .fw-500 {

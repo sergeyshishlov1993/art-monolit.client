@@ -106,6 +106,7 @@ const card = reactive({
   margin-top: 150px;
   min-width: 300px;
   align-self: center;
+
   &:hover {
     background: #000;
     color: white;

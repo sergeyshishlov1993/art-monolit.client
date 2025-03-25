@@ -26,7 +26,7 @@ const props = defineProps({
 .sceletor {
   position: absolute;
   width: 80%;
-  height: 200px;
+  height: 400px;
   border-radius: 20px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
   animation: loading 1.5s infinite;
@@ -47,7 +47,8 @@ const props = defineProps({
 
 img {
   min-width: 100%;
-  min-height: 100%;
+  min-height: 400px;
+  height: auto;
   object-fit: cover;
 }
 </style>
