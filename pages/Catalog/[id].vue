@@ -73,7 +73,7 @@
         v-if="showModal"
         @closeModal="showModal = false"
         :qwery="route.query.pixel"
-        :currentPath="route.path"
+        :currentPath="route.fullPath"
       />
     </div>
   </div>
@@ -97,7 +97,6 @@ const isLoading = ref(true);
 const isLoadingImg = true;
 
 onMounted(async () => {
-  console.log("ROUTE", route);
   try {
     changeTab(route.query.activeTab);
 
