@@ -122,6 +122,7 @@ const singIn = async () => {
 }
 .sing-in {
   padding: 100px;
+  height: 60vh;
 }
 form {
   margin: 0 auto;

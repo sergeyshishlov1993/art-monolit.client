@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div class="wrapper">
     <TheHeader />
 
     <div class="container">
       <NuxtPage />
+
       <icon-shevron
         class="shevron"
         v-if="showScrollToTop"
@@ -132,6 +133,11 @@ useHead({
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 .container {
   padding: 0;
   position: relative;

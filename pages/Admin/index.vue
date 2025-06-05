@@ -77,6 +77,7 @@ const tabContent = computed(() => {
 <style lang="scss" scoped>
 .admin {
   &-wrapper {
+    height: 100vh;
     &__navbar {
       padding: 30px 50px;
       display: flex;
