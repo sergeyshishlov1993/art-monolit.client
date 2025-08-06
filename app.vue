@@ -27,32 +27,6 @@ import useScrollToTop from "./utils/useScrollToTop";
 const { showScrollToTop, scrollToTop } = useScrollToTop();
 
 useHead({
-  script: [
-    {
-      src: "https://www.googletagmanager.com/gtag/js?id=AW-16514962201",
-      async: true,
-    },
-    {
-      children: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'AW-16514962201');
-        gtag('event', 'conversion', {'send_to': 'AW-16514962201/qellCICYw9YZEJmm-cI9'});
-      `,
-      type: "text/javascript",
-    },
-
-    {
-      children: `(function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "oxvx4l2v76");`,
-      type: "text/javascript",
-    },
-  ],
-
   link: [
     {
       rel: "preload",
@@ -109,20 +83,6 @@ useHead({
       content: "x3lktmFtn_dq-e5JemJe2aVqSQs3F8t5ttEtM_Lio9k",
     },
 
-    {
-      innerHTML: `
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '2021575691610536');
-      fbq('track', 'PageView');
-      `,
-    },
 
     {
       name: "facebook-domain-verification",
