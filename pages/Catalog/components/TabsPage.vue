@@ -94,6 +94,7 @@ function selecTab(tab) {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+
     button {
       min-width: 200px;
       margin-right: 15px;
@@ -103,6 +104,7 @@ function selecTab(tab) {
 
 @media screen and (max-width: 768px) {
   .tabs {
+    gap: 0;
     button {
       min-width: 0px;
     }

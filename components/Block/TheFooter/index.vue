@@ -16,7 +16,6 @@
       </div>
 
       <div class="wrapper__phone">
-        <icon-phone class="phone" />
 
         <div>
           <ui-text-h4 class="white">

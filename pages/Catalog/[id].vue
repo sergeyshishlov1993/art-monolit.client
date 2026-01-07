@@ -3,362 +3,184 @@
     <div class="spinner-border" role="status" v-if="isLoading"></div>
 
     <div class="about__product" :class="{ substrate: showModal }" v-else>
-      <div class="navigation">
-        <nuxt-link to="/">
-          <ui-text-h4 class="fw-500">головна</ui-text-h4>
-        </nuxt-link>
-
-        <nuxt-link to="/catalog">
-          <ui-text-h4 class="fw-500">/каталог</ui-text-h4>
-        </nuxt-link>
-
-        <ui-text-h4 class="fw-500"
-          >/{{ titelToLoverCase.toLowerCase() }}</ui-text-h4
-        >
-      </div>
+      <base-breadcrumbs :items="breadcrumbs" />
 
       <div class="product">
         <div class="mr-40">
           <div class="sceletor" v-if="isLoadingImg"></div>
           <img
-            :src="currentProduct[0].src.stringValue || currentProduct[0].src"
-            alt="catalog__item"
-            loading="lazy"
-            @load="isLoadingImg = false"
+              :src="productData.src"
+              alt="catalog__item"
+              loading="lazy"
+              @load="isLoadingImg = false"
           />
         </div>
 
         <div class="description">
-          <ui-text-h1>{{
-            currentProduct[0].title.stringValue || currentProduct[0].title
-          }}</ui-text-h1>
-          <ui-text-h3 class="fw-500 mt-40"
-            >РОЗМІР :
-            {{ currentProduct[0].size.stringValue || currentProduct[0].size }}
-            ММ</ui-text-h3
-          >
-          <ui-text-h3 class="fw-500 mt-20"
-            >МАТЕРІАЛ :
-            {{
-              currentProduct[0].material.stringValue ||
-              currentProduct[0].material
-            }}</ui-text-h3
-          >
-          <ui-text-h3 class="fw-500 mt-20"
-            >ТЕРМІН ВИГОТОВЛЕННЯ :
-            {{ currentProduct[0].term.stringValue || currentProduct[0].term }}
-            ДНІВ</ui-text-h3
-          >
-          <ui-text-h3 class="fw-500 mt-20"
-            >ДОСТАВКА :
-            {{
-              currentProduct[0].delivery.stringValue ||
-              currentProduct[0].delivery
-            }}</ui-text-h3
-          >
-          <ui-text-h3 class="fw-500 mt-20"
-            >КОМПЛЕКТАЦІЯ :
-            {{
-              currentProduct[0].equipment.stringValue ||
-              currentProduct[0].equipment
-            }}</ui-text-h3
-          >
+          <ui-text-h1>{{ productData.title }}</ui-text-h1>
 
-          <ui-btn class="button" @click="getPrice" :disabled="showModal">
-            <ui-text-h3>ДІЗНАТИСЯ ВАРТІСТЬ</ui-text-h3>
-          </ui-btn>
+          <div class="specs-table-wrapper">
+            <table class="specs-table">
+              <tbody>
+              <tr>
+                <td>Розмір</td>
+                <td>{{ productData.size }} мм</td>
+              </tr>
+              <tr>
+                <td>Матеріал</td>
+                <td>{{ productData.material }}</td>
+              </tr>
+              <tr>
+                <td>Термін виготовлення</td>
+                <td>{{ productData.term }} днів</td>
+              </tr>
+              <tr>
+                <td>Доставка</td>
+                <td>{{ productData.delivery }}</td>
+              </tr>
+              <tr>
+                <td>Комплектація</td>
+                <td>{{ productData.equipment }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="action-block" v-if="!showModal">
+            <ui-btn class="button" @click="getPrice">
+              <ui-text-h3>ДІЗНАТИСЯ ВАРТІСТЬ</ui-text-h3>
+            </ui-btn>
+            <div class="action-hint">Розрахунок вартості безкоштовний</div>
+          </div>
         </div>
       </div>
-      <modal-call-back
-        v-if="showModal"
-        @closeModal="showModal = false"
-        :qwery="route.query.pixel"
-        :currentPath="route.fullPath"
-      />
+
+      <div class="modal-wrapper" v-if="showModal">
+        <modal-call-back
+            @closeModal="showModal = false"
+            :qwery="route.query.pixel"
+            :currentPath="route.fullPath"
+        />
+      </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, computed } from "vue";
-
+<script setup lang="ts">
+import { ref, onMounted, computed, watch, onUnmounted } from "vue";
+import { storeToRefs } from "pinia";
 import { useCatalogData } from "~/stores/catalogData";
 import { useRoute } from "vue-router";
 import UiTextH1 from "~/components/UI/UiTextH1.vue";
 import UiTextH3 from "~/components/UI/UiTextH3.vue";
-import UiTextH4 from "~/components/UI/UiTextH4.vue";
-import UiBtn from "~/components/UI/UiBtn";
+import UiBtn from "~/components/UI/UiBtn.vue";
 import ModalCallBack from "~/components/Block/Modal/ModalCallBack.vue";
+import BaseBreadcrumbs from "~/components/UI/BaseBreadcrumbs.vue";
 
-const { getItemProduct, activeTab, currentProduct, changeTab } =
-  useCatalogData();
+const store = useCatalogData();
+const { getItemProduct, changeTab } = store;
+const { activeTab, currentProduct } = storeToRefs(store);
+
 const route = useRoute();
 const isLoading = ref(true);
-const isLoadingImg = true;
+const isLoadingImg = ref(true);
+const showModal = ref(false);
 
-onMounted(async () => {
-  try {
-    changeTab(route.query.activeTab);
+const getValue = (field: any) => field?.stringValue || field || "";
 
-    let productData = await getItemProduct(
-      `product/catalog/${activeTab[0]}`,
-      route.params.id
-    );
+const productData = computed(() => {
+  const item = currentProduct.value?.[0];
+  if (!item) return {};
+  return {
+    title: getValue(item.title),
+    src: getValue(item.src),
+    size: getValue(item.size),
+    material: getValue(item.material),
+    term: getValue(item.term),
+    delivery: getValue(item.delivery),
+    equipment: getValue(item.equipment),
+  };
+});
 
-    isLoading.value = false;
-  } catch (error) {
-    console.error("Ошибка при получении данных:", error);
+const breadcrumbs = computed(() => {
+  return [
+    { label: "головна", to: "/" },
+    { label: "каталог", to: "/catalog" },
+    { label: productData.value.title?.toLowerCase() || "" },
+  ];
+});
+
+watch(showModal, (val) => {
+  if (typeof document !== "undefined") {
+    document.body.style.overflow = val ? "hidden" : "";
   }
 });
-const titelToLoverCase = computed(() => {
-  return currentProduct[0].title.stringValue || currentProduct[0].title;
+
+const handleScrollTrigger = () => {
+  if (showModal.value) return;
+  const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollCurrent = window.scrollY;
+
+  if (scrollCurrent / scrollTotal > 0.5) {
+    showModal.value = true;
+    window.removeEventListener("scroll", handleScrollTrigger);
+  }
+};
+
+onMounted(async () => {
+  window.addEventListener("scroll", handleScrollTrigger);
+  try {
+    changeTab(route.query.activeTab as string);
+    await getItemProduct(`product/catalog/${activeTab.value?.[0]}`, route.params.id as string);
+    isLoading.value = false;
+  } catch (error) {
+    console.error(error);
+    isLoading.value = false;
+  }
 });
 
-const showModal = ref(false);
+onUnmounted(() => {
+  if (typeof document !== "undefined") {
+    document.body.style.overflow = "";
+    window.removeEventListener("scroll", handleScrollTrigger);
+  }
+});
+
 function getPrice() {
   showModal.value = true;
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 useHead(() => {
-  if (currentProduct && currentProduct.length > 0) {
-    const product = currentProduct[0];
-
-    const title =
-      product.title && product.title.stringValue
-        ? product.title.stringValue
-        : product.title;
-
-    const image =
-      product.src && product.src.stringValue
-        ? product.src.stringValue
-        : product.src;
-
-    const term =
-      product.term && product.term.stringValue
-        ? product.term.stringValue
-        : product.term;
-
-    const material =
-      product.material && product.material.stringValue
-        ? product.material.stringValue
-        : product.material;
-
-    const size =
-      product.size && product.size.stringValue
-        ? product.size.stringValue
-        : product.material;
-
+  const p = productData.value;
+  if (p.title) {
     return {
-      title: `Памятники Запорожье - Гранитные Памятники Запорожье - Изготовление памяинмков в запорожье - Цена памятника из гранита под ключ - Одинарный памятник под ключ - Двойной памятник под ключ ${title} `,
+      title: `Памятники Запорожье - ${p.title} - Цена памятника из гранита`,
       meta: [
-        {
-          hid: "description:id",
-          name: "description",
-          content: `назва ${title} розмір ${size} виготовимо з ${material} за ${term} днів, пам'ятник запоріжжя гранітна майстерння арт моноліт, одинарні та подвійні памʼятники в запооріжжі `,
-        },
-
-        {
-          hid: "keywords:id",
-          name: "keywords",
-          content:
-            "одинарні, подвійні памʼятники в запоріжжі, памʼятники для військових, гранітна майстерня арт моноліт, арт моноліт Запоріжжя ",
-        },
-
-        {
-          hid: "og:title:id",
-          property: "og:title",
-          content: "АРТ - МОНОЛІТ",
-        },
-        {
-          hid: "og:description:id",
-          property: "og:description",
-          content: `${title} пам'ятник купити в запоріжжі`,
-        },
-
-        {
-          hid: "og:image:id",
-          property: "og:image",
-          content: image,
-        },
-        {
-          hid: "og:image:id",
-          property: "og:image:width",
-          content: 800,
-        },
-        {
-          hid: "og:image:id",
-          property: "og:image:height",
-          content: 800,
-        },
-        {
-          hid: "og:url:id",
-          property: "og:url",
-          content: image,
-        },
-        {
-          hid: "og:type:id",
-          property: "og:type",
-          content: "article",
-        },
-        {
-          hid: "twitter:card:id",
-          name: "twitter:card",
-          content: "summary_large_image",
-        },
-        {
-          hid: "twitter:title:id",
-          name: "twitter:title",
-          content: "АРТ - МОНОЛІТ",
-        },
-        {
-          hid: "twitter:description:id",
-          name: "twitter:description",
-          content: `${title}`,
-        },
-        {
-          hid: "twitter:image:id",
-          name: "twitter:image",
-          content: image,
-        },
-        {
-          hid: "twitter:url:id",
-          name: "twitter:url",
-          content: image,
-        },
-      ],
-      script: [
-        {
-          src: "https://www.googletagmanager.com/gtag/js?id=G-CGMKTLYTRQ",
-          async: true,
-        },
-
-        {
-          innerHTML: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-CGMKTLYTRQ');
-          `,
-        },
-
-
-        {
-          name: "facebook-domain-verification",
-          content: "2yjcqfjbbbf03oiqfngtlkweldzmpy",
-        },
-      ],
-    };
-  } else {
-    return {
-      title: "АРТ - МОНОЛІТ",
-      meta: [
-        {
-          hid: "og:title-id",
-          property: "og:title",
-          content: "АРТ - МОНОЛІТ",
-        },
-
-        {
-          hid: "og:description-id",
-          property: "og:description",
-          content:
-            "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
-        },
-
-        {
-          hid: "og:image:id",
-          property: "og:image:width",
-          content: 400,
-        },
-        {
-          hid: "og:image:id",
-          property: "og:image:height",
-          content: 600,
-        },
-
-        {
-          hid: "og:image-id",
-          property: "og:image",
-          content: "",
-        },
-
-        {
-          hid: "og:url-id",
-          property: "og:url",
-          content: "",
-        },
-
-        {
-          hid: "og:type-id",
-          property: "og:type",
-          content: "article",
-        },
-
-        {
-          hid: "twitter:card-id",
-          name: "twitter:card",
-          content: "summary_large_image",
-        },
-
-        {
-          hid: "twitter:title-id",
-          name: "twitter:title",
-          content: "АРТ - МОНОЛІТ",
-        },
-
-        {
-          hid: "twitter:description-id",
-          name: "twitter:description",
-          content:
-            "виготовлення і встановлення пам'ятників в Запоріжжі, изготовление и установка памятников в городе Запорожье, пам'ятники по доступним цінам , памятники по доступным ценам, встановлення пам'ятника під ключ, установка памятников под ключ, Заказать гранитный памятник в Запорожье",
-        },
-
-        {
-          hid: "twitter:image-id",
-          name: "twitter:image",
-          content: "",
-        },
-
-        {
-          hid: "twitter:url-id",
-          name: "twitter:url",
-          content: "",
-        },
-      ],
-      script: [
-        {
-          src: "https://www.googletagmanager.com/gtag/js?id=G-CGMKTLYTRQ",
-          async: true,
-        },
-
-        {
-          innerHTML: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-CGMKTLYTRQ');
-          `,
-        },
+        { hid: "description:id", name: "description", content: `Назва ${p.title} розмір ${p.size} виготовимо з ${p.material}` },
+        { hid: "og:title:id", property: "og:title", content: "АРТ - МОНОЛІТ" },
+        { hid: "og:image:id", property: "og:image", content: p.src },
       ],
     };
   }
+  return { title: "АРТ - МОНОЛІТ" };
 });
 </script>
 
 <style lang="scss" scoped>
-.about__product {
-  padding: 75px 20px 20px 20px;
-}
+.about__product { padding: 75px 20px 20px 20px; }
 
-.navigation {
+.modal-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
   display: flex;
-  a {
-    color: inherit;
-  }
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  :deep(*) { pointer-events: auto; }
 }
 
 .product {
@@ -366,35 +188,76 @@ useHead(() => {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  gap: 40px;
+
   img {
     max-width: 100%;
     height: 600px;
     width: auto;
     border-radius: 20px;
     z-index: 2;
-
     box-shadow: -3px 49px 24px -26px rgba(34, 60, 80, 0.76);
-    border: none;
   }
 }
 
-.description {
-  display: flex;
-  flex-direction: column;
+.description { display: flex; flex-direction: column; width: 100%; max-width: 500px; }
+
+.specs-table-wrapper {
+  margin: 40px 0;
+  width: 100%;
+}
+
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  td {
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 16px;
+    vertical-align: top;
+
+    &:first-child {
+      font-weight: 500;
+      color: #666;
+      width: 40%;
+      padding-right: 15px;
+    }
+
+    &:last-child {
+      font-weight: 600;
+      color: #000;
+      text-align: right;
+    }
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
 }
 
 .button {
-  margin-top: 265px;
-  &:hover {
-    background: #000;
-    color: white;
-  }
+  margin-top: 0;
+  width: 100%;
+  max-width: 400px;
+  &:hover { background: #000; color: white; }
 }
+
+.action-hint {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  max-width: 400px;
+}
+
+.mr-40 { position: relative; max-width: 100%; }
+.spinner-border { display: block; margin: 200px auto; }
 
 .sceletor {
   position: absolute;
   top: 0;
-  max-width: 100%;
+  min-width: 100%;
   height: 600px;
   border-radius: 20px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
@@ -403,76 +266,67 @@ useHead(() => {
 }
 
 @keyframes loading {
-  0% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0.6;
-  }
+  0% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.6; }
 }
 
-.substrate {
-  background: rgba(0, 0, 0, 0.25);
-}
-.fw-500 {
-  font-weight: 500;
-}
-
-.mt-20 {
-  margin-top: 20px;
-}
-.mr-40 {
-  position: relative;
-  max-width: 100%;
-  margin-right: 40px;
-}
-.mt-40 {
-  margin-top: 40px;
-}
-
-.spinner-border {
-  display: block;
-  margin: 0 auto;
-  margin-top: 200px;
-  margin-bottom: 200px;
-}
+.substrate { background: rgba(0, 0, 0, 0.25); }
 
 @media screen and (min-width: 1440px) {
-  .container {
-    min-width: 100%;
-  }
+  .container { min-width: 100%; }
 }
 
 @media screen and (max-width: 1440px) {
-  .product {
-    padding: 100px 0;
-  }
+  .product { padding: 100px 0; }
 }
 
 @media screen and (max-width: 1199px) {
-  .product {
-    padding: 50px 20px;
+  .product { padding: 50px 20px; flex-direction: column; align-items: center; }
+  .description { margin-top: 30px; width: 100%; align-items: center; max-width: 100%; }
+  .specs-table-wrapper { max-width: 600px; width: 100%; }
+}
+
+@media screen and (max-width: 1023px) {
+  .product { padding: 50px 0; img { height: auto; } }
+}
+
+@media screen and (max-width: 767px) {
+  .product { padding-bottom: 100px; }
+
+  .action-block {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 15px 20px;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+    z-index: 100;
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .description {
-    margin-top: 50px;
-    width: 100%;
-  }
-  .mr-40 {
-    margin-right: 0;
-  }
-}
+  .button { width: 100%; max-width: 100%; }
 
-@media screen and (max-width: 1023px) {
-  .product {
-    padding: 50px 0;
-    img {
-      height: auto;
+  .specs-table {
+    td {
+      font-size: 14px;
+      padding: 10px 0;
+    }
+  }
+
+  .modal-wrapper {
+    padding: 0;
+    align-items: flex-end;
+    :deep(> *) {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      border-radius: 0 !important;
+      margin: 0 !important;
     }
   }
 }

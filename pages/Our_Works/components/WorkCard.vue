@@ -7,13 +7,12 @@
       class="hidenImg"
     />
 
-    <a :href="props.src.stringValue" target="_blank">
-      <img
+    <img
         :src="props.src.stringValue"
         alt="Фото"
         :class="{ img: props.currentTab[0] === 'double' }"
-      />
-    </a>
+        class="showImg"
+    />
   </div>
 </template>
 
@@ -44,12 +43,12 @@ img {
   border-radius: 10px;
   object-fit: cover;
 }
-a {
+.showImg {
   display: none;
 }
 
 @media screen and (max-width: 767px) {
-  a {
+  .showImg {
     display: block;
   }
   .img {

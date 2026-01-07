@@ -5,113 +5,129 @@
     <div class="container">
       <NuxtPage />
 
+      <a
+          class="viber-widget"
+          :href="viberChatLink"
+          aria-label="Написати менеджеру у Viber"
+      >
+        <IconViber class="viber-widget__icon" />
+        <span class="viber-widget__label">Написати менеджеру</span>
+      </a>
+
       <icon-shevron
-        class="shevron"
-        v-if="showScrollToTop"
-        @click="scrollToTop"
+          class="shevron"
+          v-if="showScrollToTop"
+          @click="scrollToTop"
       />
     </div>
 
-    <the-footer />
+    <TheFooter />
   </div>
 </template>
 
-<script setup>
-const imageUrl = new URL(`/assets/img/catalog/war.webp`, import.meta.url).href;
+<script setup lang="ts">
 import TheHeader from "~/components/Block/TheHeader";
-import IconShevron from "./assets/icon/IconShevron.vue";
 import TheFooter from "~/components/Block/TheFooter";
-
-import useScrollToTop from "./utils/useScrollToTop";
+import IconShevron from "~/assets/icon/IconShevron.vue";
+import IconViber from "~/assets/icon/IconViber.vue";
+import useScrollToTop from "~/utils/useScrollToTop";
 
 const { showScrollToTop, scrollToTop } = useScrollToTop();
 
-useHead({
-  link: [
-    {
-      rel: "preload",
-      href: "https://firebasestorage.googleapis.com/v0/b/art-monolit-8898c.appspot.com/o/logo%2F%D0%90%D0%9C.jpg?alt=media&token=5fa568a8-8d6d-486d-8dc0-4e2f00a1dad4",
-      as: "image",
-    },
-  ],
-
-  meta: [
-    {
-      hid: "main-description",
-      name: "description",
-      content:
-        "Каталог з одинарними та подвійми пам'ятниками у місті Запоржжя, Пам'ятнки під ключ, Пам'ятники для військових, Меморіальні пам'ятники, Виготовлення пам'ятників під ключ к місті Запоріжжя",
-    },
-
-    {
-      hid: "main-keywords",
-      name: "keywords",
-      content:
-        "купити одинарні пам'ятники у Запоріжжі, купити подвійний пам'ятник у Запоріжжі,пам'ятник для військових, купить памятник одинарный, цена одинарного памятника запорожье, цена двойного памятника запорожье, установка памятников под ключ запорожье  ",
-    },
-
-    {
-      hid: "og:title-main",
-      property: "og:title",
-      content: "АРТ - МОНОЛІТ",
-    },
-    {
-      hid: "og:description-main",
-      property: "og:description",
-      content:
-        "каталог з одинарними та подвійми пам'ятниками у місті Запоржжя, пам'ятнки під ключ, пам'ятники для військових, меморіальні пам'ятники, виготовлення пам'ятників під ключ к місті Запоріжжя",
-    },
-    {
-      hid: "og:image-main",
-      property: "og:image",
-      content:
-        "https://firebasestorage.googleapis.com/v0/b/art-monolit-8898c.appspot.com/o/logo%2F%D0%90%D0%9C.jpg?alt=media&token=5fa568a8-8d6d-486d-8dc0-4e2f00a1dad4",
-    },
-    {
-      hid: "og:url-main",
-      property: "og:url",
-      content:
-        "https://firebasestorage.googleapis.com/v0/b/art-monolit-8898c.appspot.com/o/logo%2F%D0%90%D0%9C.jpg?alt=media&token=5fa568a8-8d6d-486d-8dc0-4e2f00a1dad4",
-    },
-    {
-      hid: "og:type-main",
-      property: "og:type",
-      content: "website",
-    },
-    {
-      name: "google-site-verification",
-      content: "x3lktmFtn_dq-e5JemJe2aVqSQs3F8t5ttEtM_Lio9k",
-    },
-
-
-    {
-      name: "facebook-domain-verification",
-      content: "2yjcqfjbbbf03oiqfngtlkweldzmpy",
-    },
-  ],
-});
+const viberChatLink: string = "viber://chat?number=%2B380951121777";
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.container {
+  min-width: 100%;
+  padding: 0;
+}
+</style>
+
+<style scoped lang="scss">
 .wrapper {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
+
 .container {
-  padding: 0;
   position: relative;
 }
+
+.viber-widget {
+  position: fixed;
+  right: 5px;
+  bottom: 20px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.viber-widget__icon {
+  width: 100px;
+  height: 100px;
+  background: #7360f2;
+  border-radius: 50%;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: viberPulse 2s infinite;
+}
+
+.viber-widget__label {
+  margin-top: 6px;
+  padding: 6px 10px;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+@keyframes viberPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(115, 96, 242, 0.6);
+  }
+  70% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 18px rgba(115, 96, 242, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(115, 96, 242, 0);
+  }
+}
+
 .shevron {
   position: fixed;
   top: 600px;
+  bottom: 120px;
   right: 25px;
-  fill: rgba(130, 100, 45, 1);
   z-index: 15;
 }
-@media screen and (min-width: 1440px) {
-  .container {
-    min-width: 100%;
+
+@media (max-width: 767px) {
+  .viber-widget {
+    bottom: auto;
+    top: 120px;
+  }
+
+  .viber-widget__icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .viber-widget__label {
+    font-size: 11px;
+  }
+
+  .shevron {
+    top: auto;
+    bottom: 30px;
+    right: 15px;
   }
 }
 </style>
