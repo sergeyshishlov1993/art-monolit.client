@@ -342,7 +342,7 @@ watch([showZoomImg, showModal], ([zoom, modal]) => {
     grid-template-columns: repeat(1, 1fr);
     gap: 30px;
 
-    img { min-height: auto; max-height: auto; }
+    img { min-height: auto; }
   }
 
   .modal-wrapper :deep(.modal-content) {
