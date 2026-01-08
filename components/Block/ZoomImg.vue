@@ -2,6 +2,10 @@
   <Teleport to="body">
     <div class="zoom-overlay" @click.stop="$emit('close')">
 
+      <button class="close-btn" @click.stop="$emit('close')">
+        ✕
+      </button>
+
       <div class="zoom-container" @click.stop>
         <img :src="zoomPathImg[0]" alt="img big" />
 
@@ -63,8 +67,6 @@ onMounted(async () => {
     });
   }
 });
-
-
 
 useHead({
   title:
@@ -163,13 +165,37 @@ useHead({
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 99999;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 102;
+  transition: background 0.2s;
+  backdrop-filter: blur(5px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
 }
 
 .zoom-container {
@@ -190,8 +216,6 @@ useHead({
     pointer-events: auto;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   }
-
-
 
   .zoom-cta {
     position: absolute;
@@ -232,6 +256,13 @@ useHead({
   }
 
   @media screen and (max-width: 767px) {
+    .close-btn {
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+    }
+
     .cta-text {
       display: none;
     }

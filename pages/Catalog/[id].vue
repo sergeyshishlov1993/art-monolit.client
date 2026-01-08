@@ -85,6 +85,7 @@ const route = useRoute();
 const isLoading = ref(true);
 const isLoadingImg = ref(true);
 const showModal = ref(false);
+let timerId: ReturnType<typeof setTimeout>;
 
 const getValue = (field: any) => field?.stringValue || field || "";
 
@@ -116,19 +117,11 @@ watch(showModal, (val) => {
   }
 });
 
-const handleScrollTrigger = () => {
-  if (showModal.value) return;
-  const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollCurrent = window.scrollY;
-
-  if (scrollCurrent / scrollTotal > 0.5) {
-    showModal.value = true;
-    window.removeEventListener("scroll", handleScrollTrigger);
-  }
-};
-
 onMounted(async () => {
-  window.addEventListener("scroll", handleScrollTrigger);
+  timerId = setTimeout(() => {
+    if (!showModal.value) showModal.value = true;
+  }, 5000);
+
   try {
     changeTab(route.query.activeTab as string);
     await getItemProduct(`product/catalog/${activeTab.value?.[0]}`, route.params.id as string);
@@ -142,8 +135,8 @@ onMounted(async () => {
 onUnmounted(() => {
   if (typeof document !== "undefined") {
     document.body.style.overflow = "";
-    window.removeEventListener("scroll", handleScrollTrigger);
   }
+  clearTimeout(timerId);
 });
 
 function getPrice() {
