@@ -34,7 +34,9 @@ import useScrollToTop from "~/utils/useScrollToTop";
 
 const { showScrollToTop, scrollToTop } = useScrollToTop();
 
-const viberChatLink: string = "viber://chat?number=%2B380951121777";
+// const viberChatLink: string = "viber://chat?number=%2B380951121777";
+const viberChatLink: string = "viber://chat?number=%2B380985024333";
+
 </script>
 
 <style lang="scss">
