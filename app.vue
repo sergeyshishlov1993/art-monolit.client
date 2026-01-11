@@ -14,11 +14,6 @@
         <span class="viber-widget__label">Написати менеджеру</span>
       </a>
 
-      <icon-shevron
-          class="shevron"
-          v-if="showScrollToTop"
-          @click="scrollToTop"
-      />
     </div>
 
     <TheFooter />
@@ -28,15 +23,9 @@
 <script setup lang="ts">
 import TheHeader from "~/components/Block/TheHeader";
 import TheFooter from "~/components/Block/TheFooter";
-import IconShevron from "~/assets/icon/IconShevron.vue";
 import IconViber from "~/assets/icon/IconViber.vue";
 import useScrollToTop from "~/utils/useScrollToTop";
-
-const { showScrollToTop, scrollToTop } = useScrollToTop();
-
-// const viberChatLink: string = "viber://chat?number=%2B380951121777";
 const viberChatLink: string = "viber://chat?number=%2B380985024333";
-
 </script>
 
 <style lang="scss">
@@ -60,7 +49,7 @@ const viberChatLink: string = "viber://chat?number=%2B380985024333";
 .viber-widget {
   position: fixed;
   right: 5px;
-  bottom: 20px;
+  bottom: 30px;
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -69,21 +58,21 @@ const viberChatLink: string = "viber://chat?number=%2B380985024333";
 }
 
 .viber-widget__icon {
-  width: 100px;
-  height: 100px;
-  background: #7360f2;
+  width: 80px;
+  height: 80px;
+  background: rgba(115, 96, 242, 0.55);
   border-radius: 50%;
-  padding: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  padding: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
   animation: viberPulse 2s infinite;
 }
 
 .viber-widget__label {
-  margin-top: 6px;
-  padding: 6px 10px;
-  background: #000;
-  color: #fff;
-  font-size: 12px;
+  margin-top: 4px;
+  padding: 5px 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
   border-radius: 12px;
   white-space: nowrap;
 }
@@ -91,11 +80,11 @@ const viberChatLink: string = "viber://chat?number=%2B380985024333";
 @keyframes viberPulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(115, 96, 242, 0.6);
+    box-shadow: 0 0 0 0 rgba(115, 96, 242, 0.45);
   }
   70% {
-    transform: scale(1.08);
-    box-shadow: 0 0 0 18px rgba(115, 96, 242, 0);
+    transform: scale(1.1);
+    box-shadow: 0 0 0 20px rgba(115, 96, 242, 0);
   }
   100% {
     transform: scale(1);
@@ -105,31 +94,25 @@ const viberChatLink: string = "viber://chat?number=%2B380985024333";
 
 .shevron {
   position: fixed;
-  top: 600px;
-  bottom: 120px;
-  right: 25px;
+  right: 20px;
+  bottom: 30px;
   z-index: 15;
 }
 
 @media (max-width: 767px) {
-  .viber-widget {
-    bottom: auto;
-    top: 120px;
-  }
 
   .viber-widget__icon {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
   }
 
   .viber-widget__label {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .shevron {
-    top: auto;
-    bottom: 30px;
     right: 15px;
+    bottom: 20px;
   }
 }
 </style>
