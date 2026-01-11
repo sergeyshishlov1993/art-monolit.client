@@ -48,7 +48,7 @@ const viberChatLink: string = "viber://chat?number=%2B380985024333";
 
 .viber-widget {
   position: fixed;
-  right: 5px;
+  right: 10px;
   bottom: 30px;
   z-index: 10;
   display: flex;
@@ -63,7 +63,7 @@ const viberChatLink: string = "viber://chat?number=%2B380985024333";
   background: rgba(115, 96, 242, 0.55);
   border-radius: 50%;
   padding: 14px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 9px rgba(0, 0, 0, 0.18);
   animation: viberPulse 2s infinite;
 }
 
