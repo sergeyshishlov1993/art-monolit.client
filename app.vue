@@ -111,9 +111,8 @@ const viberChatLink: string = "viber://chat?number=%2B380985024333";
 }
 
 @media (max-width: 767px) {
-  .viber-widget__icon-wrap {
-    width: 70px;
-    height: 70px;
+  .viber-widget {
+    bottom: 90px;
   }
 
   .viber-widget__label {

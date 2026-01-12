@@ -5,6 +5,15 @@ export default defineNuxtConfig({
   css: ["~/assets/css/app.scss"],
   ssr: true,
 
+    ignore: ["functions/**/*"],
+    vite: {
+        server: {
+            watch: {
+                ignored: ["**/functions/**", "**/node_modules/**"],
+            },
+        },
+    },
+
   modules: ["@pinia/nuxt", "nuxt-lazy-load"],
 
   app: {
