@@ -27,7 +27,8 @@ import TheFooter from "~/components/Block/TheFooter";
 import IconViber from "~/assets/icon/IconViber.vue";
 import useScrollToTop from "~/utils/useScrollToTop";
 
-const viberChatLink: string = "viber://chat?number=%2B380985024333";
+const viberChatLink: string = "viber://chat?number=%2B380759227258";
+
 </script>
 
 <style lang="scss">
