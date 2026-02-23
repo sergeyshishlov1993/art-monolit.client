@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="spinner-border" role="status" v-if="isLoading"></div>
+    <div class="spinner-border" role="status" v-if="status === 'pending'"></div>
 
-    <div class="about__product" :class="{ substrate: showModal }" v-else>
+    <div class="about__product" :class="{ substrate: showModal }" v-else-if="productData">
       <base-breadcrumbs :items="breadcrumbs" />
 
       <div class="product">
@@ -67,97 +67,86 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, watch, onUnmounted } from "vue";
-import { storeToRefs } from "pinia";
-import { useCatalogData } from "~/stores/catalogData";
-import { useRoute } from "vue-router";
-import UiTextH1 from "~/components/UI/UiTextH1.vue";
-import UiTextH3 from "~/components/UI/UiTextH3.vue";
-import UiBtn from "~/components/UI/UiBtn.vue";
-import ModalCallBack from "~/components/Block/Modal/ModalCallBack.vue";
-import BaseBreadcrumbs from "~/components/UI/BaseBreadcrumbs.vue";
+import { ref, computed, watch, onMounted, onUnmounted } from "vue"
+import UiTextH1 from "~/components/UI/UiTextH1.vue"
+import UiTextH3 from "~/components/UI/UiTextH3.vue"
+import UiBtn from "~/components/UI/UiBtn.vue"
+import ModalCallBack from "~/components/Block/Modal/ModalCallBack.vue"
+import BaseBreadcrumbs from "~/components/UI/BaseBreadcrumbs.vue"
 
-const store = useCatalogData();
-const { getItemProduct, changeTab } = store;
-const { activeTab, currentProduct } = storeToRefs(store);
+const route = useRoute()
+const isLoadingImg = ref(true)
+const showModal = ref(false)
+let timerId: ReturnType<typeof setTimeout>
 
-const route = useRoute();
-const isLoading = ref(true);
-const isLoadingImg = ref(true);
-const showModal = ref(false);
-let timerId: ReturnType<typeof setTimeout>;
+const activeTab = (route.query.activeTab as string) || "single"
+const productId = route.params.id as string
 
-const getValue = (field: any) => field?.stringValue || field || "";
+const firestoreUrl = `https://firestore.googleapis.com/v1/projects/art-monolit-8898c/databases/(default)/documents/product/catalog/${activeTab}/${productId}`
+
+const { data: rawData, status } = await useAsyncData(
+    `product-${activeTab}-${productId}`,
+    () => $fetch(firestoreUrl)
+)
+
+const getValue = (field: any) => field?.stringValue || field || ""
 
 const productData = computed(() => {
-  const item = currentProduct.value?.[0];
-  if (!item) return {};
+  if (!rawData.value?.fields) return null
+  const fields = rawData.value.fields
   return {
-    title: getValue(item.title),
-    src: getValue(item.src),
-    size: getValue(item.size),
-    material: getValue(item.material),
-    term: getValue(item.term),
-    delivery: getValue(item.delivery),
-    equipment: getValue(item.equipment),
-  };
-});
-
-const breadcrumbs = computed(() => {
-  return [
-    { label: "головна", to: "/" },
-    { label: "каталог", to: "/catalog" },
-    { label: productData.value.title?.toLowerCase() || "" },
-  ];
-});
-
-watch(showModal, (val) => {
-  if (typeof document !== "undefined") {
-    document.body.style.overflow = val ? "hidden" : "";
+    title: getValue(fields.title),
+    src: getValue(fields.src),
+    size: getValue(fields.size),
+    material: getValue(fields.material),
+    term: getValue(fields.term),
+    delivery: getValue(fields.delivery),
+    equipment: getValue(fields.equipment),
   }
-});
+})
 
-onMounted(async () => {
-  timerId = setTimeout(() => {
-    if (!showModal.value) showModal.value = true;
-  }, 5000);
-
-  try {
-    changeTab(route.query.activeTab as string);
-    await getItemProduct(`product/catalog/${activeTab.value?.[0]}`, route.params.id as string);
-    isLoading.value = false;
-  } catch (error) {
-    console.error(error);
-    isLoading.value = false;
-  }
-});
-
-onUnmounted(() => {
-  if (typeof document !== "undefined") {
-    document.body.style.overflow = "";
-  }
-  clearTimeout(timerId);
-});
-
-function getPrice() {
-  showModal.value = true;
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+const breadcrumbs = computed(() => [
+  { label: "головна", to: "/" },
+  { label: "каталог", to: "/catalog" },
+  { label: productData.value?.title?.toLowerCase() || "" },
+])
 
 useHead(() => {
-  const p = productData.value;
-  if (p.title) {
-    return {
-      title: `Памятники Запорожье - ${p.title} - Цена памятника из гранита`,
-      meta: [
-        { hid: "description:id", name: "description", content: `Назва ${p.title} розмір ${p.size} виготовимо з ${p.material}` },
-        { hid: "og:title:id", property: "og:title", content: "АРТ - МОНОЛІТ" },
-        { hid: "og:image:id", property: "og:image", content: p.src },
-      ],
-    };
+  const p = productData.value
+  if (!p?.title) return { title: "АРТ - МОНОЛІТ" }
+  return {
+    title: `Памятники Запорожье - ${p.title} - Цена памятника из гранита`,
+    meta: [
+      { hid: "description:id", name: "description", content: `Назва ${p.title} розмір ${p.size} виготовимо з ${p.material}` },
+      { hid: "og:title:id", property: "og:title", content: "АРТ - МОНОЛІТ" },
+      { hid: "og:image:id", property: "og:image", content: p.src },
+    ],
   }
-  return { title: "АРТ - МОНОЛІТ" };
-});
+})
+
+watch(showModal, (val) => {
+  if (import.meta.client) {
+    document.body.style.overflow = val ? "hidden" : ""
+  }
+})
+
+onMounted(() => {
+  timerId = setTimeout(() => {
+    if (!showModal.value) showModal.value = true
+  }, 5000)
+})
+
+onUnmounted(() => {
+  if (import.meta.client) {
+    document.body.style.overflow = ""
+  }
+  clearTimeout(timerId)
+})
+
+function getPrice() {
+  showModal.value = true
+  window.scrollTo({ top: 0, behavior: "smooth" })
+}
 </script>
 
 <style lang="scss" scoped>
